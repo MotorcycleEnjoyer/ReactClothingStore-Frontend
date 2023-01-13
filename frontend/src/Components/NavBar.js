@@ -1,10 +1,11 @@
 import Search from "./Search"
+import React from "react"
 
-export default function NavBar(){
+export default function NavBar({...props}){
     return(
         <nav id="navBar">
-            <button>Login</button>
-            <button>Register</button>
+            <button onClick={props.changeView}>LOGIN</button>
+            <button onClick={props.changeView}>REGISTER</button>
             <Search />
         </nav>
     )

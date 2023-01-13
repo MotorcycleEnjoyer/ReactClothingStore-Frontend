@@ -30,7 +30,7 @@ export default function Search(){
 
     return(
         <>
-                <input type="text" value={searchVal} onChange={handleChange}></input>
+                <input type="text" value={searchVal} onChange={handleChange} placeholder="Search"></input>
 
                 <ul id="searchResults">{resultsAsHTML}</ul>
         </>
