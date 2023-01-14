@@ -2,10 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import NavBar from "./Components/NavBar"
 import React from 'react';
+import {userData} from "./DummyProductDB"
+import ShoppingProduct from './Components/ShoppingProduct';
 
 function App() {
   const [currentView, setCurrentView] = React.useState("MAIN PAGE")
 
+  const propsObject = userData.cart[0]
   function changeView(e){
     console.log(e.target.innerText)
     setCurrentView(e.target.innerText)
@@ -13,10 +16,12 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar changeView={changeView}/>
+      <ShoppingProduct {...propsObject}/>
       <header className="App-header">
       { currentView === "MAIN PAGE" &&
         <>
-          <NavBar changeView={changeView}/>
+          
           
             <img src={logo} className="App-logo" alt="logo" />
             <p>
