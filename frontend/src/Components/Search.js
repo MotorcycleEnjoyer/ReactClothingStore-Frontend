@@ -1,8 +1,9 @@
 import React from "react"
+import {userData} from "../DummyProductDB"
+import ShoppingProduct from "./ShoppingProduct"
 
 export default function Search(){
     const [searchVal, setSearchVal] = React.useState("")
-    const [dummyDB, setDummyDB] = React.useState(["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"])
     const [searchResults, setSearchResults] = React.useState([])
     function handleChange(e){
         setSearchVal(e.target.value)
@@ -10,9 +11,9 @@ export default function Search(){
 
     function findItemInDummyDB(phrase){
         setSearchResults(
-            dummyDB.filter(item => {
+            userData.cart.filter(item => {
                 const regex = new RegExp(phrase, 'gi');
-                return item.match(regex)
+                return item.name.match(regex)
             })
         )
     }
@@ -26,13 +27,12 @@ export default function Search(){
             
     }, [searchVal])
 
-    let resultsAsHTML = searchResults.map((x, index) => <li key={index}>{x}</li>)
+    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} {...x} view="full"/>)
 
     return(
         <>
                 <input type="text" value={searchVal} onChange={handleChange} placeholder="Search"></input>
-
-                <ul id="searchResults">{resultsAsHTML}</ul>
+                {resultsAsHTML}
         </>
 
     )
