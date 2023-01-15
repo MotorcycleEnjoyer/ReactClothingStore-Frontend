@@ -8,7 +8,7 @@ import ShoppingProduct from './Components/ShoppingProduct';
 function App() {
   const [currentView, setCurrentView] = React.useState("MAIN PAGE")
 
-  const propsObject = userData.cart[0]
+  const dataAsCartView = userData.cart.map((item, index) => <ShoppingProduct key={index} {...item} view="cart"/>)
   function changeView(e){
     console.log(e.target.innerText)
     setCurrentView(e.target.innerText)
@@ -17,7 +17,8 @@ function App() {
   return (
     <div className="App">
       <NavBar changeView={changeView}/>
-      <ShoppingProduct {...propsObject}/>
+      
+      
       <header className="App-header">
       { currentView === "MAIN PAGE" &&
         <>
@@ -53,6 +54,16 @@ function App() {
           <form>
           </form>
           <button onClick={changeView}>MAIN PAGE</button>
+          </>
+        }
+        {
+          currentView === "MY CART" &&
+          <>
+            <button onClick={changeView}>MAIN PAGE</button>
+            <h1>My Shopping Cart</h1>
+            <div>
+              {dataAsCartView}
+            </div>
           </>
         }
       </header>
