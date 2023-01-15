@@ -4,15 +4,29 @@ export default function ShoppingProduct({...props}){
 
     console.log(props)
     return(
-        <>
-            <h1>{props.name}</h1>
-            <ul>
-                <li>size: {props.size}</li>
-                <li>type: {props.typeOfClothing}</li>
-                <li>colors: {props.colorOptions.length}</li>
-            </ul>
-                
-        </>
+        // TWO VIEWS:
+    <>
+        {
+            props.view === "searchDropDown" &&  
+                <div>
+                    <h1>{props.name}</h1>
+                </div>
+        }
+        
+        {
+            props.view !== "searchDropDown" &&
+                <div className="product">
+                    <h1 className="product--title">{props.name}</h1>
+                    <img src={props.imagePreviewURL} alt={props.name + " preview"} className="product--preview"></img>
+                    <ul>
+                        <li>size: {props.size}</li>
+                        <li>type: {props.typeOfClothing}</li>
+                        <li>colors: {props.colorOptions.length}</li>
+                    </ul>
+                        
+                </div>
+        }
+    </>
     )
 }
 
