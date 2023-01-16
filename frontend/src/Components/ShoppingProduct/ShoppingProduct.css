@@ -1,6 +1,7 @@
 .shoppingProduct--searchResult--minimum{
     display: flex;
     border: 1px solid black;
+    background-color: lightGray;
     opacity: 50%;
 }
 
