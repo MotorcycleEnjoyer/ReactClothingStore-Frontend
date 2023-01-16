@@ -1,13 +1,32 @@
-.search{
-    display: flex;
+.search{ 
+    margin: auto;
 }
 
 .search--inputBox{
     min-width: 300px;
     min-height: 30px;
+    font-size: 1.3em;
 }
+
+.search--modal{
+    display:none;
+}
+
 .search--modal--searchResultContainer{
-    margin-top: 36px;
+    top: 36px;
     min-width: 307px;
     position: absolute;
+    background-color: white;
+    z-index: 1;
+}
+
+.search--modal--clickListener{
+    background-color: black;
+    opacity: 40%;
+    position: absolute;
+    top: 36px;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    z-index: 0;
 }

@@ -26,7 +26,6 @@ function App() {
     }
     if(classType === "search--inputBox"){
       document.querySelector(".search--modal").style.display = "block"
-      document.querySelector('.search--modal--clickListener').style.display="block"
     }
   }
 

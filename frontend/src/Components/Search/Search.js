@@ -33,7 +33,7 @@ export default function Search(){
         <div className="search">
                 <input type="text" value={searchVal} onChange={handleChange} placeholder="Search" className="search--inputBox"></input>
                 <div className="search--modal">
-                    <div className="search--searchResultContainer">{resultsAsHTML}</div>
+                    <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
                     <div className="search--modal--clickListener"></div>
                 </div>
                 
