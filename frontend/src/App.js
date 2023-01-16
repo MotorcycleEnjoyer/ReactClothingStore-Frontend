@@ -12,13 +12,26 @@ function App() {
   const [currentView, setCurrentView] = React.useState("MAIN PAGE")
 
   const dataAsCartView = userData.cart.map((item, index) => <ShoppingProduct key={index} {...item} view="cart"/>)
+
   function changeView(e){
     console.log(e.target.innerText)
     setCurrentView(e.target.innerText)
   }
 
+  function toggleModal(e){
+    let target = e.target
+    let classType = target.className
+    if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
+      document.querySelector(".search--modal").style.display = "none"
+    }
+    if(classType === "search--inputBox"){
+      document.querySelector(".search--modal").style.display = "block"
+      document.querySelector('.search--modal--clickListener').style.display="block"
+    }
+  }
+
   return (
-    <div className="App">
+    <div className="App" onClick={toggleModal}>
       <NavBar changeView={changeView}/>
       
       
@@ -67,6 +80,11 @@ function App() {
             <div>
               {dataAsCartView}
             </div>
+          </>
+        }
+        {
+          currentView === "PRODUCT" &&
+          <>
           </>
         }
       </header>
