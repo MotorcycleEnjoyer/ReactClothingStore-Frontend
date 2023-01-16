@@ -1,0 +1,13 @@
+.search{
+    display: flex;
+}
+
+.search--inputBox{
+    min-width: 300px;
+    min-height: 30px;
+}
+.search--modal--searchResultContainer{
+    margin-top: 36px;
+    min-width: 307px;
+    position: absolute;
+}

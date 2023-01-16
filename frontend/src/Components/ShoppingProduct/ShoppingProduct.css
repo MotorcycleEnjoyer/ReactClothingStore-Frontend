@@ -1,0 +1,10 @@
+.shoppingProduct--searchResult--minimum{
+    display: flex;
+    border: 1px solid black;
+    opacity: 50%;
+}
+
+.shoppingProduct--searchResult--minimum:hover{
+    opacity: 100%;
+    cursor: pointer;
+}

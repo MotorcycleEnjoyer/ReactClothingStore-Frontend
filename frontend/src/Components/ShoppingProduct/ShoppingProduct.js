@@ -8,14 +8,14 @@ export default function ShoppingProduct({...props}){
     <>
         {
             props.view === "searchDropDown" &&  
-                <div>
+                <div className="shoppingProduct--searchResult--minimum">
                     <h1>{props.name}</h1>
                 </div>
         }
         
         {
             props.view !== "searchDropDown" &&
-                <div className="product">
+                <div className="shoppingProduct--searchResult--maximum">
                     <h1 className="product--title">{props.name}</h1>
                     <img src={props.imagePreviewURL} alt={props.name + " preview"} className="product--preview"></img>
                     <ul>

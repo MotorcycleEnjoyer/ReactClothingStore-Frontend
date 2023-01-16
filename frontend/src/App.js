@@ -1,9 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import NavBar from "./Components/NavBar"
+import './Components/ShoppingProduct/ShoppingProduct.css'
+import './Components/Search/Search.css'
+import './Components/NavBar/NavBar.css'
+import NavBar from "./Components/NavBar/NavBar"
 import React from 'react';
 import {userData} from "./DummyProductDB"
-import ShoppingProduct from './Components/ShoppingProduct';
+import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
 
 function App() {
   const [currentView, setCurrentView] = React.useState("MAIN PAGE")

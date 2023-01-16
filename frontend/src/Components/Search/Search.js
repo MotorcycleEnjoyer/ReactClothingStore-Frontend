@@ -1,6 +1,6 @@
 import React from "react"
-import {userData} from "../DummyProductDB"
-import ShoppingProduct from "./ShoppingProduct"
+import {userData} from "../../DummyProductDB"
+import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 
 export default function Search(){
     const [searchVal, setSearchVal] = React.useState("")
@@ -27,13 +27,13 @@ export default function Search(){
             
     }, [searchVal])
 
-    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} {...x} view="full"/>)
+    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} {...x} view="searchDropDown"/>)
 
     return(
-        <>
-                <input type="text" value={searchVal} onChange={handleChange} placeholder="Search"></input>
-                {resultsAsHTML}
-        </>
+        <div className="search">
+                <input type="text" value={searchVal} onChange={handleChange} placeholder="Search" className="search--inputBox"></input>
+                    <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
+        </div>
 
     )
 }
