@@ -9,7 +9,7 @@ export default function ShoppingProduct({...props}){
         {
             props.view === "searchDropDown" &&  
                 <div className="shoppingProduct--searchResult--minimum">
-                    <h1>{props.name}</h1>
+                    <h3>{props.name}</h3>
                 </div>
         }
         
