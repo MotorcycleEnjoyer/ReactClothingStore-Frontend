@@ -34,23 +34,17 @@ function App() {
       <NavBar changeView={changeView}/>
       
       
-      <header className="App-header">
+      <div className="mainContainer">
       { currentView === "MAIN PAGE" &&
         <>
+          <h1>Test</h1>
+          <div className="results">
+            {dataAsCartView}
+            {dataAsCartView}
+            {dataAsCartView}
+            {dataAsCartView}
+          </div>
           
-          
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
         </>
       }
       {
@@ -84,9 +78,10 @@ function App() {
         {
           currentView === "PRODUCT" &&
           <>
+
           </>
         }
-      </header>
+      </div>
     </div>
   );
 }
