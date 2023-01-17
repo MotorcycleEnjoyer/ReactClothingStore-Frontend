@@ -5,14 +5,27 @@ import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 export default function Search(){
     const [searchVal, setSearchVal] = React.useState("")
     const [searchResults, setSearchResults] = React.useState([])
+    const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     function handleChange(e){
-        setSearchVal(e.target.value)
+        console.log(e.target.value)
+        if(blockedCharacters.test(e.target.value)){
+            console.log("INVALID REGEX CHARS SPOTTED") 
+        }else{
+            console.log("IS PROPER")
+            setSearchVal(e.target.value)   
+        }
     }
 
     function findItemInDummyDB(phrase){
+        let regex
+        try{
+            regex = new RegExp(phrase, 'gi');
+        }catch(e){
+            console.error(e)
+        }
+        
         setSearchResults(
             userData.cart.filter(item => {
-                const regex = new RegExp(phrase, 'gi');
                 return item.name.match(regex)
             })
         )
@@ -36,8 +49,6 @@ export default function Search(){
                     <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
                     <div className="search--modal--clickListener"></div>
                 </div>
-                
-                
         </div>
 
     )
