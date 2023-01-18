@@ -3,11 +3,19 @@ body{
 }
 
 .App{
-  text-align: center;
   display: flex;
   flex-direction: column;
 }
 
 .mainContainer{
   background-color: gray;
+  display: flex;
+}
+
+.mainContainer--results{
+  flex: 4;
+}
+
+.mainContainer--sideBar{
+  flex:1;
 }

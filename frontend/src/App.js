@@ -37,14 +37,13 @@ function App() {
       <div className="mainContainer">
       { currentView === "MAIN PAGE" &&
         <>
-          <h1>Test</h1>
-          <div className="results">
+          <div className="mainContainer--sideBar">SIDEBAR</div>
+          <div className="mainContainer--results">
             {dataAsCartView}
             {dataAsCartView}
             {dataAsCartView}
             {dataAsCartView}
           </div>
-          
         </>
       }
       {
