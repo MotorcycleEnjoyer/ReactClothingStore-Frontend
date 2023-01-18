@@ -16,9 +16,9 @@ export default function ShoppingProduct({...props}){
         {
             props.view !== "searchDropDown" &&
                 <div className="shoppingProduct--searchResult--maximum">
-                    <h1 className="product--title">{props.name}</h1>
-                    <img src={props.imagePreviewURL} alt={props.name + " preview"} className="product--preview"></img>
-                    <ul>
+                    <h1 className="shoppingProduct--searchResult--maximum--title">{props.name}</h1>
+                    <img src={props.imagePreviewURL} alt={props.name + " preview"} className="shoppingProduct--searchResult--maximum--image"></img>
+                    <ul className="shoppingProduct--searchResult--maximum--details">
                         <li>size: {props.size}</li>
                         <li>type: {props.typeOfClothing}</li>
                         <li>colors: {props.colorOptions.length}</li>

@@ -9,3 +9,27 @@
     opacity: 100%;
     cursor: pointer;
 }
+
+.shoppingProduct--searchResult--maximum{
+    opacity: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.shoppingProduct--searchResult--maximum:hover{
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.shoppingProduct--searchResult--maximum--title{
+    background-color: red;
+}
+.shoppingProduct--searchResult--maximum--image{
+    background-color: cyan;
+}
+
+.shoppingProduct--searchResult--maximum--details{
+    background-color: white;
+    list-style: none;
+}
