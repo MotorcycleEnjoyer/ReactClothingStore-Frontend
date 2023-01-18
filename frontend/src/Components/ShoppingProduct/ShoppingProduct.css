@@ -13,8 +13,11 @@
 .shoppingProduct--searchResult--maximum{
     opacity: 50%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    max-width: 1500px;
 }
 
 .shoppingProduct--searchResult--maximum:hover{
@@ -22,14 +25,27 @@
     cursor: pointer;
 }
 
-.shoppingProduct--searchResult--maximum--title{
-    background-color: red;
-}
 .shoppingProduct--searchResult--maximum--image{
+    max-width: 200px;
     background-color: cyan;
+    margin-right: 5px;
+    border-radius: 5px;
 }
 
 .shoppingProduct--searchResult--maximum--details{
-    background-color: white;
+    flex: 1;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.shoppingProduct--searchResult--maximum--details > h1{
+    flex: 1;
+}
+.shoppingProduct--searchResult--maximum--details > div{
+    flex: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

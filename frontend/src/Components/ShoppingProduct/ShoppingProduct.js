@@ -1,7 +1,12 @@
 import React from "react";
+import shirt from "../../t-shirt-preview.png";
 
 export default function ShoppingProduct({...props}){
 
+
+    function showColorsDropDown(e){
+        console.log("COLORS")
+    }
     console.log(props)
     return(
         // TWO VIEWS:
@@ -16,13 +21,15 @@ export default function ShoppingProduct({...props}){
         {
             props.view !== "searchDropDown" &&
                 <div className="shoppingProduct--searchResult--maximum">
-                    <h1 className="shoppingProduct--searchResult--maximum--title">{props.name}</h1>
-                    <img src={props.imagePreviewURL} alt={props.name + " preview"} className="shoppingProduct--searchResult--maximum--image"></img>
-                    <ul className="shoppingProduct--searchResult--maximum--details">
-                        <li>size: {props.size}</li>
-                        <li>type: {props.typeOfClothing}</li>
-                        <li>colors: {props.colorOptions.length}</li>
-                    </ul>
+                    <img src={shirt} className="shoppingProduct--searchResult--maximum--image"></img>
+                    <div className="shoppingProduct--searchResult--maximum--details">
+                        <h1>{props.name}</h1>
+                        <div>
+                            <div>price: ${props.price}</div>
+                            <div>maker: {props.manufacturerOrBrand}</div>
+                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>
+                        </div>
+                    </div>
                         
                 </div>
         }
