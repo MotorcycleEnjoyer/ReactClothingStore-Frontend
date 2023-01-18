@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.shoppingProduct--searchResult--maximum{
+.shoppingProduct--searchResult--mid{
     opacity: 50%;
     display: flex;
     flex-direction: row;
@@ -18,21 +18,22 @@
     border-radius: 5px;
     margin: 5px;
     max-width: 1500px;
+    background-color: lightcoral;
 }
 
-.shoppingProduct--searchResult--maximum:hover{
+.shoppingProduct--searchResult--mid:hover{
     opacity: 100%;
     cursor: pointer;
 }
 
-.shoppingProduct--searchResult--maximum--image{
+.shoppingProduct--searchResult--mid--image{
     max-width: 200px;
     background-color: cyan;
     margin-right: 5px;
     border-radius: 5px;
 }
 
-.shoppingProduct--searchResult--maximum--details{
+.shoppingProduct--searchResult--mid--details{
     flex: 1;
     list-style: none;
     display: flex;
@@ -40,10 +41,10 @@
     justify-content: space-around;
 }
 
-.shoppingProduct--searchResult--maximum--details > h1{
+.shoppingProduct--searchResult--mid--details > h1{
     flex: 1;
 }
-.shoppingProduct--searchResult--maximum--details > div{
+.shoppingProduct--searchResult--mid--details > div{
     flex: 3;
     display: flex;
     flex-direction: row;

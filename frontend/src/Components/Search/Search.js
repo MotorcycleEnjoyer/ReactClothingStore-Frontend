@@ -2,7 +2,7 @@ import React from "react"
 import {userData} from "../../DummyProductDB"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 
-export default function Search(){
+export default function Search({...props}){
     const [searchVal, setSearchVal] = React.useState("")
     const [searchResults, setSearchResults] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
@@ -40,7 +40,7 @@ export default function Search(){
             
     }, [searchVal])
 
-    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} {...x} view="searchDropDown"/>)
+    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} {...x} selectProduct={props.selectProduct} view="searchDropDown"/>)
 
     return(
         <div className="search">

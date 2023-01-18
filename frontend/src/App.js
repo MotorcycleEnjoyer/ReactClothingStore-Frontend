@@ -10,9 +10,19 @@ import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
 
 function App() {
   const [currentView, setCurrentView] = React.useState("MAIN PAGE")
+  const [selectedProduct, setSelectedProduct] = React.useState("NONE")
 
-  const dataAsCartView = userData.cart.map((item, index) => <ShoppingProduct key={index} {...item} view="cart"/>)
-
+  const dataAsCartView = userData.cart.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
+  function selectProduct(id){
+    let data = userData.cart.filter(item => item.id === id)[0]
+    if(data===undefined)
+      return
+    document.querySelector(".search--modal").style.display = "none"
+    setSelectedProduct(data)
+    console.log(selectedProduct)
+    setCurrentView("PRODUCT")
+  }
+  
   function changeView(e){
     console.log(e.target.innerText)
     setCurrentView(e.target.innerText)
@@ -31,7 +41,7 @@ function App() {
 
   return (
     <div className="App" onClick={toggleModal}>
-      <NavBar changeView={changeView}/>
+      <NavBar selectProduct={selectProduct} changeView={changeView}/>
       
       
       <div className="mainContainer">
@@ -77,7 +87,8 @@ function App() {
         {
           currentView === "PRODUCT" &&
           <>
-
+              <ShoppingProduct {...selectedProduct} view="fullSize"/>
+              <button onClick={changeView}>MAIN PAGE</button>
           </>
         }
       </div>

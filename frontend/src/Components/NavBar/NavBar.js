@@ -4,7 +4,7 @@ import React from "react"
 export default function NavBar({...props}){
     return(
         <nav className="navBar">
-            <Search />
+            <Search selectProduct={props.selectProduct}/>
             <button onClick={props.changeView}>LOGIN</button>
             <button onClick={props.changeView}>REGISTER</button>
             <button onClick={props.changeView}>MY CART</button>

@@ -3,26 +3,24 @@ import shirt from "../../t-shirt-preview.png";
 
 export default function ShoppingProduct({...props}){
 
-
     function showColorsDropDown(e){
         console.log("COLORS")
     }
-    console.log(props)
     return(
         // TWO VIEWS:
     <>
         {
             props.view === "searchDropDown" &&  
-                <div className="shoppingProduct--searchResult--minimum">
+                <div className="shoppingProduct--searchResult--minimum" onClick={()=>props.selectProduct(props.id)}>
                     <h3>{props.name}</h3>
                 </div>
         }
         
         {
-            props.view !== "searchDropDown" &&
-                <div className="shoppingProduct--searchResult--maximum">
-                    <img src={shirt} className="shoppingProduct--searchResult--maximum--image"></img>
-                    <div className="shoppingProduct--searchResult--maximum--details">
+            props.view === "searchResult" &&
+                <div className="shoppingProduct--searchResult--mid" onClick={()=> props.selectProduct(props.id)}>
+                    <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
+                    <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.name}</h1>
                         <div>
                             <div>price: ${props.price}</div>
@@ -32,6 +30,25 @@ export default function ShoppingProduct({...props}){
                     </div>
                         
                 </div>
+        }
+
+        {
+            props.view === "fullSize" &&
+            <div className="shoppingProduct--fullSize">
+                <h1>{props.name}</h1>
+                <div><img src={shirt}></img></div>
+                <div>{props.id}</div>
+                <div>BRAND: {props.manufacturerOrBrand}</div>
+                <div>SIZE: {props.size}</div>
+                <div>AGE RANGE: {props.ageCategory}</div>
+                <div>M/F: {props.sexCategory}</div>
+                <div>TYPE: {props.typeOfClothing}</div>
+                <div>COLOR OPTIONS: {props.colorOptions.toString()}</div>
+                <div>PRICE: {props.price}</div>
+                <div>Polyester: {props.materials.polyester}</div>
+                <div>Cotton: {props.materials.cotton}</div>
+                <div>AMOUNT SELECTED: {props.amount}</div>
+            </div>
         }
     </>
     )
