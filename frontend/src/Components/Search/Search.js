@@ -1,5 +1,4 @@
 import React from "react"
-import {userData} from "../../DummyProductDB"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 
 export default function Search({...props}){
@@ -49,7 +48,7 @@ export default function Search({...props}){
         }
         
         setSearchResults(
-            userData.cart.filter(item => {
+            props.userData.cart.filter(item => {
                 return item.name.match(regex)
             })
         )

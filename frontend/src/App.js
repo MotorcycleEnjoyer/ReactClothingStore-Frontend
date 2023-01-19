@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="App" onClick={toggleModal}>
-      <NavBar showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
+      <NavBar userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
       
       
       <div className="mainContainer">
