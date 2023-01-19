@@ -12,19 +12,21 @@ function App() {
   const [currentView, setCurrentView] = React.useState("SEARCH")
   const [selectedProduct, setSelectedProduct] = React.useState("NONE")
   const [searchResults, setSearchResults] = React.useState([])
+  const [modalStatus, setModalStatus] = React.useState(false)
 
   function hideModal(){
     document.querySelector(".search--modal").style.display = "none"
+    setModalStatus(false)
   }
 
   function showModal(){
     document.querySelector(".search--modal").style.display = "block"
+    setModalStatus(true)
   }
 
   function storeSearchResults(results){
     console.log(`results: ${results}`)
     setSearchResults(results)
-    hideModal()
   }
 
   const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
@@ -56,55 +58,58 @@ function App() {
 
   return (
     <div className="App" onClick={toggleModal}>
-      <NavBar userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
       
-      
-      <div className="mainContainer">
       { currentView === "SEARCH" &&
-        <>
+      <>
+        <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
+        <div className="mainContainer">
           <div className="mainContainer--sideBar">SIDEBAR</div>
           <div className="mainContainer--results">
             {dataAsCartView}
           </div>
-        </>
+        </div>
+      </>
+        
       }
       {
         currentView === "LOGIN" &&
-        <>
+        <div className="mainContainer">
           <h1>Please enter your credentials</h1>
           <input type="text" name="username" placeholder='Username'></input>
           <input type="password" name="password" placeholder='Password'></input>
-          <button onClick={changeView}>MAIN PAGE</button>
-        </>
+          <button onClick={changeView}>SEARCH</button>
+        </div>
         }
         {
           currentView === "REGISTER" &&
-          <>
+          <div className="mainContainer">
           <h1>Register account!</h1>
           <form>
           </form>
-          <button onClick={changeView}>MAIN PAGE</button>
-          </>
+          <button onClick={changeView}>SEARCH</button>
+          </div>
         }
         {
           currentView === "MY CART" &&
-          <>
-            <button onClick={changeView}>MAIN PAGE</button>
+          <div className="mainContainer">
+            <button onClick={changeView}>SEARCH</button>
             <h1>My Shopping Cart</h1>
             <div>
               {dataAsCartView}
             </div>
-          </>
+          </div>
         }
         {
           currentView === "PRODUCT" &&
           <>
+            <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
+            <div className="mainContainer">
               <ShoppingProduct {...selectedProduct} view="fullSize"/>
-              <button onClick={changeView}>MAIN PAGE</button>
+              <button onClick={changeView}>SEARCH</button>
+            </div>
           </>
         }
       </div>
-    </div>
   );
 }
 

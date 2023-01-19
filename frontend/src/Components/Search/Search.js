@@ -10,21 +10,17 @@ export default function Search({...props}){
     function checkEnter(e){
         if(e.key === "Enter")
         {
-            setSubmittedResults(searchResults)
+            props.hideModal()
+            props.storeSearchResults(submittedResults)
         }
     }
 
     function storeSearchValFromClick(value){
         //console.log(`VALUE:   ${value}`)
+        props.hideModal()
         changeSearchValueIfProperRegex(value)
         setSubmittedResults(searchResults)
-        props.hideModal()
     }
-
-    function fireAfter(){
-        props.storeSearchResults(searchResults)
-    }
-
 
     function changeSearchValueIfProperRegex(value){
         if(blockedCharacters.test(value)){
@@ -71,6 +67,9 @@ export default function Search({...props}){
         console.log("SEARCH RESULTS")
         console.log(searchResults)
         console.log("SEARCH RESULTS END")
+        if(!props.modalStatus){
+            props.storeSearchResults(searchResults)
+        }
         // props.storeSearchResults(searchResults)
     },[searchResults])
 
