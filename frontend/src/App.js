@@ -9,15 +9,30 @@ import {userData} from "./DummyProductDB"
 import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
 
 function App() {
-  const [currentView, setCurrentView] = React.useState("MAIN PAGE")
+  const [currentView, setCurrentView] = React.useState("SEARCH")
   const [selectedProduct, setSelectedProduct] = React.useState("NONE")
+  const [searchResults, setSearchResults] = React.useState([])
 
-  const dataAsCartView = userData.cart.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
+  function hideModal(){
+    document.querySelector(".search--modal").style.display = "none"
+  }
+
+  function showModal(){
+    document.querySelector(".search--modal").style.display = "block"
+  }
+
+  function storeSearchResults(results){
+    console.log(`results: ${results}`)
+    setSearchResults(results)
+    hideModal()
+  }
+
+  const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
   function selectProduct(id){
     let data = userData.cart.filter(item => item.id === id)[0]
     if(data===undefined)
       return
-    document.querySelector(".search--modal").style.display = "none"
+    hideModal()
     setSelectedProduct(data)
     console.log(selectedProduct)
     setCurrentView("PRODUCT")
@@ -32,26 +47,23 @@ function App() {
     let target = e.target
     let classType = target.className
     if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
-      document.querySelector(".search--modal").style.display = "none"
+      hideModal()
     }
     if(classType === "search--inputBox"){
-      document.querySelector(".search--modal").style.display = "block"
+      showModal()
     }
   }
 
   return (
     <div className="App" onClick={toggleModal}>
-      <NavBar selectProduct={selectProduct} changeView={changeView}/>
+      <NavBar showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
       
       
       <div className="mainContainer">
-      { currentView === "MAIN PAGE" &&
+      { currentView === "SEARCH" &&
         <>
           <div className="mainContainer--sideBar">SIDEBAR</div>
           <div className="mainContainer--results">
-            {dataAsCartView}
-            {dataAsCartView}
-            {dataAsCartView}
             {dataAsCartView}
           </div>
         </>

@@ -6,12 +6,13 @@ export default function ShoppingProduct({...props}){
     function showColorsDropDown(e){
         console.log("COLORS")
     }
+    
     return(
         // TWO VIEWS:
     <>
         {
             props.view === "searchDropDown" &&  
-                <div className="shoppingProduct--searchResult--minimum" onClick={()=>props.selectProduct(props.id)}>
+                <div className="shoppingProduct--searchResult--minimum" onClick={()=>props.storeSearchValFromClick(props.name)}>
                     <h3>{props.name}</h3>
                 </div>
         }
