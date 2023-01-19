@@ -1,11 +1,9 @@
+import logo from './logo.svg';
 import './App.css';
 import './Components/ShoppingProduct/ShoppingProduct.css'
 import './Components/Search/Search.css'
 import './Components/NavBar/NavBar.css'
 import NavBar from "./Components/NavBar/NavBar"
-import Cart from './Components/Cart/Cart';
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
 import React from 'react';
 import {userData} from "./DummyProductDB"
 import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
@@ -75,15 +73,31 @@ function App() {
       }
       {
         currentView === "LOGIN" &&
-          <Login changeView={changeView}/>
+        <div className="mainContainer">
+          <h1>Please enter your credentials</h1>
+          <input type="text" name="username" placeholder='Username'></input>
+          <input type="password" name="password" placeholder='Password'></input>
+          <button onClick={changeView}>SEARCH</button>
+        </div>
         }
         {
           currentView === "REGISTER" &&
-          <Register changeView={changeView} />
+          <div className="mainContainer">
+          <h1>Register account!</h1>
+          <form>
+          </form>
+          <button onClick={changeView}>SEARCH</button>
+          </div>
         }
         {
           currentView === "MY CART" &&
-          <Cart changeView={changeView} dataAsCartView={dataAsCartView}/>
+          <div className="mainContainer">
+            <button onClick={changeView}>SEARCH</button>
+            <h1>My Shopping Cart</h1>
+            <div>
+              {dataAsCartView}
+            </div>
+          </div>
         }
         {
           currentView === "PRODUCT" &&
