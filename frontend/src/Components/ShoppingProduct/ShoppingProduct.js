@@ -44,7 +44,7 @@ export default function ShoppingProduct({...props}){
                 <div>AGE RANGE: {props.ageCategory}</div>
                 <div>M/F: {props.sexCategory}</div>
                 <div>TYPE: {props.typeOfClothing}</div>
-                <div>COLOR OPTIONS: {props.colorOptions.toString()}</div>
+                <div>COLOR OPTIONS: <select>{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
                 <div>PRICE: {props.price}</div>
                 <div>Polyester: {props.materials.polyester}</div>
                 <div>Cotton: {props.materials.cotton}</div>
