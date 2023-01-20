@@ -120,7 +120,6 @@ function App() {
             <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
             <div className="mainContainer">
               <ShoppingProduct {...selectedProduct} view="fullSize"/>
-              <button onClick={changeView}>SEARCH</button>
             </div>
           </>
         }
