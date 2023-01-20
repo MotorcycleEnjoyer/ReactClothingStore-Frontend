@@ -5,10 +5,25 @@ import './Components/Search/Search.css'
 import './Components/NavBar/NavBar.css'
 import NavBar from "./Components/NavBar/NavBar"
 import React from 'react';
-import {userData} from "./DummyProductDB"
 import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
+import axios from 'axios'
+
+const DATA_URL = "http://localhost:5000/data"
 
 function App() {
+
+  React.useEffect(()=>{
+    loadUserData()
+  }
+  ,[])
+  
+  function loadUserData(){
+    axios.get(DATA_URL).then(function(response){
+      setUserData(response.data)
+    })
+  }
+
+  const [userData, setUserData] = React.useState([])
   const [currentView, setCurrentView] = React.useState("SEARCH")
   const [selectedProduct, setSelectedProduct] = React.useState("NONE")
   const [searchResults, setSearchResults] = React.useState([])
