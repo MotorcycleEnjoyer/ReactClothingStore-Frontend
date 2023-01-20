@@ -50,3 +50,13 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.shoppingProduct--fullSize{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: left;
+}
+.shoppingProduct--fullSize > h1{
+    text-align: center;
+}
