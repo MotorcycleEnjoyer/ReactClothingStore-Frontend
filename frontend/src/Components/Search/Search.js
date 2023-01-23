@@ -4,37 +4,50 @@ import axios from "axios"
 
 export default function Search({...props}){
     const [searchVal, setSearchVal] = React.useState("")
-    const [searchResults, setSearchResults] = React.useState([])
-    const [submittedResults, setSubmittedResults] = React.useState([])
+    const [suggestions, setSuggestions] = React.useState([])
+    const [searchResultsFromServer, setSearchResultsFromServer] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
+    const PRODUCTS_URL = "http://localhost:5000/productSearch"
       
-        function getSuggestions(value){
+    function getSuggestions(value){
         const data = {
             searchTerm: value
         }
         axios.post(SUGGESTIONS_URL, data).then(function(response){
-          setSearchResults(response.data || [])
+            setSuggestions(response.data || [])
         }).catch(error=>{
-          if(error.response){
+            if(error.response){
             console.log(error.response.data, error.response.status, error.response.headers)
-          }
+            }
         })
-      }
+    }
+
+    function getProductsFromServer(productName){
+        const data = {
+            searchTerm: productName
+        }
+        axios.post(PRODUCTS_URL, data).then(function(response){
+            setSearchResultsFromServer(response.data || [])
+        }).catch(error=>{
+            if(error.response){
+            console.log(error.response.data, error.response.status, error.response.headers)
+            }
+        })
+    }
 
     function checkEnter(e){
         if(e.key === "Enter")
         {
             props.hideModal()
-            props.storeSearchResults(submittedResults)
+            getProductsFromServer(searchVal)
         }
     }
 
     function storeSearchValFromClick(value){
         //console.log(`VALUE:   ${value}`)
         props.hideModal()
-        changeSearchValueIfProperRegex(value)
-        setSubmittedResults(searchResults)
+        getProductsFromServer(value)
     }
 
     function changeSearchValueIfProperRegex(value){
@@ -52,7 +65,7 @@ export default function Search({...props}){
 
     React.useEffect(()=>{
         if(searchVal === ""){
-            setSearchResults([])
+            setSuggestions([])
         }else{
             getSuggestions(searchVal)
         }
@@ -60,20 +73,10 @@ export default function Search({...props}){
     }, [searchVal])
 
     React.useEffect(()=>{
-        // props.storeSearchResults(searchResults)
-    },[submittedResults])
+        props.storeSearchResults(searchResultsFromServer)
+    },[searchResultsFromServer])
 
-    React.useEffect(()=>{
-        console.log("SEARCH RESULTS")
-        console.log(searchResults)
-        console.log("SEARCH RESULTS END")
-        /* if(!props.modalStatus){
-            props.storeSearchResults(searchResults)
-        } */
-        // props.storeSearchResults(searchResults)
-    },[searchResults])
-
-    const resultsAsHTML = searchResults.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>) 
+    const resultsAsHTML = suggestions.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>) 
 
     return(
         <div className="search">
