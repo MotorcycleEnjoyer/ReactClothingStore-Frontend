@@ -32,7 +32,9 @@ app.post('/suggestions', function(req,res){
 })
 
 app.post('/productSearch', function(req,res){
-    res.send("BLA")
+    let productName = req.body.searchTerm
+    let searchResults = getProductFromProductDatabase(productName)
+    res.send(searchResults)
 })
 
 function getProductFromProductDatabase(productName){
