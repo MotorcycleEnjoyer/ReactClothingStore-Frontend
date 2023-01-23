@@ -12,18 +12,47 @@ const DATA_URL = "http://localhost:5000/data"
 
 function App() {
 
-  React.useEffect(()=>{
-    loadUserData()
-  }
-  ,[])
-  
-  function loadUserData(){
-    axios.get(DATA_URL).then(function(response){
-      setUserData(response.data)
-    })
-  }
-
-  const [userData, setUserData] = React.useState([])
+  const [userData, setUserData] = React.useState({
+    session: "9a2a94eb-c327-4625-bd4d-cb9e1d53bcfb",
+    cart: [
+      {
+        id: 1,
+        name: "Generic T Shirt",
+        manufacturerOrBrand: "T-Shirt-CO",
+        size: 5,
+        ageCategory: "5-10",
+        sexCategory: "M",
+        typeOfClothing: "T-Shirt",
+        colorOptions: ["red", "green", "orange", "pink"],
+        imagePreviewURL: "a",
+        variationIsInStock: [{color: "red", amountInStock: 10}, {color: "green", amountInStock: 3}, {color: "orange", amountInStock: 0}, {color:"pink", amountInStock:2}],
+        weight: {grams: 50},
+        dimensions: "LxWxH",
+        price: 5.99,
+        materials: {polyester: "50%", cotton: "50%"},
+        amount: 1,
+        totalCost: 5.99,
+    },
+    {
+        id: 2,
+        name: "Not Generic T Shirt",
+        manufacturerOrBrand: "T-Shirt-CO",
+        size: 5,
+        ageCategory: "10-15",
+        sexCategory: "F",
+        typeOfClothing: "T-Shirt",
+        colorOptions: ["red", "green", "orange", "pink"],
+        imagePreviewURL: "a",
+        variationIsInStock: [{color: "red", amountInStock: 2}, {color: "green", amountInStock: 3}, {color: "orange", amountInStock: 4}, {color:"pink", amountInStock: 5}],
+        weight: {grams: 49},
+        dimensions: "LxWxH",
+        price: 5.99,
+        materials: {polyester: "50%", cotton: "50%"},
+        amount: 1,
+        totalCost: 5.99,
+        }
+        ],
+})
   const [currentView, setCurrentView] = React.useState("SEARCH")
   const [selectedProduct, setSelectedProduct] = React.useState("NONE")
   const [searchResults, setSearchResults] = React.useState([])
@@ -80,7 +109,6 @@ function App() {
         <div className="mainContainer">
           <div className="mainContainer--sideBar">SIDEBAR</div>
           <div className="mainContainer--results">
-            {dataAsCartView}
           </div>
         </div>
       </>
