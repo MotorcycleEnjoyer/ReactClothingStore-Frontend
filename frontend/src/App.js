@@ -69,7 +69,6 @@ function App() {
   }
 
   function storeSearchResults(results){
-    console.log(`results: ${results}`)
     setSearchResults(results)
   }
 
@@ -109,6 +108,7 @@ function App() {
         <div className="mainContainer">
           <div className="mainContainer--sideBar">SIDEBAR</div>
           <div className="mainContainer--results">
+            {dataAsCartView}
           </div>
         </div>
       </>
