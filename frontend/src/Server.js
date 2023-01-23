@@ -38,7 +38,16 @@ app.post('/productSearch', function(req,res){
 })
 
 function getProductFromProductDatabase(productName){
-    return dummyData.filter(item => item.name.includes(productName))
+    let regex
+    try{
+        regex = new RegExp(productName, 'gi');
+    }catch(e){
+        console.error(e)
+    }
+
+    return dummyData.filter(item => {
+        return item.name.match(regex)
+    })
 }
 
 console.log(getProductFromProductDatabase("Generic"))
