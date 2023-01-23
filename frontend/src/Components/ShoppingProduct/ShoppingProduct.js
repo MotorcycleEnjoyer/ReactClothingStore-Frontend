@@ -9,6 +9,7 @@ export default function ShoppingProduct({...props}){
     
     return(
         // TWO VIEWS:
+        
     <>
         {
             props.view === "searchDropDown" &&  
@@ -26,7 +27,7 @@ export default function ShoppingProduct({...props}){
                         <div>
                             <div>price: ${props.price}</div>
                             <div>maker: {props.manufacturerOrBrand}</div>
-                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>
+                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>                    
                         </div>
                     </div>
                         
