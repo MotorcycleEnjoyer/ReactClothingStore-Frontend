@@ -8,7 +8,7 @@ app.use(express.json())
 
 console.log(suggestionDB)
 
-const dummyData = dummyProductDB.userData
+const dummyData = dummyProductDB.userData.cart
 
 app.get('/data', function(req,res){
     console.log("DATA REQUEST")
@@ -30,5 +30,15 @@ app.post('/suggestions', function(req,res){
     })
     res.send(searchSuggestions)
 })
+
+app.post('/productSearch', function(req,res){
+    res.send("BLA")
+})
+
+function getProductFromProductDatabase(productName){
+    return dummyData.filter(item => item.name.includes(productName))
+}
+
+console.log(getProductFromProductDatabase("Generic"))
 
 app.listen(5000, console.log("Running on port 5000"))
