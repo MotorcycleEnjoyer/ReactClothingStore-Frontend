@@ -1,15 +1,11 @@
 body{
   background-color: red;
+  text-align: center;
 }
 
 .App{
   display: flex;
   flex-direction: column;
-}
-
-.mainContainer{
-  background-color: gray;
-  display: flex;
 }
 
 .mainContainer--results{
