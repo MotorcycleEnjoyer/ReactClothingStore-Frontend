@@ -3,6 +3,7 @@ const app = express()
 const dummyProductDB = require("./DummyProductDB")
 const suggestionDB = require("./Suggestions")
 const cors = require("cors")
+const url = require('url')
 app.use(cors())
 app.use(express.json())
 
@@ -31,10 +32,17 @@ app.post('/suggestions', function(req,res){
     res.send(searchSuggestions)
 })
 
-app.post('/productSearch', function(req,res){
-    let productName = req.body.searchTerm
-    let searchResults = getProductFromProductDatabase(productName)
+app.get('/s', function(req,res){
+    let urlObject = url.parse(req.url)
+    let rawQuery = urlObject.query.split("=")[1]
+    let properQuery = rawQuery.split("+").join(" ")
+    let searchResults = getProductFromProductDatabase(properQuery)
     res.send(searchResults)
+})
+
+app.get('/*', function(req, res){
+    res.status(404)
+    res.send("<h1>404 page not found</h1>")
 })
 
 function getProductFromProductDatabase(productName){
