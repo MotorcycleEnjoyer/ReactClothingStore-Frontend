@@ -5,10 +5,8 @@ import axios from "axios"
 export default function Search({...props}){
     const [searchVal, setSearchVal] = React.useState("")
     const [suggestions, setSuggestions] = React.useState([])
-    const [searchResultsFromServer, setSearchResultsFromServer] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
-    const PRODUCTS_URL = "http://localhost:5000/productSearch"
       
     function getSuggestions(value){
         const data = {
@@ -23,38 +21,31 @@ export default function Search({...props}){
         })
     }
 
-    function getProductsFromServer(productName){
-        const data = {
-            searchTerm: productName
-        }
-        axios.post(PRODUCTS_URL, data).then(function(response){
-            setSearchResultsFromServer(response.data || [])
-        }).catch(error=>{
-            if(error.response){
-            console.log(error.response.data, error.response.status, error.response.headers)
-            }
-        })
+    function redirectToSearchPage(productName){
+        let productNameWithPlusSigns = productName.split(" ").join("+")
+        window.location=`/s?k=${productNameWithPlusSigns}`
     }
 
     function checkEnter(e){
         if(e.key === "Enter")
         {
+            if(searchVal==="")
+                return
             props.hideModal()
-            getProductsFromServer(searchVal)
+            redirectToSearchPage(searchVal)
+            document.activeElement.blur()
         }
     }
 
     function storeSearchValFromClick(value){
-        //console.log(`VALUE:   ${value}`)
         props.hideModal()
-        getProductsFromServer(value)
+        redirectToSearchPage(value)
     }
 
     function changeSearchValueIfProperRegex(value){
         if(blockedCharacters.test(value)){
             console.log("INVALID REGEX CHARS SPOTTED") 
         }else{
-            console.log("IS PROPER")
             setSearchVal(value)
         }
     }
@@ -71,10 +62,6 @@ export default function Search({...props}){
         }
             
     }, [searchVal])
-
-    React.useEffect(()=>{
-        props.storeSearchResults(searchResultsFromServer)
-    },[searchResultsFromServer])
 
     const resultsAsHTML = suggestions.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>) 
 
