@@ -1,8 +1,10 @@
 import React from "react";
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
 import NavBar from "../NavBar/NavBar"
+import axios from "axios";
 
-export default function Homepage(){
+export default function Homepage({...props}){
+    const SEARCH_URL = "http://localhost:5000/s?k="
     const [userData, setUserData] = React.useState({
         session: "9a2a94eb-c327-4625-bd4d-cb9e1d53bcfb",
         cart: [
@@ -48,6 +50,29 @@ export default function Homepage(){
       const [selectedProduct, setSelectedProduct] = React.useState("NONE")
       const [searchResults, setSearchResults] = React.useState([])
       const [modalStatus, setModalStatus] = React.useState(false)
+      React.useEffect(()=>{
+        if(props.searchIsDone)
+        {
+          const searchTerm = window.location.href.split("s?k=")[1]
+          if(searchTerm===undefined){
+            window.location = "/"
+          }
+          const finalURL = SEARCH_URL + searchTerm
+          console.log(finalURL)
+          axios.get(finalURL).then(function(response){
+            if(response.data.length >= 1){
+              setSearchResults(response.data)
+            }else{
+              document.querySelector(".mainContainer--results").innerText = "We're sorry. That item is not on our catalogue."
+            }
+          }).catch(error=>{
+              if(error.response){
+              console.log("BRUH")
+              console.log(error.response.data, error.response.status, error.response.headers)
+              }
+          })
+        }
+      },[])
     
       function hideModal(){
         document.querySelector(".search--modal").style.display = "none"
@@ -60,14 +85,9 @@ export default function Homepage(){
       }
     
       function storeSearchResults(results){
-        console.log(results)
         setSearchResults(results)
         // setCurrentView("SEARCH")
       }
-    
-      React.useEffect(()=>{
-        setCurrentView("SEARCH")
-      },[searchResults])
     
       const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
     
@@ -77,12 +97,10 @@ export default function Homepage(){
           return
         hideModal()
         setSelectedProduct(data)
-        console.log(selectedProduct)
         setCurrentView("PRODUCT")
       }
       
       function changeView(e){
-          console.log(e.target.innerText)
           setCurrentView(e.target.innerText)
       }
     
@@ -103,7 +121,6 @@ export default function Homepage(){
             <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
             { currentView === "SEARCH" &&
                 <>
-                    <div className="mainContainer--sideBar">SIDEBAR</div>
                     <div className="mainContainer--results">
                         {dataAsCartView}
                     </div>
