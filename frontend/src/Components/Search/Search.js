@@ -7,7 +7,17 @@ export default function Search({...props}){
     const [suggestions, setSuggestions] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
-      
+
+    React.useEffect(()=>{
+        const searchTermWithPlusSigns = window.location.href.split("s?k=")[1] || false
+        if(searchTermWithPlusSigns === undefined || searchTermWithPlusSigns === false){
+          return
+        }else{
+            const searchTermWithSpaces = searchTermWithPlusSigns.split("+").join(" ")
+            setSearchVal(searchTermWithSpaces)
+        }
+    },[])
+
     function getSuggestions(value){
         const data = {
             searchTerm: value
