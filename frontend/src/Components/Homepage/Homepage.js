@@ -53,12 +53,11 @@ export default function Homepage({...props}){
       React.useEffect(()=>{
         if(props.searchIsDone)
         {
-          const searchTerm = window.location.href.split("s?k=")[1]
-          if(searchTerm===undefined){
+          const searchTermWithPlusSigns = window.location.href.split("s?k=")[1]
+          if(searchTermWithPlusSigns === undefined || searchTermWithPlusSigns === ""){
             window.location = "/"
           }
-          const finalURL = SEARCH_URL + searchTerm
-          console.log(finalURL)
+          const finalURL = SEARCH_URL + searchTermWithPlusSigns
           axios.get(finalURL).then(function(response){
             if(response.data.length >= 1){
               setSearchResults(response.data)
@@ -99,10 +98,6 @@ export default function Homepage({...props}){
         setSelectedProduct(data)
         setCurrentView("PRODUCT")
       }
-      
-      function changeView(e){
-          setCurrentView(e.target.innerText)
-      }
     
       function toggleModal(e){
         let target = e.target
@@ -118,7 +113,7 @@ export default function Homepage({...props}){
     return(
         
         <div onClick={toggleModal}>
-            <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct} changeView={changeView}/>
+            <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct}/>
             { currentView === "SEARCH" &&
                 <>
                     <div className="mainContainer--results">
