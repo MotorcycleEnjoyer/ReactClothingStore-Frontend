@@ -47,7 +47,7 @@ export default function Homepage({...props}){
             ],
     })
       const [currentView, setCurrentView] = React.useState("SEARCH")
-      const [selectedProduct, setSelectedProduct] = React.useState("NONE")
+      const [selectedProduct, setSelectedProduct] = React.useState("")
       const [searchResults, setSearchResults] = React.useState([])
       const [modalStatus, setModalStatus] = React.useState(false)
       React.useEffect(()=>{
@@ -57,6 +57,7 @@ export default function Homepage({...props}){
           if(searchTermWithPlusSigns === undefined || searchTermWithPlusSigns === ""){
             window.location = "/"
           }
+          document.title = `React Clothing Store: ${searchTermWithPlusSigns.split("+").join(" ")}`
           const finalURL = SEARCH_URL + searchTermWithPlusSigns
           axios.get(finalURL).then(function(response){
             if(response.data.length >= 1){
@@ -88,15 +89,14 @@ export default function Homepage({...props}){
         // setCurrentView("SEARCH")
       }
     
-      const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} selectProduct={selectProduct} {...item} view="searchResult"/>)
+      const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} chooseProduct={chooseProduct} {...item} view="searchResult"/>)
     
-      function selectProduct(id){
+      function chooseProduct(id){
         let data = userData.cart.filter(item => item.id === id)[0]
         if(data===undefined)
           return
         hideModal()
         setSelectedProduct(data)
-        setCurrentView("PRODUCT")
       }
     
       function toggleModal(e){
@@ -110,16 +110,30 @@ export default function Homepage({...props}){
           showModal()
         }
       }
+
+      React.useEffect(()=>{
+        if(selectedProduct === undefined || selectedProduct === ""){
+          return
+        }
+        console.log({...selectedProduct})
+        setCurrentView("PRODUCT")
+      },[selectedProduct])
     return(
         
         <div onClick={toggleModal}>
-            <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults} selectProduct={selectProduct}/>
+            <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
             { currentView === "SEARCH" &&
                 <>
                     <div className="mainContainer--results">
                         {dataAsCartView}
                     </div>
                 </>
+            }
+            {
+              currentView === "PRODUCT" &&
+              <>
+                <ShoppingProduct {...selectedProduct} view="fullSize"/>
+              </>
             }
         </div>
     )
