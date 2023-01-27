@@ -4,7 +4,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Homepage from './Components/Homepage/Homepage';
 import Login from './Components/Login/Login';
-import ShoppingProduct from './Components/ShoppingProduct/ShoppingProduct';
 import './App.css'
 import './Components/Search/Search.css'
 import './Components/ShoppingProduct/ShoppingProduct.css';
