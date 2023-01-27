@@ -20,7 +20,7 @@ export default function ShoppingProduct({...props}){
         
         {
             props.view === "searchResult" &&
-                <div className="shoppingProduct--searchResult--mid" onClick={()=> props.selectProduct(props.id)}>
+                <div className="shoppingProduct--searchResult--mid" onClick={()=> props.chooseProduct(props.id)}>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.name}</h1>
