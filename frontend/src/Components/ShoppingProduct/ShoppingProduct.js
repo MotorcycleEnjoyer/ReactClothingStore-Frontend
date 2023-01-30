@@ -73,19 +73,19 @@ export default function ShoppingProduct({...props}){
                 <form action="http://localhost:5000/addToCart" method="POST" id="addToCart">
                     <fieldset>
                         <div>SIZE: {props.size}</div>
-                        <label for="ageSelector">AGE RANGE:</label> 
+                        <label htmlFor="ageSelector">AGE RANGE:</label> 
                         <select id="ageSelector">
                             <option value="5-10">5-12</option>
                             <option value="10-15">13-18</option>
                             <option value="adult">adult</option>
                         </select>
-                        <label for="sexSelector">M/F: </label>
+                        <label htmlFor="sexSelector">M/F: </label>
                             <select id="sexSelector">
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
                         <div>COLOR OPTIONS: 
-                            <label for="colorSelector"></label>
+                            <label htmlFor="colorSelector"></label>
                             <select id="colorSelector">{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
                         <div>Quantity: <select id="quantitySelector"></select></div>       
                         <button onClick={submitToServer}>Add To Cart</button>         
