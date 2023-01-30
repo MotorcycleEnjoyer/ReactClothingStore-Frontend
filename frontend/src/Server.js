@@ -6,6 +6,7 @@ const cors = require("cors")
 const url = require('url')
 app.use(cors())
 app.use(express.json())
+app.use(express.urlencoded())
 
 console.log(suggestionDB)
 
@@ -30,6 +31,11 @@ app.post('/suggestions', function(req,res){
         return item.match(regex)
     })
     res.send(searchSuggestions)
+})
+
+app.post('/addToCart', function(req,res){
+    console.log(req.body)
+    res.send("ok")
 })
 
 app.get('/s', function(req,res){
