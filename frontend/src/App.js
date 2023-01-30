@@ -24,6 +24,7 @@ function App() {
             <Route path="/register" element={<Register />}/>
             <Route path="/cart" element={<Cart />}/>
             <Route path="/s" element={<Homepage searchIsDone={true}/>}/>
+            <Route path="/product/*" element={<Homepage  productIsSelected={true}/>}/>
             <Route path="/*" element={<NoMatch />} />
           </Routes>
         </BrowserRouter>
