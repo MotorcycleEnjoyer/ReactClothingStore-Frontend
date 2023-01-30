@@ -9,7 +9,7 @@ export default function ShoppingProduct({...props}){
 
     function redirectToProductView(){
         let productNameWithPlusSigns = props.name.split(" ").join("+")
-        window.location=`/product/${productNameWithPlusSigns}`
+        window.location=`/p/${productNameWithPlusSigns}/id/${props.id}`
     }
 
     function generateDropdownOptions(){
