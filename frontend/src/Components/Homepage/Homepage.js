@@ -23,7 +23,7 @@ export default function Homepage({...props}){
         changeTitle(newTitle)
 
         const finalURL = SEARCH_URL + searchTermWithPlusSigns
-        axios.get(finalURL).then(function(response){
+        axios.get(finalURL, {withCredentials: true}).then(function(response){
           if(response.data.length >= 1){
             setSearchResults(response.data)
           }else{
@@ -42,14 +42,14 @@ export default function Homepage({...props}){
         }
         const finalURL = PRODUCT_URL + urlSecondHalf
         console.log(finalURL)
-        axios.get(finalURL).then(response => {
+        axios.get(finalURL, {withCredentials: true}).then(response => {
           setSelectedProduct(response.data[0])
         })
       }
     },[])
 
     function getUserCartFromServer(){
-      axios.get("http://localhost:5000/").then((response) => {
+      axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
         setUserData(response.data)
         console.log(response.data)
       }).catch(error => {

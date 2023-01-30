@@ -1,5 +1,8 @@
+import axios from "axios";
 import React from "react";
 import shirt from "../../t-shirt-preview.png";
+
+const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
 
 export default function ShoppingProduct({...props}){
 
@@ -23,8 +26,23 @@ export default function ShoppingProduct({...props}){
     }
 
     function submitToServer(e){
+        e.preventDefault()
         console.log(e)
+        let dataObject = {}
+        dataObject["size"]=document.querySelector("#sizeSelector").value
+        dataObject["ageCategory"]=document.querySelector("#ageSelector").value
+        dataObject["sexCategory"]=document.querySelector("#sexSelector").value
+        dataObject["color"]=document.querySelector("#colorSelector").value
+        dataObject["amount"]=document.querySelector("#quantitySelector").value
 
+        let dataObjectHeaders = {}
+        dataObjectHeaders["productName"] = props.name
+        dataObjectHeaders["productId"] = props.id
+        dataObjectHeaders["data"] = dataObject
+        console.table(dataObjectHeaders)
+        axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
+        .then(response => console.log(response))
+        .catch(error => console.error(error))
     }
 
     React.useEffect(()=>{
@@ -72,12 +90,18 @@ export default function ShoppingProduct({...props}){
                     <div>Cotton: {props.materials.cotton}</div>
                 <form action="http://localhost:5000/addToCart" method="POST" id="addToCart">
                     <fieldset>
-                        <div>SIZE: {props.size}</div>
+                        <label htmlFor="sizeSelector">SIZE:</label>
+                        <select id="sizeSelector">
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
                         <label htmlFor="ageSelector">AGE RANGE:</label> 
                         <select id="ageSelector">
-                            <option value="5-10">5-12</option>
-                            <option value="10-15">13-18</option>
-                            <option value="adult">adult</option>
+                            <option value="adults">adult</option>
+                            <option value="kids">kids</option>
                         </select>
                         <label htmlFor="sexSelector">M/F: </label>
                             <select id="sexSelector">
