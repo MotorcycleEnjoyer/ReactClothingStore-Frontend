@@ -6,10 +6,35 @@ export default function ShoppingProduct({...props}){
     function showColorsDropDown(e){
         console.log("COLORS")
     }
+
+    function redirectToProductView(){
+        let productNameWithPlusSigns = props.name.split(" ").join("+")
+        window.location=`/product/${productNameWithPlusSigns}`
+    }
+
+    function generateDropdownOptions(){
+        let parent = document.querySelector("#quantitySelector")
+        for(let i=1; i<=20; i++){
+            let child = document.createElement("option")
+            child.value=i
+            child.innerText=i
+            parent.appendChild(child)
+        }
+    }
+
+    function submitToServer(e){
+        console.log(e)
+
+    }
+
+    React.useEffect(()=>{
+        if(props.view === "fullSize")
+        {
+            generateDropdownOptions()
+        }
+    },[])
     
     return(
-        // TWO VIEWS:
-        
     <>
         {
             props.view === "searchDropDown" &&  
@@ -20,7 +45,7 @@ export default function ShoppingProduct({...props}){
         
         {
             props.view === "searchResult" &&
-                <div className="shoppingProduct--searchResult--mid" onClick={()=> props.chooseProduct(props.id)}>
+                <div className="shoppingProduct--searchResult--mid" onClick={()=> redirectToProductView()}>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.name}</h1>
@@ -38,41 +63,37 @@ export default function ShoppingProduct({...props}){
             props.view === "fullSize" &&
             <div className="shoppingProduct--fullSize">
                 <h1>{props.name}</h1>
-                <div><img src={shirt}></img></div>
-                <div>{props.id}</div>
-                <div>BRAND: {props.manufacturerOrBrand}</div>
-                <div>SIZE: {props.size}</div>
-                <div>AGE RANGE: {props.ageCategory}</div>
-                <div>M/F: {props.sexCategory}</div>
-                <div>TYPE: {props.typeOfClothing}</div>
-                <div>COLOR OPTIONS: <select>{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
-                <div>PRICE: {props.price}</div>
-                <div>Polyester: {props.materials.polyester}</div>
-                <div>Cotton: {props.materials.cotton}</div>
-                <div>AMOUNT SELECTED: {props.amount}</div>
+                    <div><img src={shirt}></img></div>
+                    <div>{props.id}</div>
+                    <div>BRAND: {props.manufacturerOrBrand}</div>
+                    <div>TYPE: {props.typeOfClothing}</div>
+                    <div>PRICE: {props.price}</div>
+                    <div>Polyester: {props.materials.polyester}</div>
+                    <div>Cotton: {props.materials.cotton}</div>
+                <form action="http://localhost:5000/addToCart" method="POST" id="addToCart">
+                    <fieldset>
+                        <div>SIZE: {props.size}</div>
+                        <label for="ageSelector">AGE RANGE:</label> 
+                        <select id="ageSelector">
+                            <option value="5-10">5-12</option>
+                            <option value="10-15">13-18</option>
+                            <option value="adult">adult</option>
+                        </select>
+                        <label for="sexSelector">M/F: </label>
+                            <select id="sexSelector">
+                                <option value="M">M</option>
+                                <option value="F">F</option>
+                            </select>
+                        <div>COLOR OPTIONS: 
+                            <label for="colorSelector"></label>
+                            <select id="colorSelector">{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
+                        <div>Quantity: <select id="quantitySelector"></select></div>       
+                        <button onClick={submitToServer}>Add To Cart</button>         
+                    </fieldset>
+                </form>
+                
             </div>
         }
     </>
     )
 }
-
-    /*
-    {
-            id: 1,
-            name: "one",
-            manufacturerOrBrand: "T-Shirt-CO",
-            size: 5,
-            ageCategory: "5-10",
-            sexCategory: "M",
-            typeOfClothing: "T-Shirt",
-            colorOptions: ["red", "green", "orange", "pink"],
-            imagePreviewURL: "a",
-            variationIsInStock: [{color: "red", amountInStock: 10}, {color: "green", amountInStock: 3}, {color: "orange", amountInStock: 0}, {color:"pink", amountInStock:2}],
-            weight: {grams: 50},
-            dimensions: "LxWxH",
-            price: 5.99,
-            materials: {polyester: "50%", cotton: "50%"},
-            amount: 1,
-            totalCost: 5.99,
-        }
-    */
