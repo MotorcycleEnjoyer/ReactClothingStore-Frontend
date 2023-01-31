@@ -18,11 +18,11 @@ export default function Register(){
             credentials["password"] = password
             axios.post(REGISTER_ENDPOINT, credentials, {withCredentials: true})
             .then(response => {
-                if(response === SUCCESS_MESSAGE)
+                if(response.data === SUCCESS_MESSAGE)
                 {
                     window.location = "/"
                 }
-                if(response === NAME_COLLISION){
+                if(response.data === NAME_COLLISION){
                     document.querySelector("#passwordMismatch").innerText = NAME_COLLISION                
                 }
             })
