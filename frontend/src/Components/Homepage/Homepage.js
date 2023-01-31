@@ -6,11 +6,19 @@ import axios from "axios";
 export default function Homepage({...props}){
     const SEARCH_URL = "http://localhost:5000/s?k="
     const PRODUCT_URL = "http://localhost:5000/p/"
+    const LOGOUT_URL = "http://localhost:5000/logout"
     const [userData, setUserData] = React.useState({})
     const [currentView, setCurrentView] = React.useState("SEARCH")
     const [selectedProduct, setSelectedProduct] = React.useState("")
     const [searchResults, setSearchResults] = React.useState([])
     const [modalStatus, setModalStatus] = React.useState(false)      
+
+    function logout(){
+      axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
+      .then(response => console.log(response))
+      .catch(error => console.error(error))
+  }
+
     React.useEffect(()=>{
       getUserCartFromServer()
       if(props.searchIsDone)
@@ -97,7 +105,7 @@ export default function Homepage({...props}){
     return(
       
       <div onClick={toggleModal}>
-          <NavBar modalStatus={modalStatus} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
+          <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
           { currentView === "SEARCH" &&
               <>
                   <div className="mainContainer--results">
