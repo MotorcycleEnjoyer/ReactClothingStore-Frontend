@@ -15,7 +15,14 @@ export default function Homepage({...props}){
 
     function logout(){
       axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response)
+        if(response.data === "Logged out successfully!")
+        {
+          window.location = "/"
+        }
+      }
+)
       .catch(error => console.error(error))
   }
 
