@@ -27,7 +27,6 @@ export default function ShoppingProduct({...props}){
 
     function submitToServer(e){
         e.preventDefault()
-        console.log(e)
         let dataObject = {}
         dataObject["size"]=document.querySelector(".sizeSelector").value
         dataObject["ageCategory"]=document.querySelector(".ageSelector").value
@@ -39,7 +38,8 @@ export default function ShoppingProduct({...props}){
         dataObjectHeaders["productName"] = props.name
         dataObjectHeaders["productId"] = props.id
         dataObjectHeaders["data"] = dataObject
-        console.table(dataObjectHeaders)
+        console.log("DATA:")
+        console.log(dataObjectHeaders)
         axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
         .then(response => console.log(response))
         .catch(error => console.error(error))
@@ -111,7 +111,7 @@ export default function ShoppingProduct({...props}){
                     <div>PRICE: {props.price}</div>
                     <div>Polyester: {props.materials.polyester}</div>
                     <div>Cotton: {props.materials.cotton}</div>
-                <form action="http://localhost:5000/addToCart" method="POST" id="addToCart">
+                <form id="addToCart">
                     <fieldset>
                         <label htmlFor="sizeSelector">SIZE:</label>
                         <select className="sizeSelector">
