@@ -16,12 +16,12 @@ export default function ShoppingProduct({...props}){
     }
 
     function generateDropdownOptions(){
-        let parent = document.querySelector("#quantitySelector")
-        for(let i=1; i<=20; i++){
+        let parent = document.querySelectorAll(".quantitySelector")
+        for(let i=0; i<=20; i++){
             let child = document.createElement("option")
             child.value=i
             child.innerText=i
-            parent.appendChild(child)
+            parent.forEach(item => item.appendChild(child))
         }
     }
 
@@ -29,11 +29,11 @@ export default function ShoppingProduct({...props}){
         e.preventDefault()
         console.log(e)
         let dataObject = {}
-        dataObject["size"]=document.querySelector("#sizeSelector").value
-        dataObject["ageCategory"]=document.querySelector("#ageSelector").value
-        dataObject["sexCategory"]=document.querySelector("#sexSelector").value
-        dataObject["color"]=document.querySelector("#colorSelector").value
-        dataObject["amount"]=document.querySelector("#quantitySelector").value
+        dataObject["size"]=document.querySelector(".sizeSelector").value
+        dataObject["ageCategory"]=document.querySelector(".ageSelector").value
+        dataObject["sexCategory"]=document.querySelector(".sexSelector").value
+        dataObject["color"]=document.querySelector(".colorSelector").value
+        dataObject["amount"]=document.querySelector(".quantitySelector").value
 
         let dataObjectHeaders = {}
         dataObjectHeaders["productName"] = props.name
@@ -46,7 +46,7 @@ export default function ShoppingProduct({...props}){
     }
 
     React.useEffect(()=>{
-        if(props.view === "fullSize")
+        if(props.view === "fullSize" || props.view ==="cart")
         {
             generateDropdownOptions()
         }
@@ -78,6 +78,29 @@ export default function ShoppingProduct({...props}){
         }
 
         {
+            props.view === "cart" &&
+            <div style={{display:"flex"}}>
+                <div className="shoppingProduct--searchResult--mid" style={{flex: "1"}} onClick={()=> redirectToProductView()}>
+                    <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
+                    <div className="shoppingProduct--searchResult--mid--details">
+                        <h1>{props.name}</h1>
+                        <div>
+                            <div>price: ${props.price}</div>
+                            <div>maker: {props.manufacturerOrBrand}</div>
+                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>                    
+                        </div>
+                    </div>
+                        
+                </div>
+                <div className="cartButtons">
+                    <select className="quantitySelector"></select>
+                    <button>Remove</button>
+                </div>       
+            </div>
+                
+        }
+
+        {
             props.view === "fullSize" &&
             <div className="shoppingProduct--fullSize">
                 <h1>{props.name}</h1>
@@ -91,7 +114,7 @@ export default function ShoppingProduct({...props}){
                 <form action="http://localhost:5000/addToCart" method="POST" id="addToCart">
                     <fieldset>
                         <label htmlFor="sizeSelector">SIZE:</label>
-                        <select id="sizeSelector">
+                        <select className="sizeSelector">
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
@@ -99,19 +122,19 @@ export default function ShoppingProduct({...props}){
                             <option value="XXL">XXL</option>
                         </select>
                         <label htmlFor="ageSelector">AGE RANGE:</label> 
-                        <select id="ageSelector">
+                        <select className="ageSelector">
                             <option value="adults">adult</option>
                             <option value="kids">kids</option>
                         </select>
                         <label htmlFor="sexSelector">M/F: </label>
-                            <select id="sexSelector">
+                            <select className="sexSelector">
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
                         <div>COLOR OPTIONS: 
                             <label htmlFor="colorSelector"></label>
-                            <select id="colorSelector">{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
-                        <div>Quantity: <select id="quantitySelector"></select></div>       
+                            <select className="colorSelector">{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
+                        <div>Quantity: <select className="quantitySelector"></select></div>       
                         <button onClick={submitToServer}>Add To Cart</button>         
                     </fieldset>
                 </form>

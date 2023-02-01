@@ -60,3 +60,13 @@
 .shoppingProduct--fullSize > h1{
     text-align: center;
 }
+
+.cartButtons{
+    display: flex;
+    flex-direction: column;
+}
+
+.cartButtons > button{
+    margin-top: auto;
+    margin-bottom: 0px
+}
