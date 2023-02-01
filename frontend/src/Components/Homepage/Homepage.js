@@ -58,7 +58,7 @@ export default function Homepage({...props}){
         const finalURL = PRODUCT_URL + urlSecondHalf
         console.log(finalURL)
         axios.get(finalURL, {withCredentials: true}).then(response => {
-          setSelectedProduct(response.data[0])
+          setSelectedProduct(response.data)
         })
       }
     },[])
@@ -104,6 +104,7 @@ export default function Homepage({...props}){
     }
 
     React.useEffect(()=>{
+      console.log(selectedProduct)
       if(selectedProduct === undefined || selectedProduct === ""){
         return
       }
