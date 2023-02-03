@@ -39,6 +39,11 @@ export default function Homepage({...props}){
 
         const finalURL = SEARCH_URL + searchTermWithPlusSigns
         axios.get(finalURL, {withCredentials: true}).then(function(response){
+          if(response.data === "INVALID SEARCH TERMS!!!")
+          {
+            alert("INVALID SEARCH TERMS!!!")
+            return document.location = "/"
+          }
           if(response.data.length >= 1){
             setSearchResults(response.data)
           }else{
@@ -58,6 +63,11 @@ export default function Homepage({...props}){
         const finalURL = PRODUCT_URL + urlSecondHalf
         console.log(finalURL)
         axios.get(finalURL, {withCredentials: true}).then(response => {
+          if(response.data === "TOO MANY REQUESTS! SLOW DOWN!")
+          {
+            alert("Too many HTTP requests in short time")
+            window.location = "/"
+          }
           setSelectedProduct(response.data)
         })
       }
