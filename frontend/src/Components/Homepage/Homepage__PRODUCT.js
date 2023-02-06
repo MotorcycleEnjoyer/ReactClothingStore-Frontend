@@ -10,23 +10,14 @@ export default function Homepage__PRODUCT(){
     const [selectedProduct, setSelectedProduct] = React.useState("")
     const [modalStatus, setModalStatus] = React.useState(false)      
 
-
     React.useEffect(()=>{
       getUserCartFromServer()
       loadProductFromUrl()
     },[])
 
-    function logout(){
-        axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-        .then(response => {
-          alert(response.data)
-          if(response.data === "Logged out successfully!")
-          {
-            window.location = "/"
-          }
-        })
-        .catch(error => console.error(error))
-    }  
+    function storeDataInProductComponent(data){
+      setSelectedProduct(<ShoppingProduct {...data} view="fullSize"/>)
+    }
 
     function loadProductFromUrl(){
         const urlSecondHalf = window.location.href.split("/p/")[1]
@@ -44,7 +35,7 @@ export default function Homepage__PRODUCT(){
               alert("Too many HTTP requests in short time")
               window.location = "/"
             }
-            setSelectedProduct(<ShoppingProduct {...response.data} view="fullSize"/>)
+            storeDataInProductComponent(response.data)
             document.title=`React Clothing Store: ${response.data.name}`
           }).catch(error => console.error(error))
     }
@@ -78,6 +69,18 @@ export default function Homepage__PRODUCT(){
         showModal()
       }
     }
+
+    function logout(){
+      axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
+      .then(response => {
+        alert(response.data)
+        if(response.data === "Logged out successfully!")
+        {
+          window.location = "/"
+        }
+      })
+      .catch(error => console.error(error))
+  }  
 
     return(
       <div onClick={toggleModal}>
