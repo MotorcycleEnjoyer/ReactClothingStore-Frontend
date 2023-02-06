@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Homepage from './Components/Homepage/Homepage';
 import Login from './Components/Login/Login';
 import './App.css'
-import './Components/Search/Search.css'
+import './Components/SearchBar/Search.css'
 import './Components/ShoppingProduct/ShoppingProduct.css';
 import './Components/NavBar/NavBar.css'
 import Register from './Components/Register/Register';

@@ -1,4 +1,4 @@
-import Search from "../Search/Search"
+import Search from "../SearchBar/SearchBar"
 
 export default function NavBar({...props}){
 
