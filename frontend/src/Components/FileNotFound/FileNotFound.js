@@ -1,4 +1,4 @@
-export default   function NoMatch() {
+export default   function FileNotFound() {
     return (
       <div>
         <h3>

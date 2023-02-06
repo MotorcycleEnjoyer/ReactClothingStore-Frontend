@@ -2,7 +2,7 @@ import React from "react"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 import axios from "axios"
 
-export default function Search({...props}){
+export default function SearchBar({...props}){
     const [searchVal, setSearchVal] = React.useState("")
     const [suggestions, setSuggestions] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
