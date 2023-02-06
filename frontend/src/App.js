@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Homepage from './Components/Homepage/Homepage';
+import Homepage__PRODUCT from './Components/Homepage/Homepage__PRODUCT';
+import Homepage__SEARCH from './Components/Homepage/Homepage__SEARCH';
 import Login from './Components/Login/Login';
 import './App.css'
 import './Components/SearchBar/Search.css'
@@ -19,11 +21,11 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Homepage />}/>
+            <Route path="/s" element={<Homepage__SEARCH searchIsDone={true}/>}/>
+            <Route path="/p/*" element={<Homepage__PRODUCT  productIsSelected={true}/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
             <Route path="/cart" element={<Cart />}/>
-            <Route path="/s" element={<Homepage searchIsDone={true}/>}/>
-            <Route path="/p/*" element={<Homepage  productIsSelected={true}/>}/>
             <Route path="/*" element={<FileNotFound />} />
           </Routes>
         </BrowserRouter>
