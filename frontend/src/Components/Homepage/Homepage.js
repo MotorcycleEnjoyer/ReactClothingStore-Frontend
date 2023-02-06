@@ -6,7 +6,6 @@ import axios from "axios";
 export default function Homepage({...props}){
     const LOGOUT_URL = "http://localhost:5000/logout"
     const [userData, setUserData] = React.useState({})
-    const [searchResults, setSearchResults] = React.useState([])
     const [modalStatus, setModalStatus] = React.useState(false)      
 
     function logout(){
@@ -44,12 +43,6 @@ export default function Homepage({...props}){
       setModalStatus(true)
     }
   
-    function storeSearchResults(results){
-      setSearchResults(results)
-    }
-  
-    const dataAsCartView = searchResults.map((item, index) => <ShoppingProduct key={index} {...item} view="searchResult"/>)
-  
     function toggleModal(e){
       let target = e.target
       let classType = target.className
@@ -60,13 +53,11 @@ export default function Homepage({...props}){
         showModal()
       }
     }
+
     return(
       
       <div onClick={toggleModal}>
-          <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
-          <div className="mainContainer--results">
-              {dataAsCartView}
-          </div>
+          <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal}/>
       </div>
     )
 }
