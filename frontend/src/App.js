@@ -13,6 +13,7 @@ import './App.css'
 import './Components/SearchBar/Search.css'
 import './Components/ShoppingProduct/ShoppingProduct.css';
 import './Components/NavBar/NavBar.css'
+import './Components/CategoryButton/CategoryButton.css'
 
 function App() {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
-import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
+import CategoryButton from "../CategoryButton/CategoryButton";
+import allCategories from "../CategoryButton/categories"
 import NavBar from "../NavBar/NavBar"
 import axios from "axios";
 
@@ -7,6 +8,7 @@ export default function Homepage({...props}){
     const LOGOUT_URL = "http://localhost:5000/logout"
     const [userData, setUserData] = React.useState({})
     const [modalStatus, setModalStatus] = React.useState(false)      
+    const [categories, setCategories] = React.useState(allCategories.dummyDB)
 
     function logout(){
       axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
@@ -54,10 +56,15 @@ export default function Homepage({...props}){
       }
     }
 
+    const categoryDataAsHtml = categories.map((item, index) => <CategoryButton key={index} name={item} />)
+
     return(
       
       <div onClick={toggleModal}>
           <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal}/>
+          <div className="categoryButtonParentContainer">
+            {categoryDataAsHtml}
+          </div>
       </div>
     )
 }

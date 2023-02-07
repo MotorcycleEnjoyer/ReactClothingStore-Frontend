@@ -1,0 +1,28 @@
+const dummyDB = [
+    "Hats",
+    "Shirts",
+    "Jackets",
+    "Pants",
+    "Shorts",
+    "Underwear",
+    "Hats",
+    "Shirts",
+    "Jackets",
+    "Pants",
+    "Shorts",
+    "Underwear",
+    "Hats",
+    "Shirts",
+    "Jackets",
+    "Pants",
+    "Shorts",
+    "Underwear",
+    "Hats",
+    "Shirts",
+    "Jackets",
+    "Pants",
+    "Shorts",
+    "Underwear",
+]
+
+module.exports = {dummyDB}
