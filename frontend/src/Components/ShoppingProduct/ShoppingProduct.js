@@ -32,11 +32,11 @@ export default function ShoppingProduct({...props}){
         dataObject["ageCategory"]=document.querySelector(".ageSelector").value
         dataObject["sexCategory"]=document.querySelector(".sexSelector").value
         dataObject["color"]=document.querySelector(".colorSelector").value
-        dataObject["amount"]=document.querySelector(".quantitySelector").value
 
         let dataObjectHeaders = {}
         dataObjectHeaders["productName"] = props.name
         dataObjectHeaders["productId"] = props.id
+        dataObjectHeaders["amount"] = document.querySelector(".quantitySelector").value
         dataObjectHeaders["data"] = dataObject
         console.log("DATA:")
         console.log(dataObjectHeaders)
