@@ -3,9 +3,9 @@ import React from "react";
 import shirt from "../../t-shirt-preview.png";
 
 const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
+const INVALID_DATA = "Could not add to cart. Reason: Invalid data provided."
 
 export default function ShoppingProduct({...props}){
-
     function showColorsDropDown(e){
         console.log("COLORS")
     }
@@ -41,7 +41,12 @@ export default function ShoppingProduct({...props}){
         console.log("DATA:")
         console.log(dataObjectHeaders)
         axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
-        .then(response => console.log(response))
+        .then(response => {
+            if(response.data === INVALID_DATA){
+                alert(INVALID_DATA)
+                return
+            }
+        })
         .catch(error => console.error(error))
     }
 
@@ -123,7 +128,7 @@ export default function ShoppingProduct({...props}){
                         </select>
                         <label htmlFor="ageSelector">AGE RANGE:</label> 
                         <select className="ageSelector">
-                            <option value="adults">adult</option>
+                            <option value="adults">adults</option>
                             <option value="kids">kids</option>
                         </select>
                         <label htmlFor="sexSelector">M/F: </label>
