@@ -6,6 +6,7 @@ import axios from "axios";
 export default function Homepage__PRODUCT(){
     const LOGOUT_URL = "http://localhost:5000/logout"
     const PRODUCT_URL = "http://localhost:5000/p/"
+    const TOO_MANY_REQUESTS = "TOO MANY REQUESTS! SLOW DOWN!"
     const [userData, setUserData] = React.useState({})
     const [selectedProduct, setSelectedProduct] = React.useState("")
     const [modalStatus, setModalStatus] = React.useState(false)      
@@ -30,9 +31,9 @@ export default function Homepage__PRODUCT(){
 
     function fetchProductFromServer(finalURL){
         axios.get(finalURL, {withCredentials: true}).then(response => {
-            if(response.data === "TOO MANY REQUESTS! SLOW DOWN!")
+            if(response.data === TOO_MANY_REQUESTS)
             {
-              alert("Too many HTTP requests in short time")
+              alert(TOO_MANY_REQUESTS)
               window.location = "/"
             }
             storeDataInProductComponent(response.data)
