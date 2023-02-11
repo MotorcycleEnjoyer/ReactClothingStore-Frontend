@@ -31,7 +31,7 @@ export default function CartItems(){
         let shoppingCart = response.data.shoppingCart
         console.log(response.data.shoppingCart)
         if(shoppingCart.length > 0){
-          let cartAsHTML = response.data.shoppingCart.map((item, index) => <ShoppingProduct key={index} index={index} {...item} toggleCartModal={toggleCartModal} view={"cart"} />)
+          let cartAsHTML = response.data.shoppingCart.map((item, index) => <ShoppingProduct key={index} hideSearchModal={hideSearchModal} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
           setShoppingCart(shoppingCart)
           setCartAsHTML(cartAsHTML)
         }
@@ -61,13 +61,21 @@ export default function CartItems(){
       }
     }
 
-    function showCartModal(){
+    function showCartModal(e){
       let modalStyle = document.querySelector(".cartItem--modal").style
       modalStyle.display = "block"
     }
 
-    function toggleCartModal(propsFromCartItem){    
-      let itemToAppend = <ShoppingProduct {...propsFromCartItem} toggleCartModal={toggleCartModal} view="fullSize"/>
+    function hideCartModal(e){
+      console.log(e.target)
+      if(e.target.className === "cartItem--modal"){
+        let modalStyle = document.querySelector(".cartItem--modal").style
+        modalStyle.display = "none"
+      }
+    }
+
+    function activateCartModal(propsFromCartItem){    
+      let itemToAppend = <ShoppingProduct {...propsFromCartItem} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
       setActiveCartItem(itemToAppend)
     }
 
@@ -84,7 +92,7 @@ export default function CartItems(){
     return(
       
       <div onClick={toggleModal}>
-        <div className="cartItem--modal" style={{display: "none"}}>
+        <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
           {activeCartItem}
         </div>
           <NavBar modalStatus={modalStatus} logout={logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
