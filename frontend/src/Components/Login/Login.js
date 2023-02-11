@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const LOGIN_ENDPOINT = "http://localhost:5000/login"
-const FAILURE_STRING = "Incorrect credentials. Please try again"
+const FAILURE_STRING = "POST/login: Incorrect credentials. Please try again"
 const HOMEPAGE = "/"
 
 export default function Login(){
