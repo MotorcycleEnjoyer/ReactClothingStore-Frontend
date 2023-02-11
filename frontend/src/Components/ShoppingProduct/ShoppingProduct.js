@@ -3,7 +3,7 @@ import React from "react";
 import shirt from "../../t-shirt-preview.png";
 
 const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
-const INVALID_DATA = "Could not add to cart. Reason: Invalid data provided."
+const INVALID_DATA = "POST/addToCart: Could not add to cart. Reason: Invalid data provided."
 
 export default function ShoppingProduct({...props}){
     function showColorsDropDown(e){
@@ -85,7 +85,7 @@ export default function ShoppingProduct({...props}){
         {
             props.view === "cart" &&
             <div style={{display:"flex"}}>
-                <div className="shoppingProduct--searchResult--mid" style={{flex: "1"}} onClick={()=> redirectToProductView()}>
+                <div className="shoppingProduct--searchResult--mid" style={{flex: "1"}} onClick={() => props.toggleCartModal(props)}>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.name}</h1>
