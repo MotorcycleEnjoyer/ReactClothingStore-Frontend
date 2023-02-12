@@ -6,10 +6,6 @@ const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
 const INVALID_DATA = "POST/addToCart: Could not add to cart. Reason: Invalid data provided."
 
 export default function ShoppingProduct({...props}){
-    function showColorsDropDown(e){
-        console.log("COLORS")
-    }
-
     function redirectToProductView(){
         let productNameWithPlusSigns = props.details.name.split(" ").join("+")
         window.location=`/p/${productNameWithPlusSigns}/id/${props.details.id}`
@@ -58,7 +54,7 @@ export default function ShoppingProduct({...props}){
                         <div>
                             <div>price: ${props.details.price}</div>
                             <div>maker: {props.details.manufacturerOrBrand}</div>
-                            <div onClick={showColorsDropDown}>colors: {props.details.colorOptions.length}</div>                    
+                            <div>colors: {props.details.colorOptions.length}</div>                    
                         </div>
                     </div>
                         
@@ -73,9 +69,10 @@ export default function ShoppingProduct({...props}){
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.details.name}</h1>
                         <div>
+                            <div>Qty: {props.amount}</div>
                             <div>price: ${props.details.price}</div>
                             <div>maker: {props.details.manufacturerOrBrand}</div>
-                            <div onClick={showColorsDropDown}>colors: {props.details.colorOptions.length}</div>                    
+                            <div>color: {props.userSelectedParameters.color}</div>
                         </div>
                     </div>
                         
@@ -83,6 +80,7 @@ export default function ShoppingProduct({...props}){
                 <div className="cartButtons">
                     <select className="quantitySelector"></select>
                     <button>Remove</button>
+                    <div>Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
                 </div>       
             </div>
                 
