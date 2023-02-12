@@ -9,6 +9,7 @@ export default function CartItems(){
     const [shoppingCart, setShoppingCart] = React.useState([])
     const [modalStatus, setModalStatus] = React.useState(false)      
     const [activeCartItem, setActiveCartItem] = React.useState("")
+    const [totalCost, setTotalCost] = React.useState(0)
 
     function logout(){
       axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
@@ -25,6 +26,17 @@ export default function CartItems(){
     React.useEffect(()=>{
       getUserCartItemsFromServer()
     },[])
+
+    React.useEffect(()=>{
+      if(shoppingCart.length > 0){
+        const initialValue = 0;
+        const total = shoppingCart.reduce(
+          (accumulator, currentItem) => accumulator + (currentItem.amount * currentItem.details.price),
+          initialValue
+        )
+        setTotalCost(total)
+      }
+    },[shoppingCart])
 
     function getUserCartItemsFromServer(){
       axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
@@ -102,6 +114,7 @@ export default function CartItems(){
           <div className="cartItems">
             {cartAsHTML}
           </div>
+          <h1>TOTAL: {totalCost.toFixed(2) }</h1>
       </div>
     )
 }
