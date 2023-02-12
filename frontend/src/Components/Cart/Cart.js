@@ -5,6 +5,9 @@ import NavBar from "../NavBar/NavBar"
 
 export default function CartItems(){
     const LOGOUT_URL = "http://localhost:5000/logout"
+    const DELETION_URL = "http://localhost:5000/deleteCartItem"
+    const INVALID_CART_DELETION = "POST/deleteCartItem: Cart is not defined."
+    const INVALID_DELETION= "POST/deleteCartItem: Invalid Data."
     const [cartAsHTML, setCartAsHTML] = React.useState(<h3>Your cart is empty</h3>)
     const [shoppingCart, setShoppingCart] = React.useState([])
     const [modalStatus, setModalStatus] = React.useState(false)      
@@ -28,24 +31,53 @@ export default function CartItems(){
     },[])
 
     React.useEffect(()=>{
-      if(shoppingCart.length > 0){
         const initialValue = 0;
         const total = shoppingCart.reduce(
           (accumulator, currentItem) => accumulator + (currentItem.amount * currentItem.details.price),
           initialValue
         )
         setTotalCost(total)
-      }
     },[shoppingCart])
+
+    function removeFromCart(index){
+      console.log(index)
+      axios.post(DELETION_URL, {indexOfCartItem: index}, {withCredentials: true})
+      .then(response => {
+          if(response.data === INVALID_CART_DELETION){
+             alert(response.data) 
+             return
+          }
+          if(response.data === INVALID_DELETION){
+              alert(response.data)
+              return
+          }
+          console.log(response.data)
+          renderCartItems(response.data.shoppingCart)
+      })
+      .catch(error => console.error(error))
+    }
+
+    function renderCartItems(cart){
+      if(cart === undefined){
+        console.error("CART IS UNDEFINED!!!")
+        return
+      }
+      if(cart.length === 0){
+        setShoppingCart(cart)
+        setCartAsHTML(<h3>Your cart is empty</h3>)
+      }else{
+        let cartAsHTML = cart.map((item, index) => <ShoppingProduct key={index} hideSearchModal={hideSearchModal} removeFromCart={removeFromCart} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
+        setShoppingCart(cart)
+        setCartAsHTML(cartAsHTML)
+      }
+      
+    }
 
     function getUserCartItemsFromServer(){
       axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
-        let shoppingCart = response.data.shoppingCart
         console.log(response.data.shoppingCart)
-        if(shoppingCart.length > 0){
-          let cartAsHTML = response.data.shoppingCart.map((item, index) => <ShoppingProduct key={index} hideSearchModal={hideSearchModal} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
-          setShoppingCart(shoppingCart)
-          setCartAsHTML(cartAsHTML)
+        if(response.data.shoppingCart.length > 0){
+          renderCartItems(response.data.shoppingCart)
         }
       }).catch(error => {
         console.error(error)
