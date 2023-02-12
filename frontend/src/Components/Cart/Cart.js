@@ -93,7 +93,9 @@ export default function CartItems(){
       
       <div onClick={toggleModal}>
         <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
-          {activeCartItem}
+          <div className="cartItem--modal--content">
+            {activeCartItem}
+          </div>
         </div>
           <NavBar modalStatus={modalStatus} logout={logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
           
