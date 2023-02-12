@@ -29,7 +29,6 @@ export default function Homepage({...props}){
     function getUserCartFromServer(){
       axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
         setUserData(response.data)
-        console.log(response.data)
       }).catch(error => {
         console.error(error)
       })

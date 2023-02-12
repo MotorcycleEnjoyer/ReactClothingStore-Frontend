@@ -11,8 +11,8 @@ export default function ShoppingProduct({...props}){
     }
 
     function redirectToProductView(){
-        let productNameWithPlusSigns = props.name.split(" ").join("+")
-        window.location=`/p/${productNameWithPlusSigns}/id/${props.id}`
+        let productNameWithPlusSigns = props.details.name.split(" ").join("+")
+        window.location=`/p/${productNameWithPlusSigns}/id/${props.details.id}`
     }
 
     function generateDropdownOptions(){
@@ -34,8 +34,8 @@ export default function ShoppingProduct({...props}){
         dataObject["color"]=document.querySelector(".colorSelector").value
 
         let dataObjectHeaders = {}
-        dataObjectHeaders["productName"] = props.name
-        dataObjectHeaders["productId"] = props.id
+        dataObjectHeaders["productName"] = props.details.name
+        dataObjectHeaders["productId"] = props.details.id
         dataObjectHeaders["amount"] = document.querySelector(".quantitySelector").value
         dataObjectHeaders["data"] = dataObject
         console.log("DATA:")
@@ -51,6 +51,7 @@ export default function ShoppingProduct({...props}){
     }
 
     React.useEffect(()=>{
+        console.log(props)
         if(props.view === "fullSize" || props.view ==="cart")
         {
             generateDropdownOptions()
@@ -71,11 +72,11 @@ export default function ShoppingProduct({...props}){
                 <div className="shoppingProduct--searchResult--mid" onClick={()=> redirectToProductView()}>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
-                        <h1>{props.name}</h1>
+                        <h1>{props.details.name}</h1>
                         <div>
-                            <div>price: ${props.price}</div>
-                            <div>maker: {props.manufacturerOrBrand}</div>
-                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>                    
+                            <div>price: ${props.details.price}</div>
+                            <div>maker: {props.details.manufacturerOrBrand}</div>
+                            <div onClick={showColorsDropDown}>colors: {props.details.colorOptions.length}</div>                    
                         </div>
                     </div>
                         
@@ -88,11 +89,11 @@ export default function ShoppingProduct({...props}){
                 <div className="shoppingProduct--searchResult--mid" style={{flex: "1"}} onClick={() => props.toggleCartModal(props)}>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
-                        <h1>{props.name}</h1>
+                        <h1>{props.details.name}</h1>
                         <div>
-                            <div>price: ${props.price}</div>
-                            <div>maker: {props.manufacturerOrBrand}</div>
-                            <div onClick={showColorsDropDown}>colors: {props.colorOptions.length}</div>                    
+                            <div>price: ${props.details.price}</div>
+                            <div>maker: {props.details.manufacturerOrBrand}</div>
+                            <div onClick={showColorsDropDown}>colors: {props.details.colorOptions.length}</div>                    
                         </div>
                     </div>
                         
@@ -110,12 +111,12 @@ export default function ShoppingProduct({...props}){
             <div className="shoppingProduct--fullSize">
                 <h1>{props.name}</h1>
                     <div><img src={shirt}></img></div>
-                    <div>{props.id}</div>
-                    <div>BRAND: {props.manufacturerOrBrand}</div>
-                    <div>TYPE: {props.typeOfClothing}</div>
-                    <div>PRICE: {props.price}</div>
-                    <div>Polyester: {props.materials.polyester}</div>
-                    <div>Cotton: {props.materials.cotton}</div>
+                    <div>{props.details.id}</div>
+                    <div>BRAND: {props.details.manufacturerOrBrand}</div>
+                    <div>TYPE: {props.details.typeOfClothing}</div>
+                    <div>PRICE: {props.details.price}</div>
+                    <div>Polyester: {props.details.materials.polyester}</div>
+                    <div>Cotton: {props.details.materials.cotton}</div>
                 <form id="addToCart">
                     <fieldset>
                         <label htmlFor="sizeSelector">SIZE:</label>
@@ -138,7 +139,7 @@ export default function ShoppingProduct({...props}){
                             </select>
                         <div>COLOR OPTIONS: 
                             <label htmlFor="colorSelector"></label>
-                            <select className="colorSelector">{props.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
+                            <select className="colorSelector">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
                         <div>Quantity: <select className="quantitySelector"></select></div>       
                         <button onClick={submitToServer}>Add To Cart</button>         
                     </fieldset>
