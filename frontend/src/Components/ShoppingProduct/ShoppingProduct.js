@@ -5,6 +5,7 @@ import shirt from "../../t-shirt-preview.png";
 const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
 const INVALID_DATA = "POST/addToCart: Could not add to cart. Reason: Invalid data provided."
 
+
 export default function ShoppingProduct({...props}){
     function redirectToProductView(){
         let productNameWithPlusSigns = props.details.name.split(" ").join("+")
@@ -79,7 +80,7 @@ export default function ShoppingProduct({...props}){
                 </div>
                 <div className="cartButtons">
                     <select className="quantitySelector"></select>
-                    <button>Remove</button>
+                    <button onClick={() => props.removeFromCart(props.index)}>Remove</button>
                     <div>Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
                 </div>       
             </div>
