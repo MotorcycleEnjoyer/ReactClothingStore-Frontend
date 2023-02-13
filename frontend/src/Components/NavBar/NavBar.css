@@ -4,3 +4,27 @@
     display: flex;
     justify-content: right;
 }
+
+.shoppingCartIcon{
+    border: 1px solid black;
+    min-width: 50px;
+    min-height: 50px;
+    background-position: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: red;
+    font-weight: bold;
+}
+
+.shoppingCartIcon:hover{
+    border: 1px solid white;
+    background-color: gray;
+    cursor: pointer;
+}
+
+.cartIconSpan{
+    background-color: white;
+    border-radius: 50%;
+}
+

@@ -141,7 +141,7 @@ export default function CartItems(){
             {activeCartItem}
           </div>
         </div>
-          <NavBar modalStatus={modalStatus} logout={logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
+          <NavBar modalStatus={modalStatus} userData={{shoppingCart: shoppingCart}} logout={logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
           
           <div className="cartItems">
             {cartAsHTML}
