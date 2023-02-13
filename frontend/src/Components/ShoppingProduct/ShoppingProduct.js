@@ -33,6 +33,7 @@ export default function ShoppingProduct({...props}){
                 alert(INVALID_DATA)
                 return
             }
+            alert(response.data)
         })
         .catch(error => console.error(error))
     }
