@@ -6,12 +6,8 @@ export default function NavBar({...props}){
     console.log(props.userData)
     const [amountInCart, setAmountInCart] = React.useState("")
     React.useEffect(()=>{
-        if(props.userData !== undefined){
-            if(props.userData.shoppingCart !== undefined){
-                setAmountInCart(props.userData.shoppingCart.length)
-            }
-        }
-    },[props])
+        setAmountInCart(props.length)
+    },[])
 
     return(
         <nav className="navBar">
