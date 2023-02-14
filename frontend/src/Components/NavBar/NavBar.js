@@ -7,7 +7,7 @@ export default function NavBar({...props}){
     const [amountInCart, setAmountInCart] = React.useState("")
     React.useEffect(()=>{
         setAmountInCart(props.length)
-    },[])
+    },[props.length])
 
     return(
         <nav className="navBar">
