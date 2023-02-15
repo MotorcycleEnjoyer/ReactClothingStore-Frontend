@@ -25,17 +25,8 @@ export default function ShoppingProduct({...props}){
         dataObjectHeaders["productId"] = props.details.id
         dataObjectHeaders["amount"] = document.querySelector(".quantitySelector").value
         dataObjectHeaders["data"] = dataObject
-        console.log("DATA:")
-        console.log(dataObjectHeaders)
-        axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
-        .then(response => {
-            if(response.data === INVALID_DATA){
-                alert(INVALID_DATA)
-                return
-            }
-            alert(response.data)
-        })
-        .catch(error => console.error(error))
+
+        props.addToCart(dataObjectHeaders)
     }
     
     return(
