@@ -75,6 +75,7 @@ function addToCart(dataObjectHeaders){
     removeFromCart: removeFromCart,
     logout: logout, 
     cart: userShoppingCart,
+    length: userShoppingCart.length,
   }
 
   React.useEffect(()=>{
