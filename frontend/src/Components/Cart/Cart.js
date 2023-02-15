@@ -58,7 +58,7 @@ export default function CartItems({...props}){
     }
 
     function activateCartModal(propsFromCartItem){    
-      let itemToAppend = <ShoppingProduct {...propsFromCartItem} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
+      let itemToAppend = <ShoppingProduct {...propsFromCartItem} addToCart={props.addToCart} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
       setActiveCartItem(itemToAppend)
     }
 
