@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import axios from 'axios';
 
 import Homepage from './Components/Homepage/Homepage';
 import Homepage__PRODUCT from './Components/Homepage/Homepage__PRODUCT';
@@ -15,36 +16,69 @@ import './Components/ShoppingProduct/ShoppingProduct.css';
 import './Components/NavBar/NavBar.css'
 import './Components/CategoryButton/CategoryButton.css'
 
-// HELPER FUNCTIONS
-import apiCalls from "./apiCalls"
-
 export default function App() {
-  const BASE_URL = "http://localhost:5000"
+
+
+const BASE_URL = "http://localhost:5000"
+const LOGOUT_URL = BASE_URL + "/logout"
+const LOGIN_URL = BASE_URL + "login"
+const DELETION_URL = BASE_URL + "/deleteCartItem"
+const ADD_TO_CART_URL = BASE_URL + "/addToCart"
+const GET_CART_URL = BASE_URL + "/shoppingCart"
+
+function fetchUserShoppingCart(){
+    axios.get(GET_CART_URL, {withCredentials: true})
+    .then(response => {
+        if(response.data.shoppingCart === undefined){
+            setUserShoppingCart([])
+        }
+        else{
+            setUserShoppingCart(response.data.shoppingCart)
+        }
+    }).catch(error => console.error(error))
+  }
+
+function logout(){
+    axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
+    .then(response => {
+      alert(response.data)
+      if(response.data === "POST/logout: Logged out successfully!")
+      {
+        window.location = "/"
+      }
+    })
+    .catch(error => console.error(error))
+  }
+
+function removeFromCart(index){
+    console.log(index)
+    axios.post(DELETION_URL, {indexOfCartItem: index}, {withCredentials: true})
+    .then(response => {
+        setUserShoppingCart(response.data.shoppingCart)
+    })
+    .catch(error => console.error(error))
+  }
+
+function addToCart(dataObjectHeaders){
+    axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
+    .then(response => {
+        alert(response.data)
+        fetchUserShoppingCart()
+    })
+    .catch(error => console.error(error))
+  }
+
   const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
 
-  React.useEffect(()=>{
-    //console.log(userShoppingCart)
-  },[userShoppingCart])
-
-  function addToCart(dataObjectHeaders){ 
-    setUserShoppingCart(apiCalls.addToCart(dataObjectHeaders)) 
-  }
-  function removeFromCart(index){ 
-    setUserShoppingCart(apiCalls.removeFromCart(index)) 
-  }
-  function getCart(){ 
-    setUserShoppingCart(apiCalls.fetchUserShoppingCart())
-  }
-  
   const propsObject = {
     addToCart: addToCart,
     removeFromCart: removeFromCart,
-    logout: apiCalls.logout,
+    logout: logout, 
     cart: userShoppingCart,
   }
 
   React.useEffect(()=>{
-    getCart()
+    fetchUserShoppingCart()
   },[])
 
   return (
