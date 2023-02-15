@@ -27,6 +27,10 @@ export default function ShoppingProduct({...props}){
         dataObjectHeaders["data"] = dataObject
 
         props.addToCart(dataObjectHeaders)
+        
+        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
+        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
+        setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2000)
     }
     
     return(
@@ -82,6 +86,9 @@ export default function ShoppingProduct({...props}){
         {
             props.view === "fullSize" &&
             <div className="shoppingProduct--fullSize">
+                <div className="fadeModal">
+                    <div className="fadeModal--content">SampleText</div>
+                </div>
                 <h1>{props.name}</h1>
                     <div><img src={shirt}></img></div>
                     <div>{props.details.id}</div>

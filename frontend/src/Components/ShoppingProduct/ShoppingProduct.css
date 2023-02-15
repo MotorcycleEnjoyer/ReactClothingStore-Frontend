@@ -86,3 +86,29 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+.fadeModal{
+    margin: auto;
+    padding: 50px;
+    min-width: 300px;
+    min-height: 300px;
+    left: 30%;
+    right: 30%;
+    display: flex;
+    position: absolute;
+    visibility: hidden;
+    justify-content: center;
+    text-align: center;
+    background-color:rgba(0,0,0,0.9)
+}
+
+.fadeModal--content{
+    font-size: 50px;
+    flex: 1/3;
+    color: black;
+    background-color: gray;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
