@@ -3,7 +3,7 @@ import shoppingCartLogo from "../../shopping-cart-icon.png"
 import React from "react"
 
 export default function NavBar({...props}){
-    const [amountInCart, setAmountInCart] = React.useState("")
+    const [amountInCart, setAmountInCart] = React.useState(props.length)
     React.useEffect(()=>{
         setAmountInCart(props.length)
     },[props.length])
