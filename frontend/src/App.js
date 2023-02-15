@@ -25,6 +25,7 @@ const LOGIN_URL = BASE_URL + "login"
 const DELETION_URL = BASE_URL + "/deleteCartItem"
 const ADD_TO_CART_URL = BASE_URL + "/addToCart"
 const GET_CART_URL = BASE_URL + "/shoppingCart"
+const EDIT_CART_URL = BASE_URL + "/editCartItem"
 
 function fetchUserShoppingCart(){
     axios.get(GET_CART_URL, {withCredentials: true})
@@ -69,12 +70,22 @@ function addToCart(dataObjectHeaders){
     .catch(error => console.error(error))
   }
 
+  function editCartItem(dataObjectHeaders){
+    axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
+    .then(response => {
+      let fadeModalContent = document.querySelector(".fadeModal--content")
+      fadeModalContent.innerText = response.data
+      fetchUserShoppingCart()
+    }).catch(error => console.error(error))
+  }
+
   const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
 
   const propsObject = {
     addToCart: addToCart,
     removeFromCart: removeFromCart,
     logout: logout, 
+    editCartItem: editCartItem,
     cart: userShoppingCart,
     length: userShoppingCart.length,
   }
