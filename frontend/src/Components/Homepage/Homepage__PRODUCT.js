@@ -3,21 +3,18 @@ import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
 import NavBar from "../NavBar/NavBar"
 import axios from "axios";
 
-export default function Homepage__PRODUCT(){
-    const LOGOUT_URL = "http://localhost:5000/logout"
+export default function Homepage__PRODUCT({...props}){
     const PRODUCT_URL = "http://localhost:5000/p/"
     const TOO_MANY_REQUESTS = "TOO MANY REQUESTS! SLOW DOWN!"
-    const [userData, setUserData] = React.useState({})
     const [selectedProduct, setSelectedProduct] = React.useState("")
     const [modalStatus, setModalStatus] = React.useState(false)      
 
     React.useEffect(()=>{
-      getUserCartFromServer()
       loadProductFromUrl()
     },[])
 
     function storeDataInProductComponent(data){
-      setSelectedProduct(<ShoppingProduct {...data} view="fullSize"/>)
+      setSelectedProduct(<ShoppingProduct {...data} addToCart={props.addToCart} view="fullSize"/>)
     }
 
     function loadProductFromUrl(){
@@ -41,15 +38,6 @@ export default function Homepage__PRODUCT(){
           }).catch(error => console.error(error))
     }
 
-    function getUserCartFromServer(){
-      axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
-        setUserData(response.data)
-        console.log(response.data)
-      }).catch(error => {
-        console.error(error)
-      })
-    }
-
     function hideModal(){
       document.querySelector(".search--modal").style.display = "none"
       setModalStatus(false)
@@ -70,22 +58,11 @@ export default function Homepage__PRODUCT(){
         showModal()
       }
     }
-
-    function logout(){
-      axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-      .then(response => {
-        alert(response.data)
-        if(response.data === "Logged out successfully!")
-        {
-          window.location = "/"
-        }
-      })
-      .catch(error => console.error(error))
-  }  
+ 
 
     return(
       <div onClick={toggleModal}>
-        <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal} />
+        <NavBar modalStatus={modalStatus} logout={props.logout} length={props.length} showModal={showModal} hideModal={hideModal} />
         {selectedProduct}
       </div>
     )

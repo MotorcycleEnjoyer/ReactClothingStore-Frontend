@@ -3,29 +3,14 @@ import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
 import NavBar from "../NavBar/NavBar"
 import axios from "axios";
 
-export default function Homepage__SEARCH(){
-    const SEARCH_URL = "http://localhost:5000/s?k="
-    const LOGOUT_URL = "http://localhost:5000/logout"
-    const [userData, setUserData] = React.useState({})
+export default function Homepage__SEARCH({...props}){
+    const SEARCH_URL = "http://localhost:5000/s?k=" 
     const [searchResults, setSearchResults] = React.useState([])
     const [modalStatus, setModalStatus] = React.useState(false)      
 
     React.useEffect(()=>{
-        getUserCartFromServer()
         loadSearchResultsFromUrlValues()
     },[])
-
-    function logout(){
-      axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-      .then(response => {
-        alert(response.data)
-        if(response.data === "Logged out successfully!")
-        {
-          window.location = "/"
-        }
-      })
-      .catch(error => console.error(error))
-  }
 
     function loadSearchResultsFromUrlValues(){
         const searchTermWithPlusSigns = window.location.href.split("s?k=")[1]
@@ -56,15 +41,6 @@ export default function Homepage__SEARCH(){
             console.log(error.response.data, error.response.status, error.response.headers)
             }
         })
-    }
-
-    function getUserCartFromServer(){
-      axios.get("http://localhost:5000/shoppingCart", {withCredentials: true}).then((response) => {
-        setUserData(response.data)
-        console.log(response.data)
-      }).catch(error => {
-        console.error(error)
-      })
     }
     
     function changeTitle(title){
@@ -98,7 +74,7 @@ export default function Homepage__SEARCH(){
 
     return(
       <div onClick={toggleModal}>
-        <NavBar modalStatus={modalStatus} logout={logout} userData={userData} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
+        <NavBar modalStatus={modalStatus} logout={props.logout} length={props.length} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
         <div className="mainContainer--results">
             {searchResults}
         </div>
