@@ -2,14 +2,20 @@ import axios from "axios";
 import React from "react";
 import shirt from "../../t-shirt-preview.png";
 
-const ADD_TO_CART_URL = "http://localhost:5000/addToCart"
-const INVALID_DATA = "POST/addToCart: Could not add to cart. Reason: Invalid data provided."
-
-
 export default function ShoppingProduct({...props}){
     function redirectToProductView(){
         let productNameWithPlusSigns = props.details.name.split(" ").join("+")
         window.location=`/p/${productNameWithPlusSigns}/id/${props.details.id}`
+    }
+
+    function oldAndNewDataAreIdentical(first, second){
+        let keys = Object.keys(first)
+        let allEqual = true
+        keys.forEach(key=>{
+                if(first[key] !== second[key])
+                    allEqual = false
+        })
+        return allEqual
     }
 
     function submitToServer(e){
@@ -26,11 +32,25 @@ export default function ShoppingProduct({...props}){
         dataObjectHeaders["amount"] = document.querySelector(".quantitySelector").value
         dataObjectHeaders["data"] = dataObject
 
-        props.addToCart(dataObjectHeaders)
+        if(props.modal!== undefined && props.modal === true){
+            dataObjectHeaders["oldData"] = { 
+                size: props.userSelectedParameters.size,
+                ageCategory: props.userSelectedParameters.ageCategory,
+                sexCategory: props.userSelectedParameters.sexCategory,
+                color: props.userSelectedParameters.color
+            }
+            if(oldAndNewDataAreIdentical(dataObjectHeaders["oldData"], dataObjectHeaders["data"])){
+                return
+            }
+            props.editCartItem(dataObjectHeaders)
+            setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
+        }else{
+            props.addToCart(dataObjectHeaders)
+        }
         
         setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
         setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
-        setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2000)
+        
     }
     
     return(
@@ -98,7 +118,34 @@ export default function ShoppingProduct({...props}){
                     <div>Polyester: {props.details.materials.polyester}</div>
                     <div>Cotton: {props.details.materials.cotton}</div>
                 <form id="addToCart">
+                    {   props.modal === true &&
+                        <div>
+                            <fieldset className="oldData">
+                            <label htmlFor="oldData">Old Selection</label>
+                            <br></br>
+                            <label htmlFor="size">SIZE:</label>
+                            <select className="size" disabled><option>{props.userSelectedParameters.size}</option></select>
+
+                            <label htmlFor="age">AGE RANGE:</label>
+                            <select className="age" disabled><option>{props.userSelectedParameters.ageCategory}</option></select>
+
+                            <label htmlFor="sex">M/F:</label>
+                            <select className="sex" disabled><option>{props.userSelectedParameters.sexCategory}</option></select>
+
+                            <br></br>
+                            <label htmlFor="color">COLOR OPTIONS:</label>
+                            <select className="color" disabled><option>{props.userSelectedParameters.color}</option></select>
+
+                            <br></br>
+                            <label htmlFor="amount">Quantity:</label>
+                            <select className="amount" disabled><option>{props.amount}</option></select>
+                        </fieldset>
+                        </div>
+                        
+                    }
                     <fieldset>
+                        New Selection:
+                        <br></br>
                         <label htmlFor="sizeSelector">SIZE:</label>
                         <select className="sizeSelector">
                             <option value="S">S</option>
