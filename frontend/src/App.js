@@ -62,7 +62,8 @@ function removeFromCart(index){
 function addToCart(dataObjectHeaders){
     axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
     .then(response => {
-        alert(response.data)
+        let fadeModalContent = document.querySelector(".fadeModal--content")
+        fadeModalContent.innerText = response.data
         fetchUserShoppingCart()
     })
     .catch(error => console.error(error))
