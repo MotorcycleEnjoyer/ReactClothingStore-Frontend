@@ -54,7 +54,8 @@ export default function CartItems({...props}){
     }
 
     function activateCartModal(propsFromCartItem){    
-      let itemToAppend = <ShoppingProduct {...propsFromCartItem} addToCart={props.addToCart} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
+      let itemToAppend = <ShoppingProduct {...propsFromCartItem} modal={true} editCartItem={props.editCartItem} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
+      
       setActiveCartItem(itemToAppend)
     }
 
@@ -63,18 +64,19 @@ export default function CartItems({...props}){
         showCartModal()
       }
     },[activeCartItem])
-
+    
     return(
       
       <div onClick={toggleModal}>
         <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
-          <div className="cartItem--modal--content">
+          <div className="cartItem--modal--content" >
+            <h1>Edit Item</h1>
             {activeCartItem}
           </div>
         </div>
           <NavBar modalStatus={modalStatus} length={props.length} logout={props.logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
           
-          <div className="cartItems">
+          <div className="cartItems" >
             {cartAsHTML}
           </div>
           <h1>TOTAL: {totalCost.toFixed(2) }</h1>
