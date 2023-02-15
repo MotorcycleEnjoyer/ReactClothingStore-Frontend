@@ -16,43 +16,32 @@ import './Components/ShoppingProduct/ShoppingProduct.css';
 import './Components/NavBar/NavBar.css'
 import './Components/CategoryButton/CategoryButton.css'
 
+// HELPER FUNCTIONS
+import apiCalls from "./apiCalls"
+
 export default function App() {
   const BASE_URL = "http://localhost:5000"
-  const LOGOUT_URL = BASE_URL + "/logout"
-  const LOGIN_URL = BASE_URL + "login"
-  const DELETION_URL = BASE_URL + "/deleteCartItem"
-  const [userShoppingCart, setUserShoppingCart] = React.useState("")
+  const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
 
-  function fetchUserShoppingCart(){
-    axios.get(BASE_URL + "/shoppingCart", {withCredentials: true})
-    .then(response => {
-      setUserShoppingCart(response.data.shoppingCart)
-    }).catch(error => console.error(error))
+  function addToCart(dataObjectHeaders){ 
+    setUserShoppingCart(apiCalls.addToCart(dataObjectHeaders)) 
   }
-
-  function logout(){
-    axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-    .then(response => {
-      alert(response.data)
-      if(response.data === "POST/logout: Logged out successfully!")
-      {
-        window.location = "/"
-      }
-    })
-    .catch(error => console.error(error))
+  function removeFromCart(index){ 
+    setUserShoppingCart(apiCalls.removeFromCart(index)) 
   }
-
-  function removeFromCart(index){
-    console.log(index)
-    axios.post(DELETION_URL, {indexOfCartItem: index}, {withCredentials: true})
-    .then(response => {
-        setUserShoppingCart(response.data.shoppingCart)
-    })
-    .catch(error => console.error(error))
+  function getCart(){ 
+    setUserShoppingCart(apiCalls.fetchUserShoppingCart())
+  }
+  
+  const propsObject = {
+    addToCart: addToCart,
+    removeFromCart: removeFromCart,
+    logout: apiCalls.logout, 
+    cart: userShoppingCart,
   }
 
   React.useEffect(()=>{
-    fetchUserShoppingCart()
+    getCart()
   },[])
 
   return (
@@ -61,12 +50,12 @@ export default function App() {
           <Routes>
             { 
               // PREVENT RENDERING UNTIL MAIN APP RECEIVES DATA FROM SERVER!
-              userShoppingCart !== "" &&
+              userShoppingCart !== "UNDEFINED USER CART" &&
               <>
-                <Route path="/" element={<Homepage logout={logout} cart={userShoppingCart}/>}/>
-                <Route path="/s" element={<Homepage__SEARCH logout={logout} cart={userShoppingCart} searchIsDone={true}/>}/>
-                <Route path="/p/*" element={<Homepage__PRODUCT logout={logout} cart={userShoppingCart} productIsSelected={true}/>}/>
-                <Route path="/cart" element={<Cart logout={logout} removeFromCart={removeFromCart} cart={userShoppingCart}/>}/>
+                <Route path="/" element={<Homepage {...propsObject}/>}/>
+                <Route path="/s" element={<Homepage__SEARCH {...propsObject} searchIsDone={true}/>}/>
+                <Route path="/p/*" element={<Homepage__PRODUCT {...propsObject} productIsSelected={true}/>}/>
+                <Route path="/cart" element={<Cart {...propsObject} cart={userShoppingCart}/>}/>
               </>
               
             }
