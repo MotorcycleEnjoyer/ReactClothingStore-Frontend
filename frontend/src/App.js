@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
-import axios from 'axios';
 
 import Homepage from './Components/Homepage/Homepage';
 import Homepage__PRODUCT from './Components/Homepage/Homepage__PRODUCT';
@@ -23,6 +22,10 @@ export default function App() {
   const BASE_URL = "http://localhost:5000"
   const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
 
+  React.useEffect(()=>{
+    //console.log(userShoppingCart)
+  },[userShoppingCart])
+
   function addToCart(dataObjectHeaders){ 
     setUserShoppingCart(apiCalls.addToCart(dataObjectHeaders)) 
   }
@@ -36,7 +39,7 @@ export default function App() {
   const propsObject = {
     addToCart: addToCart,
     removeFromCart: removeFromCart,
-    logout: apiCalls.logout, 
+    logout: apiCalls.logout,
     cart: userShoppingCart,
   }
 
