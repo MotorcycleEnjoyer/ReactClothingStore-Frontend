@@ -34,6 +34,7 @@ function fetchUserShoppingCart(){
             setUserShoppingCart([])
         }
         else{
+            setIsLoggedIn(response.data.type !== "anonymous-User")
             setUserShoppingCart(response.data.shoppingCart)
         }
     }).catch(error => console.error(error))
@@ -80,6 +81,7 @@ function addToCart(dataObjectHeaders){
   }
 
   const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
   const propsObject = {
     addToCart: addToCart,
@@ -88,6 +90,7 @@ function addToCart(dataObjectHeaders){
     editCartItem: editCartItem,
     cart: userShoppingCart,
     length: userShoppingCart.length,
+    isLoggedIn: isLoggedIn
   }
 
   React.useEffect(()=>{
