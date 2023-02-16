@@ -78,6 +78,7 @@
     position: fixed;
     padding-top: 100px;
     background-color:rgba(0,0,0,0.4);
+    overflow: scroll;
 }
 
 .cartItem--modal--content{
@@ -110,4 +111,22 @@
     padding: 20px;
     border-radius: 5px;
     font-weight: bold;
+}
+
+.cartButtons{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: fit-content;
+}
+
+.editCartItemButton{
+    padding: 30px;
+}
+
+.removeFromCartButton{
+    padding: 20px;   
+}
+.cartItemCost{
+    background-color: white;
+    border-radius: 5px;
 }
