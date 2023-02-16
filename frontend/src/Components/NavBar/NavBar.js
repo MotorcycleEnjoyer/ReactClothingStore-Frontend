@@ -14,10 +14,15 @@ export default function NavBar({...props}){
             <Search modalStatus={props.modalStatus} showModal={props.showModal} hideModal={props.hideModal}/>
 
             <div onClick={()=> window.location.assign("/cart")} className="shoppingCartIcon" style={{backgroundImage: `url('${shoppingCartLogo}')`}}><span className="cartIconSpan">{amountInCart}</span></div>
-            <button onClick={()=> props.logout()}>LOGOUT</button>
-            <button onClick={()=> window.location.assign("/login")}>LOGIN</button>
-            <button onClick={()=> window.location.assign("/register")}>REGISTER</button>
-            <button onClick={()=> window.location.assign("/cart")}>MY CART</button>
+
+            { props.isLoggedIn && <button onClick={()=> props.logout()}>LOGOUT</button>}
+
+            { !props.isLoggedIn && 
+                <>
+                    <button onClick={()=> window.location.assign("/login")}>LOGIN</button> 
+                    <button onClick={()=> window.location.assign("/register")}>REGISTER</button>
+                </>
+            }
         </nav>
     )
 }
