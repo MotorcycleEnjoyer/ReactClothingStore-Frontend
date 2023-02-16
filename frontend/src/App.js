@@ -26,6 +26,7 @@ const DELETION_URL = BASE_URL + "/deleteCartItem"
 const ADD_TO_CART_URL = BASE_URL + "/addToCart"
 const GET_CART_URL = BASE_URL + "/shoppingCart"
 const EDIT_CART_URL = BASE_URL + "/editCartItem"
+const REGISTER_URL = BASE_URL + "/register"
 
 function fetchUserShoppingCart(){
     axios.get(GET_CART_URL, {withCredentials: true})
@@ -34,7 +35,10 @@ function fetchUserShoppingCart(){
             setUserShoppingCart([])
         }
         else{
-            setIsLoggedIn(response.data.type !== "anonymous-User")
+            console.log(response.data)
+            if(response.data.type === "user"){
+              setIsLoggedIn(true)
+            }
             setUserShoppingCart(response.data.shoppingCart)
         }
     }).catch(error => console.error(error))
@@ -80,6 +84,20 @@ function addToCart(dataObjectHeaders){
     }).catch(error => console.error(error))
   }
 
+  function register(credentials){
+    axios.post(REGISTER_URL, credentials, {withCredentials: true})
+    .then(response => {
+        if(response.status === 200)
+        {
+            window.location = "/"
+        }
+    })
+    .catch(error => {
+        console.error(error)
+    })
+  }
+  
+
   const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
@@ -97,6 +115,10 @@ function addToCart(dataObjectHeaders){
     fetchUserShoppingCart()
   },[])
 
+  React.useEffect(()=>{
+    alert(isLoggedIn)
+  },[isLoggedIn])
+
   return (
       <div className="App">
         <BrowserRouter>
@@ -113,7 +135,7 @@ function addToCart(dataObjectHeaders){
               
             }
             <Route path="/login" element={<Login />}/>
-            <Route path="/register" element={<Register />}/>
+            <Route path="/register"  element={<Register register={register} />}/>
             <Route path="/*" element={<FileNotFound />} />
           </Routes>
         </BrowserRouter>
