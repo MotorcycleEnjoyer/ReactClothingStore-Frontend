@@ -115,10 +115,6 @@ function addToCart(dataObjectHeaders){
     fetchUserShoppingCart()
   },[])
 
-  React.useEffect(()=>{
-    alert(isLoggedIn)
-  },[isLoggedIn])
-
   return (
       <div className="App">
         <BrowserRouter>
