@@ -34,7 +34,7 @@ export default function Homepage__PRODUCT({...props}){
               window.location = "/"
             }
             storeDataInProductComponent(response.data)
-            document.title=`React Clothing Store: ${response.data.name}`
+            document.title=`React Clothing Store: ${response.data.details.name}`
           }).catch(error => console.error(error))
     }
 
