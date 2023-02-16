@@ -63,7 +63,9 @@ export default function Homepage__PRODUCT({...props}){
     return(
       <div onClick={toggleModal}>
         <NavBar modalStatus={modalStatus} isLoggedIn={props.isLoggedIn} logout={props.logout} length={props.length} showModal={showModal} hideModal={hideModal} />
-        {selectedProduct}
+        <div className="fullsizeProductContainer">
+          {selectedProduct}
+        </div>
       </div>
     )
 }

@@ -109,14 +109,18 @@ export default function ShoppingProduct({...props}){
                 <div className="fadeModal">
                     <div className="fadeModal--content">SampleText</div>
                 </div>
-                <h1>{props.name}</h1>
+                <div className="productHeader">
+                    <h1>{props.details.name}</h1>
+                    <h3>by {props.details.manufacturerOrBrand}</h3>
+                </div>
+                <div className="productDetails">
                     <div><img src={shirt}></img></div>
-                    <div>{props.details.id}</div>
-                    <div>BRAND: {props.details.manufacturerOrBrand}</div>
                     <div>TYPE: {props.details.typeOfClothing}</div>
                     <div>PRICE: {props.details.price}</div>
                     <div>Polyester: {props.details.materials.polyester}</div>
                     <div>Cotton: {props.details.materials.cotton}</div>
+                </div>
+                    
                 <form id="addToCart">
                     {   props.modal === true &&
                         <div>
@@ -144,7 +148,7 @@ export default function ShoppingProduct({...props}){
                         
                     }
                     <fieldset>
-                        New Selection:
+                        <b>New Selection:</b>
                         <br></br>
                         <label htmlFor="sizeSelector">SIZE:</label>
                         <select className="sizeSelector">

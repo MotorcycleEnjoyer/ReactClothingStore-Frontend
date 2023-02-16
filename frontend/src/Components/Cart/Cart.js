@@ -70,7 +70,7 @@ export default function CartItems({...props}){
       <div onClick={toggleModal}>
         <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
           <div className="cartItem--modal--content" >
-            <h1>Edit Item</h1>
+            <h1 className="modalContentHeader">Edit Item</h1>
             {activeCartItem}
           </div>
         </div>
