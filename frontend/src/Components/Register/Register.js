@@ -1,11 +1,11 @@
 import axios from "axios"
 import React from "react"
 
-const REGISTER_ENDPOINT = "http://localhost:5000/register"
-const SUCCESS_MESSAGE = "Registered Successfully!"
-const NAME_COLLISION = "Name is taken!"
 
-export default function Register(){
+
+const NAME_COLLISION = "POST/register: Name is taken!"
+
+export default function Register({...props}){
     function handleSubmit(e){
         e.preventDefault()
 
@@ -16,19 +16,8 @@ export default function Register(){
             const credentials = {}
             credentials["username"] = document.querySelector("#username").value
             credentials["password"] = password
-            axios.post(REGISTER_ENDPOINT, credentials, {withCredentials: true})
-            .then(response => {
-                if(response.data === SUCCESS_MESSAGE)
-                {
-                    window.location = "/"
-                }
-                if(response.data === NAME_COLLISION){
-                    document.querySelector("#passwordMismatch").innerText = NAME_COLLISION                
-                }
-            })
-            .catch(error => {
-                console.error(error)
-            })
+            props.register(credentials)
+            
         }else{
             document.querySelector("#message").innerText = "Passwords do not match"
         }
