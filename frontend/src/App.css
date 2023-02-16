@@ -3,19 +3,6 @@ html{
 }
 
 body{
-  background-color: red;
+  background-color: darkcyan;
   text-align: center;
-}
-
-.App{
-  display: flex;
-  flex-direction: column;
-}
-
-.mainContainer--results{
-  flex: 4;
-}
-
-.mainContainer--sideBar{
-  flex:1;
 }
