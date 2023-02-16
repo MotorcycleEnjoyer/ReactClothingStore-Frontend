@@ -95,9 +95,9 @@ export default function ShoppingProduct({...props}){
                         
                 </div>
                 <div className="cartButtons">
-                    <select className="quantitySelector"></select>
-                    <button onClick={() => props.removeFromCart(props.index)}>Remove</button>
-                    <div>Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
+                    <button className="editCartItemButton" onClick={() => props.toggleCartModal(props)}>Edit</button>
+                    <button className="removeFromCartButton" onClick={() => props.removeFromCart(props.index)}>Remove</button>
+                    <div className="cartItemCost">Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
                 </div>       
             </div>
                 
