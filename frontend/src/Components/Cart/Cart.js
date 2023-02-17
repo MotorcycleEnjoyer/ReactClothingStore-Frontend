@@ -1,14 +1,12 @@
 import React from "react"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
-import NavBar from "../NavBar/NavBar"
 
 export default function CartItems({...props}){
-    const [cartAsHTML, setCartAsHTML] = React.useState([])
-    const [activeCartItem, setActiveCartItem] = React.useState("")
+    const [cartAsHTML, setCartAsHTML] = React.useState(null)
+    const [activeCartItem, setActiveCartItem] = React.useState(null)
     const [totalCost, setTotalCost] = React.useState(0)
 
     React.useEffect(()=>{
-      console.log(props)
         const initialValue = 0;
         const total = props.cart.reduce(
           (accumulator, currentItem) => accumulator + (currentItem.amount * currentItem.details.price),
@@ -24,7 +22,6 @@ export default function CartItems({...props}){
     }
 
     function hideCartModal(e){
-      console.log(e.target)
       if(e.target.className === "cartItem--modal"){
         let modalStyle = document.querySelector(".cartItem--modal").style
         modalStyle.display = "none"
@@ -38,7 +35,7 @@ export default function CartItems({...props}){
     }
 
     React.useEffect(()=>{
-      if(activeCartItem !== "" && activeCartItem !== undefined){
+      if(activeCartItem){
         showCartModal()
       }
     },[activeCartItem])
