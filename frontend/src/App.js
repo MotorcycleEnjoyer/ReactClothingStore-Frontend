@@ -9,6 +9,7 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Cart from './Components/Cart/Cart';
 import FileNotFound from './Components/FileNotFound/FileNotFound';
+import NavBar from './Components/NavBar/NavBar';
 
 import './App.css'
 import './Components/SearchBar/Search.css'
@@ -98,22 +99,56 @@ function addToCart(dataObjectHeaders){
   }
   
 
-  const [userShoppingCart, setUserShoppingCart] = React.useState("UNDEFINED USER CART")
+  const [userShoppingCart, setUserShoppingCart] = React.useState(null)
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
   const propsObject = {
     addToCart: addToCart,
     removeFromCart: removeFromCart,
-    logout: logout, 
     editCartItem: editCartItem,
-    cart: userShoppingCart,
-    length: userShoppingCart.length,
-    isLoggedIn: isLoggedIn
+    cart: userShoppingCart
   }
 
   React.useEffect(()=>{
     fetchUserShoppingCart()
   },[])
+
+  const DefaultPage = (props) => {
+    const [modalStatus, setModalStatus] = React.useState(false)
+    function hideModal(){
+      document.querySelector(".search--modal").style.display = "none"
+      setModalStatus(false)
+    }
+  
+    function showModal(){
+      document.querySelector(".search--modal").style.display = "block"
+      setModalStatus(true)
+    }
+  
+    function toggleModal(e){
+      let target = e.target
+      let classType = target.className
+      if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
+        hideModal()
+      }
+      if(classType === "search--inputBox"){
+        showModal()
+      }
+    }
+    return (
+      <div onClick={toggleModal}>
+        <NavBar 
+          length= {userShoppingCart.length}
+          modalStatus = {modalStatus}
+          logout = {logout}
+          isLoggedIn = {isLoggedIn}
+        />
+        <div>
+          {props.mainContent}
+        </div>
+      </div>
+    )
+  }
 
   return (
       <div className="App">
@@ -121,12 +156,12 @@ function addToCart(dataObjectHeaders){
           <Routes>
             { 
               // PREVENT RENDERING UNTIL MAIN APP RECEIVES DATA FROM SERVER!
-              userShoppingCart !== "UNDEFINED USER CART" &&
+              userShoppingCart!== null &&
               <>
-                <Route path="/" element={<Homepage {...propsObject}/>}/>
-                <Route path="/s" element={<Homepage__SEARCH {...propsObject} searchIsDone={true}/>}/>
-                <Route path="/p/*" element={<Homepage__PRODUCT {...propsObject} productIsSelected={true}/>}/>
-                <Route path="/cart" element={<Cart {...propsObject} cart={userShoppingCart}/>}/>
+                <Route path="/s" element={<DefaultPage mainContent={<Homepage__SEARCH cart={userShoppingCart}/>} />}/>
+                <Route path="/" element={<DefaultPage />}/>
+                <Route path="/p/*" element={<DefaultPage mainContent={<Homepage__PRODUCT addToCart={addToCart}/>}/>}/>
+                <Route path="/cart" element={<DefaultPage mainContent={<Cart {...propsObject} />}/>}/>
               </>
               
             }
