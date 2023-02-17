@@ -11,7 +11,7 @@ export default function NavBar({...props}){
     return(
         <nav className="navBar">
             <button onClick={()=>window.location.assign("/")}>HOME</button>
-            <Search modalStatus={props.modalStatus} showModal={props.showModal} hideModal={props.hideModal}/>
+            <Search />
 
             <div onClick={()=> window.location.assign("/cart")} className="shoppingCartIcon" style={{backgroundImage: `url('${shoppingCartLogo}')`}}><span className="cartIconSpan">{amountInCart}</span></div>
 
