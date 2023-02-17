@@ -41,14 +41,12 @@ export default function SearchBar({...props}){
         {
             if(searchVal==="")
                 return
-            props.hideModal()
             redirectToSearchPage(searchVal)
             document.activeElement.blur()
         }
     }
 
     function storeSearchValFromClick(value){
-        props.hideModal()
         redirectToSearchPage(value)
     }
 
