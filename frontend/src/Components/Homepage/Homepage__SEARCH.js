@@ -1,12 +1,10 @@
 import React from "react";
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
-import NavBar from "../NavBar/NavBar"
 import axios from "axios";
 
 export default function Homepage__SEARCH({...props}){
     const SEARCH_URL = "http://localhost:5000/s?k=" 
     const [searchResults, setSearchResults] = React.useState([])
-    const [modalStatus, setModalStatus] = React.useState(false)      
 
     React.useEffect(()=>{
         loadSearchResultsFromUrlValues()
@@ -47,37 +45,9 @@ export default function Homepage__SEARCH({...props}){
       document.title = title
     }
 
-    function hideModal(){
-      document.querySelector(".search--modal").style.display = "none"
-      setModalStatus(false)
-    }
-  
-    function showModal(){
-      document.querySelector(".search--modal").style.display = "block"
-      setModalStatus(true)
-    }
-  
-    function storeSearchResults(results){
-      setSearchResults(results)
-    }
-  
-    function toggleModal(e){
-        let target = e.target
-        let classType = target.className
-        if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
-          hideModal()
-        }
-        if(classType === "search--inputBox"){
-          showModal()
-        }
-      }
-
     return(
-      <div onClick={toggleModal}>
-        <NavBar modalStatus={modalStatus} isLoggedIn={props.isLoggedIn} logout={props.logout} length={props.length} showModal={showModal} hideModal={hideModal} storeSearchResults={storeSearchResults}/>
         <div className="mainContainer--results">
             {searchResults}
         </div>
-      </div>
     )
 }

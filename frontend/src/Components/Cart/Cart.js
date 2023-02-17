@@ -4,7 +4,6 @@ import NavBar from "../NavBar/NavBar"
 
 export default function CartItems({...props}){
     const [cartAsHTML, setCartAsHTML] = React.useState([])
-    const [modalStatus, setModalStatus] = React.useState(false)      
     const [activeCartItem, setActiveCartItem] = React.useState("")
     const [totalCost, setTotalCost] = React.useState(0)
 
@@ -16,29 +15,8 @@ export default function CartItems({...props}){
           initialValue
         )
         setTotalCost(total)
-        setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} hideSearchModal={hideSearchModal} removeFromCart={props.removeFromCart} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
+        setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={props.removeFromCart} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
     },[props.cart])
-
-    function hideSearchModal(){
-      document.querySelector(".search--modal").style.display = "none"
-      setModalStatus(false)
-    }
-  
-    function showSearchModal(){
-      document.querySelector(".search--modal").style.display = "block"
-      setModalStatus(true)
-    }
-  
-    function toggleModal(e){
-      let target = e.target
-      let classType = target.className
-      if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
-        hideSearchModal()
-      }
-      if(classType === "search--inputBox"){
-        showSearchModal()
-      }
-    }
 
     function showCartModal(e){
       let modalStyle = document.querySelector(".cartItem--modal").style
@@ -54,7 +32,7 @@ export default function CartItems({...props}){
     }
 
     function activateCartModal(propsFromCartItem){    
-      let itemToAppend = <ShoppingProduct {...propsFromCartItem} modal={true} editCartItem={props.editCartItem} hideSearchModal={hideSearchModal} toggleCartModal={activateCartModal} view="fullSize"/>
+      let itemToAppend = <ShoppingProduct {...propsFromCartItem} modal={true} editCartItem={props.editCartItem} toggleCartModal={activateCartModal} view="fullSize"/>
       
       setActiveCartItem(itemToAppend)
     }
@@ -67,15 +45,13 @@ export default function CartItems({...props}){
     
     return(
       
-      <div onClick={toggleModal}>
+      <div>
         <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
           <div className="cartItem--modal--content" >
             <h1 className="modalContentHeader">Edit Item</h1>
             {activeCartItem}
           </div>
         </div>
-          <NavBar modalStatus={modalStatus} length={props.length} logout={props.logout} showModal={showSearchModal} hideModal={hideSearchModal}/>
-          
           <div className="cartItems" >
             {cartAsHTML}
           </div>

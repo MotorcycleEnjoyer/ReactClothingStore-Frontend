@@ -1,20 +1,18 @@
 import React from "react";
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
-import NavBar from "../NavBar/NavBar"
 import axios from "axios";
 
-export default function Homepage__PRODUCT({...props}){
+export default function Homepage__PRODUCT({addToCart}){
     const PRODUCT_URL = "http://localhost:5000/p/"
     const TOO_MANY_REQUESTS = "TOO MANY REQUESTS! SLOW DOWN!"
-    const [selectedProduct, setSelectedProduct] = React.useState("")
-    const [modalStatus, setModalStatus] = React.useState(false)      
+    const [selectedProduct, setSelectedProduct] = React.useState(null)
 
     React.useEffect(()=>{
       loadProductFromUrl()
     },[])
 
     function storeDataInProductComponent(data){
-      setSelectedProduct(<ShoppingProduct {...data} addToCart={props.addToCart} view="fullSize"/>)
+      setSelectedProduct(<ShoppingProduct {...data} addToCart={addToCart} view="fullSize"/>)
     }
 
     function loadProductFromUrl(){
@@ -38,34 +36,9 @@ export default function Homepage__PRODUCT({...props}){
           }).catch(error => console.error(error))
     }
 
-    function hideModal(){
-      document.querySelector(".search--modal").style.display = "none"
-      setModalStatus(false)
-    }
-  
-    function showModal(){
-      document.querySelector(".search--modal").style.display = "block"
-      setModalStatus(true)
-    }
-  
-    function toggleModal(e){
-      let target = e.target
-      let classType = target.className
-      if(classType ==="search--modal--clickListener" || classType==="navBar" || target.type ==="submit"){
-        hideModal()
-      }
-      if(classType === "search--inputBox"){
-        showModal()
-      }
-    }
- 
-
     return(
-      <div onClick={toggleModal}>
-        <NavBar modalStatus={modalStatus} isLoggedIn={props.isLoggedIn} logout={props.logout} length={props.length} showModal={showModal} hideModal={hideModal} />
         <div className="fullsizeProductContainer">
           {selectedProduct}
         </div>
-      </div>
     )
 }
