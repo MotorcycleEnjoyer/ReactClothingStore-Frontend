@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import axios from 'axios';
 
 import Homepage from './Components/Homepage/Homepage';
-import Homepage__PRODUCT from './Components/Homepage/Homepage__PRODUCT';
-import Homepage__SEARCH from './Components/Homepage/Homepage__SEARCH';
+import Homepage__PRODUCT from './Components/Homepage/HomepageProduct';
+import Homepage__SEARCH from './Components/Homepage/HomepageSearch';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Cart from './Components/Cart/Cart';
@@ -67,8 +67,10 @@ function removeFromCart(index){
   }
 
 function addToCart(dataObjectHeaders){
+  console.table(dataObjectHeaders)
     axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
     .then(response => {
+        console.log(response.data)
         let fadeModalContent = document.querySelector(".fadeModal--content")
         fadeModalContent.innerText = response.data
         fetchUserShoppingCart()
