@@ -8,7 +8,7 @@ export default function Homepage__SEARCH({...props}){
 
     React.useEffect(()=>{
         loadSearchResultsFromUrlValues()
-    },[])
+    },[window.location.href])
 
     function loadSearchResultsFromUrlValues(){
         const searchTermWithPlusSigns = window.location.href.split("s?k=")[1]
@@ -32,7 +32,8 @@ export default function Homepage__SEARCH({...props}){
             if(response.data.length >= 1){
             setSearchResults(response.data.map((item, index) => <ShoppingProduct key={index} {...item} view="searchResult"/>))
             }else{
-            document.querySelector(".mainContainer--results").innerText = "We're sorry. That item is not on our catalogue."
+            setSearchResults([])
+            document.querySelector(".sorryItem").style.visibility = "visible"
             }
         }).catch(error=>{
             if(error.response){
@@ -47,7 +48,7 @@ export default function Homepage__SEARCH({...props}){
 
     return(
         <div className="mainContainer--results">
-            {searchResults}
+            <div style={{visibility: "hidden"}} className="sorryItem">"We're sorry. That item is not on our catalogue."</div>            {searchResults}
         </div>
     )
 }
