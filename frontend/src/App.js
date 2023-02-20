@@ -17,6 +17,7 @@ import './Components/ShoppingProduct/ShoppingProduct.css';
 import './Components/NavBar/NavBar.css'
 import './Components/CategoryButton/CategoryButton.css'
 
+export const LoginContext = React.createContext();
 export default function App() {
 
 
@@ -115,8 +116,7 @@ function addToCart(dataObjectHeaders){
     fetchUserShoppingCart()
   },[])
 
-  const DefaultPage = (props) => {
-    const [modalStatus, setModalStatus] = React.useState(false)
+  const [modalStatus, setModalStatus] = React.useState(false)
     function hideModal(){
       document.querySelector(".search--modal").style.display = "none"
       setModalStatus(false)
@@ -137,42 +137,39 @@ function addToCart(dataObjectHeaders){
         showModal()
       }
     }
-    return (
-      <div onClick={toggleModal}>
-        <NavBar 
-          length= {userShoppingCart.length}
-          modalStatus = {modalStatus}
-          logout = {logout}
-          isLoggedIn = {isLoggedIn}
-        />
-        <div>
-          {props.mainContent}
-        </div>
-      </div>
-    )
-  }
 
   return (
-      <div className="App">
-        <BrowserRouter>
+    <LoginContext.Provider value = {isLoggedIn}>
+      <div className="App" onClick={toggleModal}>
+      <BrowserRouter>
+        <NavBar 
+          length={userShoppingCart?.length || 0}
+          logout = {logout}
+          modalStatus = {modalStatus}
+          hideModal = {hideModal}
+          isLoggedIn = {isLoggedIn} 
+        />
+        
           <Routes>
-            { 
-              // PREVENT RENDERING UNTIL MAIN APP RECEIVES DATA FROM SERVER!
-              userShoppingCart!== null &&
+            {
+              userShoppingCart !== null && 
               <>
-                <Route path="/s" element={<DefaultPage mainContent={<Homepage__SEARCH cart={userShoppingCart}/>} />}/>
-                <Route path="/" element={<DefaultPage />}/>
-                <Route path="/p/*" element={<DefaultPage mainContent={<Homepage__PRODUCT addToCart={addToCart}/>}/>}/>
-                <Route path="/cart" element={<DefaultPage mainContent={<Cart {...propsObject} />}/>}/>
+                <Route path="/s" element={<Homepage__SEARCH cart={userShoppingCart} />}/>
+                <Route path="/" element={<Homepage/>}/>
+                <Route path="/p/*" element={<Homepage__PRODUCT addToCart={addToCart}/>}/>
+                <Route path="/cart" element={<Cart {...propsObject} />}/>
+                <Route path="/login" element={<Login loginUrl={LOGIN_URL}/>}/>
+                <Route path="/register"  element={<Register register={register} />}/>
+                <Route path="/*" element={<FileNotFound />} />              
               </>
-              
             }
-            <Route path="/login" element={<Login />}/>
-            <Route path="/register"  element={<Register register={register} />}/>
-            <Route path="/*" element={<FileNotFound />} />
+            <Route path="/*" element={null} />
+
           </Routes>
         </BrowserRouter>
       </div>
+    </LoginContext.Provider>
+      
   );
 }
 
