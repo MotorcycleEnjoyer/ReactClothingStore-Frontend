@@ -13,7 +13,7 @@ export default function CartItems({...props}){
           initialValue
         )
         setTotalCost(total)
-        setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={props.removeFromCart} index={index} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
+        setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => props.removeFromCart(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
     },[props.cart])
 
     function showCartModal(e){
