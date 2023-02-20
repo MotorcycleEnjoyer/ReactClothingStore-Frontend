@@ -1,16 +1,15 @@
 import axios from "axios"
 
-const LOGIN_ENDPOINT = "http://localhost:5000/login"
 const FAILURE_STRING = "POST/login: Incorrect credentials. Please try again"
 const HOMEPAGE = "/"
 
-export default function Login(){
+export default function Login({loginUrl}){
     function handleSubmit(e){
         e.preventDefault()
         let credentials = {}
         credentials["username"] = document.querySelector("#username").value
         credentials["password"] = document.querySelector("#password").value
-        axios.post(LOGIN_ENDPOINT, credentials, {withCredentials: true})
+        axios.post(loginUrl, credentials, {withCredentials: true})
             .then((response)=>
             {
                 console.log(response)
