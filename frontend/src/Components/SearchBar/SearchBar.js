@@ -8,16 +8,6 @@ export default function SearchBar({...props}){
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
 
-    React.useEffect(()=>{
-        const searchTermWithPlusSigns = window.location.href.split("s?k=")[1] || false
-        if(searchTermWithPlusSigns === undefined || searchTermWithPlusSigns === false){
-          return
-        }else{
-            const searchTermWithSpaces = searchTermWithPlusSigns.split("+").join(" ")
-            setSearchVal(searchTermWithSpaces)
-        }
-    },[])
-
     function getSuggestions(value){
         const data = {
             searchTerm: value
@@ -31,23 +21,20 @@ export default function SearchBar({...props}){
         })
     }
 
-    function redirectToSearchPage(productName){
-        let productNameWithPlusSigns = productName.split(" ").join("+")
-        window.location=`/s?k=${productNameWithPlusSigns}`
-    }
-
     function checkEnter(e){
         if(e.key === "Enter")
         {
             if(searchVal==="")
                 return
-            redirectToSearchPage(searchVal)
+            
+            props.navigateWithoutRefresh(searchVal)
             document.activeElement.blur()
         }
     }
 
     function storeSearchValFromClick(value){
-        redirectToSearchPage(value)
+        setSearchVal(value)
+        props.navigateWithoutRefresh(value)
     }
 
     function changeSearchValueIfProperRegex(value){
