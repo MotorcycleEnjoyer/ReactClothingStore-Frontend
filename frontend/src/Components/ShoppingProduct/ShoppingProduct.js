@@ -40,7 +40,8 @@ export default function ShoppingProduct({...props}){
                 color: props.userSelectedParameters.color
             }
             if(oldAndNewDataAreIdentical(dataObjectHeaders["oldData"], dataObjectHeaders["data"])){
-                return
+                if(props.amount === dataObject["amount"])
+                    return
             }
             props.editCartItem(dataObjectHeaders)
             setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
