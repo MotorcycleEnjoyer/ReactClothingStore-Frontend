@@ -6,6 +6,7 @@
 }
 
 .shoppingCartIcon{
+    transition: 0.25s;
     border: 1px solid black;
     min-width: 50px;
     min-height: 50px;
@@ -13,27 +14,45 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+    text-align: right;
+}
+
+.cartIconSpan{
+    display: inline-block;
+    background-color: white;
+    min-height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
     color: red;
     font-weight: bold;
-    display: flex;
-    flex-direction: row;
     text-align: center;
 }
 
 .shoppingCartIcon:hover{
-    border: 1px solid white;
-    background-color: gray;
+    transition: 0.25s;
+    background-color: darkslategray;
+    border: 1px solid black;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.cartIconSpan{
-    line-height: 115%;
-    background-color: white;
-    max-height: 20px;
-    min-width: 20px;
-    border-radius: 50%;
-    flex: 1/5;
-    margin-right: 0;
-    margin-left: auto;
+
+.homeLogo{
+    min-width: 100px;
+    transition: 0.25s;
+    transition-timing-function: ease-in-out;
+    background-color: darkred;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+}
+
+.homeLogo:hover{
+    font-weight: bold;
+    box-shadow: gray 5px 5px 5px;
+    transition: 0.25s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+    background-color: red;
 }
 
