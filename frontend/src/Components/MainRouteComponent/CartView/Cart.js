@@ -1,5 +1,5 @@
 import React from "react"
-import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
+import ShoppingProduct from "../../SmallComponents/ShoppingProduct/ShoppingProduct"
 
 export default function CartItems({...props}){
     const [cartAsHTML, setCartAsHTML] = React.useState(null)

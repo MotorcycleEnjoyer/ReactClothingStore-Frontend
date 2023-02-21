@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import shirt from "../../t-shirt-preview.png";
+import shirt from "../../../t-shirt-preview.png";
 
 export default function ShoppingProduct({...props}){
     function redirectToProductView(){

@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingProduct from "../ShoppingProduct/ShoppingProduct";
+import ShoppingProduct from "../../SmallComponents/ShoppingProduct/ShoppingProduct";
 import axios from "axios";
 
 export default function Homepage__PRODUCT({addToCart}){

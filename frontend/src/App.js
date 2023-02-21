@@ -2,20 +2,20 @@ import React from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import axios from 'axios';
 
-import Homepage from './Components/Homepage/Homepage';
-import Homepage__PRODUCT from './Components/Homepage/HomepageProduct';
-import Homepage__SEARCH from './Components/Homepage/HomepageSearch';
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
-import Cart from './Components/Cart/Cart';
-import FileNotFound from './Components/FileNotFound/FileNotFound';
-import NavBar from './Components/NavBar/NavBar';
+import Homepage from './Components/MainRouteComponent/Homepage/Homepage';
+import Homepage__PRODUCT from './Components/MainRouteComponent/ProductView/HomepageProduct';
+import Homepage__SEARCH from './Components/MainRouteComponent/ProductSearch/HomepageSearch';
+import Login from './Components/MainRouteComponent/Login/Login';
+import Register from './Components/MainRouteComponent/Register/Register';
+import Cart from './Components/MainRouteComponent/CartView/Cart';
+import FileNotFound from './Components/MainRouteComponent/FileNotFound/FileNotFound';
+import NavBar from './Components/SmallComponents/NavBar/NavBar';
 
 import './App.css'
-import './Components/SearchBar/Search.css'
-import './Components/ShoppingProduct/ShoppingProduct.css';
-import './Components/NavBar/NavBar.css'
-import './Components/CategoryButton/CategoryButton.css'
+import './Components/SmallComponents/SearchBar/Search.css'
+import './Components/SmallComponents/ShoppingProduct/ShoppingProduct.css';
+import './Components/SmallComponents/NavBar/NavBar.css'
+import './Components/SmallComponents/CategoryButton/CategoryButton.css'
 
 export const LoginContext = React.createContext();
 export default function App() {
@@ -149,22 +149,14 @@ function addToCart(dataObjectHeaders){
           hideModal = {hideModal}
           isLoggedIn = {isLoggedIn} 
         />
-        
           <Routes>
-            {
-              userShoppingCart !== null && 
-              <>
-                <Route path="/s" element={<Homepage__SEARCH cart={userShoppingCart} />}/>
-                <Route path="/" element={<Homepage/>}/>
-                <Route path="/p/*" element={<Homepage__PRODUCT addToCart={addToCart}/>}/>
-                <Route path="/cart" element={<Cart {...propsObject} />}/>
-                <Route path="/login" element={<Login loginUrl={LOGIN_URL}/>}/>
-                <Route path="/register"  element={<Register register={register} />}/>
-                <Route path="/*" element={<FileNotFound />} />              
-              </>
-            }
-            <Route path="/*" element={null} />
-
+              <Route path="/s" element={<Homepage__SEARCH cart={userShoppingCart} />}/>
+              <Route path="/" element={<Homepage/>}/>
+              <Route path="/p/*" element={<Homepage__PRODUCT addToCart={addToCart}/>}/>
+              <Route path="/cart" element={<Cart {...propsObject} />}/>
+              <Route path="/login" element={<Login loginUrl={LOGIN_URL}/>}/>
+              <Route path="/register"  element={<Register register={register} />}/>
+              <Route path="/*" element={<FileNotFound />} />              
           </Routes>
         </BrowserRouter>
       </div>

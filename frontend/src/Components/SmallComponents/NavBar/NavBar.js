@@ -1,7 +1,7 @@
 import Search from "../SearchBar/SearchBar"
-import shoppingCartLogo from "../../shopping-cart-icon.png"
+import shoppingCartLogo from "../../../shopping-cart-icon.png"
 import React from "react"
-import { LoginContext } from "../../App"
+import { LoginContext } from "../../../App"
 import { Link } from "react-router-dom"
 
 export default function NavBar({...props}){

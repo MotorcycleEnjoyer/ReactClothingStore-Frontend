@@ -1,6 +1,6 @@
 import React from "react";
-import CategoryButton from "../CategoryButton/CategoryButton";
-import allCategories from "../CategoryButton/categories"
+import CategoryButton from "../../SmallComponents/CategoryButton/CategoryButton";
+import allCategories from "../../SmallComponents/CategoryButton/categories"
 
 export default function Homepage(){
     const [categories, setCategories] = React.useState(allCategories.dummyDB)
