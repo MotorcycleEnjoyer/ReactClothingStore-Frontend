@@ -16,6 +16,7 @@ export default function ColorSelector({colorArray, colorOverride}){
     }))
 
     function testing(e, item){
+        console.log(e.target)
         setActiveColor(item)
         let old = document.querySelector(".colorInput--active")
         if(old !== undefined && old !== null){
@@ -23,7 +24,13 @@ export default function ColorSelector({colorArray, colorOverride}){
         }
         e.target.classList.add("colorInput--active")
     }
- 
+
+    React.useEffect(()=>{
+        if(activeColor !== null){
+            console.log(document.querySelector(".colorSelector").value = activeColor)
+        }
+    },[activeColor])
+    
 
     return(
         <div style={{minWidth: "200px", display:"flex"}}>
