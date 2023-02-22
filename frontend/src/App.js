@@ -16,6 +16,7 @@ import './Components/SmallComponents/SearchBar/Search.css'
 import './Components/SmallComponents/ShoppingProduct/ShoppingProduct.css';
 import './Components/SmallComponents/NavBar/NavBar.css'
 import './Components/SmallComponents/CategoryButton/CategoryButton.css'
+import './Components/SmallComponents/ColorSelector/ColorSelector.css'
 
 export const LoginContext = React.createContext();
 export default function App() {
@@ -147,7 +148,6 @@ function addToCart(dataObjectHeaders){
           logout = {logout}
           modalStatus = {modalStatus}
           hideModal = {hideModal}
-          isLoggedIn = {isLoggedIn} 
         />
           <Routes>
               <Route path="/s" element={<Homepage__SEARCH cart={userShoppingCart} />}/>
