@@ -7,13 +7,16 @@ export default function CartItems({...props}){
     const [totalCost, setTotalCost] = React.useState(0)
 
     React.useEffect(()=>{
-        const initialValue = 0;
-        const total = props.cart.reduce(
-          (accumulator, currentItem) => accumulator + (currentItem.amount * currentItem.details.price),
-          initialValue
-        )
-        setTotalCost(total)
-        setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => props.removeFromCart(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
+      if(props.cart === null || props.cart === undefined){
+        return
+      }
+      const initialValue = 0;
+      const total = props.cart.reduce(
+        (accumulator, currentItem) => accumulator + (currentItem.amount * currentItem.details.price),
+        initialValue
+      )
+      setTotalCost(total)
+      setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => props.removeFromCart(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
     },[props.cart])
 
     function showCartModal(e){
