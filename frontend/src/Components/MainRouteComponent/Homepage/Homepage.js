@@ -10,6 +10,6 @@ export default function Homepage(){
     return(
         <div className="categoryButtonParentContainer">
           {categoryDataAsHtml}
-        </div>
+          </div>
     )
 }
