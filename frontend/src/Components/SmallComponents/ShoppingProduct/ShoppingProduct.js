@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import shirt from "../../../t-shirt-preview.png";
+import ColorSelector from "../ColorSelector/ColorSelector";
 
 export default function ShoppingProduct({...props}){
     function redirectToProductView(){
@@ -53,6 +54,8 @@ export default function ShoppingProduct({...props}){
         setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
         
     }
+
+    const [colorSelected, setColorSelected] = React.useState("")
     
     return(
     <>
@@ -171,7 +174,11 @@ export default function ShoppingProduct({...props}){
                             </select>
                         <div>COLOR OPTIONS: 
                             <label htmlFor="colorSelector"></label>
-                            <select className="colorSelector">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select></div>
+                            <select className="colorSelector">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select>
+                        </div>
+
+                        <ColorSelector colorArray={props.details.colorOptions} />
+                            
                         <div>Quantity: 
                                     <select className="quantitySelector">
                                         <option value="1">1</option>
@@ -198,6 +205,7 @@ export default function ShoppingProduct({...props}){
                         </div>       
                         <button onClick={submitToServer}>Add To Cart</button>         
                     </fieldset>
+                    
                 </form>
                 
             </div>
