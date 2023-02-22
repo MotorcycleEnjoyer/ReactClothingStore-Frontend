@@ -1,0 +1,15 @@
+.colorInput{
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    margin: 1px;
+}
+
+.colorInput:hover{
+    cursor: pointer;
+    border-color: white;
+}
+
+.colorInput--active{
+    border-color: white;
+}
