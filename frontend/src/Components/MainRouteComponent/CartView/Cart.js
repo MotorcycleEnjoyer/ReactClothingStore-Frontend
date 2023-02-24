@@ -2,7 +2,6 @@ import React from "react"
 import ShoppingProduct from "../../SmallComponents/ShoppingProduct/ShoppingProduct"
 
 export default function CartItems({...props}){
-    const [cartAsHTML, setCartAsHTML] = React.useState(null)
     const [activeCartItem, setActiveCartItem] = React.useState(null)
     const [totalCost, setTotalCost] = React.useState(0)
 
@@ -16,7 +15,6 @@ export default function CartItems({...props}){
         initialValue
       )
       setTotalCost(total)
-      setCartAsHTML(props.cart.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => props.removeFromCart(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />))
     },[props.cart])
 
     function showCartModal(e){
@@ -42,6 +40,9 @@ export default function CartItems({...props}){
         showCartModal()
       }
     },[activeCartItem])
+
+    const cartAsHTML = props.cart?.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => props.removeFromCart(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
+
     
     return(
       
