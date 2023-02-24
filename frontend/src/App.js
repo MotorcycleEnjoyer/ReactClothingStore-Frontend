@@ -32,19 +32,26 @@ const EDIT_CART_URL = BASE_URL + "/editCartItem"
 const REGISTER_URL = BASE_URL + "/register"
 
 function fetchUserShoppingCart(){
+  let ignore = false
+  setUserShoppingCart(null)
     axios.get(GET_CART_URL, {withCredentials: true})
     .then(response => {
+      if(!ignore){
         if(response.data.shoppingCart === undefined){
-            setUserShoppingCart([])
+          setUserShoppingCart([])
         }
         else{
-            console.log(response.data)
-            if(response.data.type === "user"){
-              setIsLoggedIn(true)
-            }
-            setUserShoppingCart(response.data.shoppingCart)
+          console.log(response.data)
+          if(response.data.type === "user"){
+            setIsLoggedIn(true)
+          }
+          setUserShoppingCart(response.data.shoppingCart)
         }
+      }
     }).catch(error => console.error(error))
+    return () => {
+      ignore = true
+    }
   }
 
 function logout(){
@@ -149,6 +156,8 @@ function addToCart(dataObjectHeaders){
           modalStatus = {modalStatus}
           hideModal = {hideModal}
         />
+        {
+          userShoppingCart !== null &&
           <Routes>
               <Route path="/s" element={<Homepage__SEARCH cart={userShoppingCart} />}/>
               <Route path="/" element={<Homepage/>}/>
@@ -158,6 +167,7 @@ function addToCart(dataObjectHeaders){
               <Route path="/register"  element={<Register register={register} />}/>
               <Route path="/*" element={<FileNotFound />} />              
           </Routes>
+        } 
         </BrowserRouter>
       </div>
     </LoginContext.Provider>
