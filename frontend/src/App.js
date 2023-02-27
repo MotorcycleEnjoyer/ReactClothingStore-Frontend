@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes, createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
 import axios from 'axios';
 
 import Homepage from './Components/MainRouteComponent/Homepage/Homepage';
@@ -18,7 +18,28 @@ import './Components/SmallComponents/NavBar/NavBar.css'
 import './Components/SmallComponents/CategoryButton/CategoryButton.css'
 import './Components/SmallComponents/ColorSelector/ColorSelector.css'
 
+import NewNav, { loader as NavLoader } from "./Components/NewNav"
+import NewSearch, { loader as SearchLoader } from "./Components/NewSearch"
+
 export const LoginContext = React.createContext();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <NewNav />,
+    errorElement: <h1>Error???</h1>,
+    loader: NavLoader,
+    children: [
+      {
+        path: "/s:",
+        element: <NewSearch />,
+        errorElement: <h1>Search Failed</h1>,
+        loader: SearchLoader,
+      }
+    ]
+  }
+])
+
 export default function App() {
 
 
@@ -31,7 +52,7 @@ const GET_CART_URL = BASE_URL + "/shoppingCart"
 const EDIT_CART_URL = BASE_URL + "/editCartItem"
 const REGISTER_URL = BASE_URL + "/register"
 
-function fetchUserShoppingCart(){
+/* function fetchUserShoppingCart(){
   let ignore = false
   setUserShoppingCart(null)
     axios.get(GET_CART_URL, {withCredentials: true})
@@ -54,17 +75,7 @@ function fetchUserShoppingCart(){
     }
   }
 
-function logout(){
-    axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
-    .then(response => {
-      alert(response.data)
-      if(response.data === "POST/logout: Logged out successfully!")
-      {
-        window.location = "/"
-      }
-    })
-    .catch(error => console.error(error))
-  }
+
 
 function removeFromCart(index){
     console.log(index)
@@ -87,14 +98,7 @@ function addToCart(dataObjectHeaders){
     .catch(error => console.error(error))
   }
 
-  function editCartItem(dataObjectHeaders){
-    axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
-    .then(response => {
-      let fadeModalContent = document.querySelector(".fadeModal--content")
-      fadeModalContent.innerText = response.data
-      fetchUserShoppingCart()
-    }).catch(error => console.error(error))
-  }
+  
 
   function register(credentials){
     axios.post(REGISTER_URL, credentials, {withCredentials: true})
@@ -144,10 +148,10 @@ function addToCart(dataObjectHeaders){
       if(classType === "search--inputBox"){
         showModal()
       }
-    }
+    } */
 
   return (
-    <LoginContext.Provider value = {isLoggedIn}>
+/*     <LoginContext.Provider value = {isLoggedIn}>
       <div className="App" onClick={toggleModal}>
       <BrowserRouter>
         <NavBar 
@@ -170,7 +174,10 @@ function addToCart(dataObjectHeaders){
         } 
         </BrowserRouter>
       </div>
-    </LoginContext.Provider>
+    </LoginContext.Provider> */
+    <>
+      <RouterProvider router={router}  />
+    </>
       
   );
 }
