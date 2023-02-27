@@ -20,6 +20,7 @@ import './Components/SmallComponents/ColorSelector/ColorSelector.css'
 
 import NewNav, { loader as NavLoader } from "./Components/NewNav"
 import NewSearch, { loader as SearchLoader } from "./Components/NewSearch"
+import NewProduct, { loader as NewProductLoader } from "./Components/NewProduct"
 
 export const LoginContext = React.createContext();
 
@@ -31,10 +32,16 @@ const router = createBrowserRouter([
     loader: NavLoader,
     children: [
       {
-        path: "/s:",
+        path: "/s/:productName",
         element: <NewSearch />,
         errorElement: <h1>Search Failed</h1>,
         loader: SearchLoader,
+      },
+       {
+        path: "/p/:productName/id/:productId",
+        element: <NewProduct />,
+        errorElement: <h1>Product Load Failed</h1>,
+        loader: NewProductLoader,
       }
     ]
   }
@@ -86,17 +93,6 @@ function removeFromCart(index){
     .catch(error => console.error(error))
   }
 
-function addToCart(dataObjectHeaders){
-  console.table(dataObjectHeaders)
-    axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
-    .then(response => {
-        console.log(response.data)
-        let fadeModalContent = document.querySelector(".fadeModal--content")
-        fadeModalContent.innerText = response.data
-        fetchUserShoppingCart()
-    })
-    .catch(error => console.error(error))
-  }
 
   
 
