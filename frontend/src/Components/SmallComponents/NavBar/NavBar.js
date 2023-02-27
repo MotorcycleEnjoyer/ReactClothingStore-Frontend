@@ -5,12 +5,9 @@ import { LoginContext } from "../../../App"
 import { Link } from "react-router-dom"
 
 export default function NavBar({...props}){
-    const [amountInCart, setAmountInCart] = React.useState(props.length)
+    const amountInCart = props.length
     const loggedIn = React.useContext(LoginContext)
     const [searchDestination, setSearchDestination] = React.useState("")
-    React.useEffect(()=>{
-        setAmountInCart(props.length)
-    },[props.length])
 
     function navigateWithoutRefresh(query){
         let productNameWithPlusSigns = query.split(" ").join("+")
@@ -29,7 +26,7 @@ export default function NavBar({...props}){
 
     return(
         <nav className="navBar">
-            <Link id="searchBox" to={`/s?k=${searchDestination}`} style={{display:"none"}} value={searchDestination}></Link>
+            <Link id="searchBox" to={`/s/${searchDestination}`} style={{display:"none"}} value={searchDestination}></Link>
 
             <Link reloadDocument to="/" className="homeLogo" >HOME</Link>
             <Search navigateWithoutRefresh={navigateWithoutRefresh}/>
