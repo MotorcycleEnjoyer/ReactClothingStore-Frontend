@@ -41,7 +41,8 @@ export async function getProduct(id){
 export async function addToCart(dataObjectHeaders){
     axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
     .then(response => {
-        console.log(response.data)
+        let fadeModalContent = document.querySelector(".fadeModal--content")
+        fadeModalContent.innerText = response.data
     })
     .catch(error => console.error(error))
   }
@@ -49,8 +50,8 @@ export async function addToCart(dataObjectHeaders){
 export async function editCartItem(dataObjectHeaders){
   axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
   .then(response => {
-    alert(response.data)
-    console.log(response)
+    let fadeModalContent = document.querySelector(".fadeModal--content")
+        fadeModalContent.innerText = response.data
     return getShoppingCart()
   }).catch(error => console.error(error))
 }
