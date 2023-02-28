@@ -7,6 +7,7 @@ const ADD_TO_CART_URL = BASE_URL + "/addToCart"
 const REGISTER_URL = BASE_URL + "/register"
 const DELETION_URL = BASE_URL + "/deleteCartItem"
 const SUGGESTIONS_URL = BASE_URL + "/suggestions"
+const EDIT_CART_URL = BASE_URL + "/editCartItem"
 
 export async function getShoppingCart(){
         return axios.get(GET_CART_URL, {withCredentials: true})
@@ -44,6 +45,15 @@ export async function addToCart(dataObjectHeaders){
     })
     .catch(error => console.error(error))
   }
+
+export async function editCartItem(dataObjectHeaders){
+  axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
+  .then(response => {
+    alert(response.data)
+    console.log(response)
+    return getShoppingCart()
+  }).catch(error => console.error(error))
+}
 
 export async function logout(){
     axios.post(LOGOUT_URL, {dummy: 2}, {withCredentials: true})
