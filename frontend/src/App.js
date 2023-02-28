@@ -11,6 +11,7 @@ import './Components/SmallComponents/ColorSelector/ColorSelector.css'
 import NewNav, { loader as NavLoader } from "./Routes/NewNav"
 import NewSearch, { loader as SearchLoader } from "./Routes/NewSearch"
 import NewProduct, { loader as NewProductLoader } from "./Routes/NewProduct"
+import NewCart, {loader as NewCartLoader} from './Routes/NewCart';
 
 export const LoginContext = React.createContext();
 
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
         element: <NewProduct />,
         errorElement: <h1>Product Load Failed</h1>,
         loader: NewProductLoader,
+      },
+      {
+        path: "/cart",
+        element: <NewCart />,
+        errorElement: <h1>Cart Failed to Load</h1>,
+        loader: NewCartLoader,
       }
     ]
   }
