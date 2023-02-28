@@ -20,33 +20,33 @@ export default function ShoppingProduct({...props}){
 
     function submitToServer(e){
         e.preventDefault()
-        let dataObject = {}
-        dataObject["size"]=document.querySelector(".sizeSelector").value
-        dataObject["ageCategory"]=document.querySelector(".ageSelector").value
-        dataObject["sexCategory"]=document.querySelector(".sexSelector").value
-        dataObject["color"]=document.querySelector(".colorSelector").value
+        let userChoices = {}
+        userChoices["size"]=document.querySelector(".sizeSelector").value
+        userChoices["ageCategory"]=document.querySelector(".ageSelector").value
+        userChoices["sexCategory"]=document.querySelector(".sexSelector").value
+        userChoices["color"]=document.querySelector(".colorSelector").value
 
-        let dataObjectHeaders = {}
-        dataObjectHeaders["productName"] = props.details.name
-        dataObjectHeaders["productId"] = props.details.id
-        dataObjectHeaders["amount"] = document.querySelector(".quantitySelector").value
-        dataObjectHeaders["data"] = dataObject
+        let dataPacket = {}
+        dataPacket["productName"] = props.details.name
+        dataPacket["productId"] = props.details.id
+        dataPacket["amount"] = document.querySelector(".quantitySelector").value
+        dataPacket["data"] = userChoices
 
-        if(props.modal!== undefined && props.modal === true){
-            dataObjectHeaders["oldData"] = { 
+        if(props.modal === true){
+            dataPacket["oldData"] = { 
                 size: props.userSelectedParameters.size,
                 ageCategory: props.userSelectedParameters.ageCategory,
                 sexCategory: props.userSelectedParameters.sexCategory,
                 color: props.userSelectedParameters.color
             }
-            if(oldAndNewDataAreIdentical(dataObjectHeaders["oldData"], dataObjectHeaders["data"])){
-                if(props.amount === dataObject["amount"])
+            if(oldAndNewDataAreIdentical(dataPacket["oldData"], dataPacket["data"])){
+                if(props.amount === parseInt(dataPacket["amount"]))
                     return
             }
-            props.editCartItem(dataObjectHeaders)
+            props.editCartItem(dataPacket)
             setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
         }else{
-            props.addToCart(dataObjectHeaders)
+            props.addToCart(dataPacket)
         }
         
         setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
