@@ -1,6 +1,7 @@
 import React from "react"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 import axios from "axios"
+import { getSuggestions } from "../../../apiCalls"
 
 export default function SearchBar({...props}){
     const [searchVal, setSearchVal] = React.useState("")
@@ -8,17 +9,12 @@ export default function SearchBar({...props}){
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
 
-    function getSuggestions(value){
+    async function fetchNewSuggestionList(value){
         const data = {
             searchTerm: value
         }
-        axios.post(SUGGESTIONS_URL, data).then(function(response){
-            setSuggestions(response.data || [])
-        }).catch(error=>{
-            if(error.response){
-            console.log(error.response.data, error.response.status, error.response.headers)
-            }
-        })
+        const fetchedSuggestions = await getSuggestions(data)
+        setSuggestions(fetchedSuggestions)
     }
 
     function checkEnter(e){
@@ -53,7 +49,7 @@ export default function SearchBar({...props}){
         if(searchVal === ""){
             setSuggestions([])
         }else{
-            getSuggestions(searchVal)
+            fetchNewSuggestionList(searchVal)
         }
             
     }, [searchVal])
