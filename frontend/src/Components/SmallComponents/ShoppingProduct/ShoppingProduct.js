@@ -1,12 +1,11 @@
-import axios from "axios";
 import React from "react";
 import shirt from "../../../t-shirt-preview.png";
 import ColorSelector from "../ColorSelector/ColorSelector";
+import { redirect, Link } from "react-router-dom";
 
 export default function ShoppingProduct({...props}){
-    function redirectToProductView(){
-        let productNameWithPlusSigns = props.details.name.split(" ").join("+")
-        window.location=`/p/${productNameWithPlusSigns}/id/${props.details.id}`
+    function redirectToProductView(id){
+        document.querySelector(`.Link${id}`).click()
     }
 
     function oldAndNewDataAreIdentical(first, second){
@@ -68,7 +67,8 @@ export default function ShoppingProduct({...props}){
         
         {
             props.view === "searchResult" &&
-                <div className="shoppingProduct--searchResult--mid" onClick={()=> redirectToProductView()}>
+                <div className="shoppingProduct--searchResult--mid" onClick={()=> redirectToProductView(props.details.id)}>
+                    <Link className={`Link${props.details.id}`} style={{display: "none"}} to={`/p/${props.details.name.split(" ").join("+")}/id/${props.details.id}`}></Link>
                     <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.details.name}</h1>

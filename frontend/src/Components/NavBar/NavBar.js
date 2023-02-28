@@ -2,7 +2,7 @@ import Search from "../SmallComponents/SearchBar/SearchBar"
 import shoppingCartLogo from "../../shopping-cart-icon.png"
 import React from "react"
 import { LoginContext } from "../../App"
-import { Link, redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function NavBar({...props}){
     const amountInCart = props.length
@@ -17,7 +17,10 @@ export default function NavBar({...props}){
     React.useEffect(()=>{
         if(searchDestination !== "")
         {
-            redirect(`/s/${searchDestination}`)
+            let linkItem = document.querySelector("#searchBox")
+            linkItem.click()
+            setSearchDestination("")
+            props.hideModal()
         }
     },[searchDestination])
 
