@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet, useLoaderData } from "react-router-dom"
-import { getShoppingCart } from "../apiCalls"
+import { getShoppingCart } from "../API/apiCalls"
 import NavBar from '../Components/NavBar/NavBar'
-import { logout } from '../apiCalls'
+import { logout } from '../API/apiCalls'
 
 export async function loader(){
     const shoppingCart = await getShoppingCart()
@@ -43,7 +43,6 @@ export default function NewNav(){
                 modalStatus = {modalStatus}
                 hideModal = {hideModal}
             />
-            <h1>bruh {shoppingCart.shoppingCart.length}</h1>
             <Outlet />
         </div>
     )

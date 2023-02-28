@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLoaderData, Form, redirect, NavLink, useNavigation } from "react-router-dom"
-import { getSearchResults } from "../apiCalls"
+import { getSearchResults } from "../API/apiCalls"
 import ShoppingProduct from '../Components/SmallComponents/ShoppingProduct/ShoppingProduct'
 
 export async function loader({ params }){

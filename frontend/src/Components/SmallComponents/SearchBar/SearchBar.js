@@ -1,7 +1,7 @@
 import React from "react"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
 import axios from "axios"
-import { getSuggestions } from "../../../apiCalls"
+import { getSuggestions } from "../../../API/apiCalls"
 
 export default function SearchBar({...props}){
     const [searchVal, setSearchVal] = React.useState("")
