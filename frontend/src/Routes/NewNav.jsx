@@ -10,7 +10,8 @@ export async function loader(){
 }
 
 export default function NewNav(){
-    const shoppingCart = useLoaderData()
+    const { shoppingCart } = useLoaderData()
+    console.log(shoppingCart)
 
 
     const [modalStatus, setModalStatus] = React.useState(false)
