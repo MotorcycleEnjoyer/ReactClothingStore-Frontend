@@ -3,16 +3,20 @@ import { Outlet, useLoaderData } from "react-router-dom"
 import { getShoppingCart } from "../API/apiCalls"
 import NavBar from '../Components/NavBar/NavBar'
 import { logout } from '../API/apiCalls'
+import { useContext } from 'react'
+import { ShoppingCartContext } from '../Contexts/ShoppingContext'
 
 export async function loader(){
     const shoppingCart = await getShoppingCart()
+    console.log("GET SHOPPING CART: ", {shoppingCart})
     return { shoppingCart }
 }
 
 export default function NewNav(){
     const { shoppingCart } = useLoaderData()
-    console.log(shoppingCart)
 
+    const secondItem = useContext(ShoppingCartContext)
+    console.log(secondItem)
 
     const [modalStatus, setModalStatus] = React.useState(false)
     function hideModal(){
