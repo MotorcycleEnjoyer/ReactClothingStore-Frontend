@@ -48,11 +48,9 @@ export async function addToCart(dataObjectHeaders){
   }
 
 export async function editCartItem(dataObjectHeaders){
-  axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
+  return axios.post(EDIT_CART_URL, dataObjectHeaders, {withCredentials: true})
   .then(response => {
-    let fadeModalContent = document.querySelector(".fadeModal--content")
-        fadeModalContent.innerText = response.data
-    return getShoppingCart()
+    return response.data.shoppingCart
   }).catch(error => console.error(error))
 }
 

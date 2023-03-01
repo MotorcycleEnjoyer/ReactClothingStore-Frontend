@@ -25,17 +25,19 @@ export default function NewCart(){
 
     async function deleteCartItem(index){
         const newCart = await removeFromCart(index)
-        if(newCart !== null && newCart !== undefined){
+/*         if(newCart !== null && newCart !== undefined){
             setShoppingCart(newCart)
-        }
+        } */
+        window.location.reload()
     }
 
     async function changeCartItem(objectHeaders){
         console.log(objectHeaders)
-        const newCart = await editCartItem(objectHeaders).shoppingCart
-        if(newCart !== null && newCart !== undefined){
+        const newCart = await editCartItem(objectHeaders)
+/*         if(newCart !== null && newCart !== undefined){
             setShoppingCart(newCart)
-        } 
+        }  */
+        window.location.reload()
     }
 
     function showCartModal(e){

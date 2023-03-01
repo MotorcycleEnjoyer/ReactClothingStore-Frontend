@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLoaderData, Form, redirect, NavLink, useNavigation } from "react-router-dom"
+import { Link, useLoaderData} from "react-router-dom"
 import { getProduct, addToCart } from "../API/apiCalls"
 import ShoppingProduct from '../Components/SmallComponents/ShoppingProduct/ShoppingProduct'
 
