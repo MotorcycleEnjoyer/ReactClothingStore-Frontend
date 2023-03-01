@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import './App.css'
@@ -13,7 +13,11 @@ import NewSearch, { loader as SearchLoader } from "./Routes/NewSearch"
 import NewProduct, { loader as NewProductLoader } from "./Routes/NewProduct"
 import NewCart, {loader as NewCartLoader} from './Routes/NewCart';
 
+import { editCartItem, getShoppingCart, removeFromCart } from './API/apiCalls';
+import { ShoppingCartContext, ShoppingCartDispatchContext } from './Contexts/ShoppingContext';
+
 export const LoginContext = React.createContext();
+
 
 const router = createBrowserRouter([
   {
@@ -30,7 +34,7 @@ const router = createBrowserRouter([
       },
        {
         path: "/p/:productName/id/:productId",
-        element: <NewProduct />,
+        element: <NewProduct NavLoader={NavLoader}/>,
         errorElement: <h1>Product Load Failed</h1>,
         loader: NewProductLoader,
       },
@@ -45,11 +49,36 @@ const router = createBrowserRouter([
 ])
 
 export default function App() {
+  const [shoppingCart, dispatch] = useReducer(shoppingCartReducer, [])
+
   return (
     <>
-      <RouterProvider router={router}  />
+    <ShoppingCartContext.Provider value={shoppingCart}>
+      <ShoppingCartDispatchContext.Provider value={dispatch}>
+        <RouterProvider router={router}  />
+      </ShoppingCartDispatchContext.Provider>
+    </ShoppingCartContext.Provider>
     </>
   );
 }
 
+async function shoppingCartReducer(shoppingCart, action){
+  switch(action.type){
+    case 'addToCart':{
+      console.log(action.type, action.properties)
+      return
+      // return addToCart(action.properties)
+    }
+    case 'editCartItem':{
+      console.log(action.type, action.properties)
+      return
+      // return editCartItem(action.properties)
+    }
+    case 'deleteCartItem':{
+      console.log(action.type, action.properties)
+      return
+      // return removeFromCart(action.properties)
+    }
+  }
+}
 
