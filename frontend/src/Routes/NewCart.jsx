@@ -1,7 +1,9 @@
 import React from "react"
 import ShoppingProduct from "../Components/SmallComponents/ShoppingProduct/ShoppingProduct"
 import { getShoppingCart, editCartItem, removeFromCart } from "../API/apiCalls"
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData} from "react-router-dom"
+import { ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
+import { useContext } from "react"
 
 export async function loader(){
     const shoppingCart = await getShoppingCart()
@@ -10,6 +12,7 @@ export async function loader(){
 
 export default function NewCart(){
     const [shoppingCart, setShoppingCart] = React.useState(useLoaderData().shoppingCart)
+    const dispatch = useContext(ShoppingCartDispatchContext)
     let iniVal = 0;
     const totalCost = shoppingCart
         .reduce((accumulator, currentVal) =>
@@ -29,6 +32,10 @@ export default function NewCart(){
             setShoppingCart(newCart)
         }
         /* window.location.reload() */
+        dispatch({
+            type: 'deleteCartItem',
+            properties: index
+        })
     }
 
     async function changeCartItem(objectHeaders){
@@ -38,6 +45,11 @@ export default function NewCart(){
             setShoppingCart(newCart)
         } 
         /* window.location.reload() */
+        
+        dispatch({
+            type: 'editCartItem',
+            properties: objectHeaders
+        })
     }
 
     function showCartModal(e){
@@ -63,11 +75,11 @@ export default function NewCart(){
     return (
     <>
         <div className="cartItem--modal" style={{display: "none"}} onClick={hideCartModal}>
-          <div className="cartItem--modal--content" >
-            <h1 className="modalContentHeader">Edit Item</h1>
-            {activeCartItem}
+            <div className="cartItem--modal--content" >
+              <h1 className="modalContentHeader">Edit Item</h1>
+              {activeCartItem}
+            </div>
           </div>
-        </div>
           <div className="cartItems" >
             {cartAsHTML}
           </div>
