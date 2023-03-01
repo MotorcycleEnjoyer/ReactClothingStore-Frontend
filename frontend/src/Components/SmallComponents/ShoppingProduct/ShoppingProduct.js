@@ -49,9 +49,8 @@ export default function ShoppingProduct({...props}){
             props.addToCart(dataPacket)
         }
         
-        //setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
-        //setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
-        setTimeout(()=>{window.location.reload()}, 250)
+        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
+        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
     }
 
     return(
