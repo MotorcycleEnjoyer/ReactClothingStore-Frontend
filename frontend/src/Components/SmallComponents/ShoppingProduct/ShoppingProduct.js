@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import shirt from "../../../t-shirt-preview.png";
 import ColorSelector from "../ColorSelector/ColorSelector";
 import { Link } from "react-router-dom";
+import { ShoppingCartDispatchContext } from "../../../Contexts/ShoppingContext";
 
 export default function ShoppingProduct({...props}){
+    const dispatch = useContext(ShoppingCartDispatchContext)
+
     function redirectToProductView(id){
         document.querySelector(`.Link${id}`).click()
     }
@@ -44,14 +47,22 @@ export default function ShoppingProduct({...props}){
                     return
             }
             props.editCartItem(dataPacket)
+            dispatch({
+                type: 'editCartItem',
+                properties: dataPacket
+            })
             setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
         }else{
             props.addToCart(dataPacket)
+            dispatch({
+                type: 'addToCart',
+                properties: dataPacket
+            })
         }
         
         setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "visible"}, 50)
-        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 2000)
-    }
+        setTimeout(() => {document.querySelector(".fadeModal").style.visibility = "hidden"}, 1200)
+    }   
 
     return(
     <>
