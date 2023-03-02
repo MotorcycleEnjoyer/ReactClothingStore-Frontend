@@ -39,10 +39,11 @@ export async function getProduct(id){
 }
 
 export async function addToCart(dataObjectHeaders){
-    axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
+    return axios.post(ADD_TO_CART_URL, dataObjectHeaders, {withCredentials: true})
     .then(response => {
         let fadeModalContent = document.querySelector(".fadeModal--content")
-        fadeModalContent.innerText = response.data
+        fadeModalContent.innerText = "Added to cart"
+        return response.data.shoppingCart
     })
     .catch(error => console.error(error))
   }
