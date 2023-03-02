@@ -2,7 +2,7 @@ import React from "react"
 import ShoppingProduct from "../Components/SmallComponents/ShoppingProduct/ShoppingProduct"
 import { getShoppingCart, editCartItem, removeFromCart } from "../API/apiCalls"
 import { useLoaderData} from "react-router-dom"
-import { ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
+import { ShoppingCartContext, ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
 import { useContext } from "react"
 
 export async function loader(){
@@ -11,8 +11,10 @@ export async function loader(){
 }
 
 export default function NewCart(){
-    const [shoppingCart, setShoppingCart] = React.useState(useLoaderData().shoppingCart)
+    const shoppingCart = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
+    // console.log(shoppingCart)
+
     let iniVal = 0;
     const totalCost = shoppingCart
         .reduce((accumulator, currentVal) =>
@@ -26,26 +28,14 @@ export default function NewCart(){
         }
       },[activeCartItem])
 
-    async function deleteCartItem(index){
-        const newCart = await removeFromCart(index)
-        if(newCart !== null && newCart !== undefined){
-            setShoppingCart(newCart)
-        }
-        /* window.location.reload() */
+    function deleteCartItem(index){
         dispatch({
             type: 'deleteCartItem',
             properties: index
         })
     }
 
-    async function changeCartItem(objectHeaders){
-        console.log(objectHeaders)
-        const newCart = await editCartItem(objectHeaders)
-        if(newCart !== null && newCart !== undefined){
-            setShoppingCart(newCart)
-        } 
-        /* window.location.reload() */
-        
+    function changeCartItem(objectHeaders){
         dispatch({
             type: 'editCartItem',
             properties: objectHeaders
@@ -85,5 +75,5 @@ export default function NewCart(){
           </div>
           <h1>TOTAL: {totalCost.toFixed(2) }</h1>
     </>
-    )
+    ) 
 }
