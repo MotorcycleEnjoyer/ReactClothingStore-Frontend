@@ -46,14 +46,12 @@ export default function ShoppingProduct({...props}){
                 if(props.amount === parseInt(dataPacket["amount"]))
                     return
             }
-            props.editCartItem(dataPacket)
             dispatch({
                 type: 'editCartItem',
                 properties: dataPacket
             })
             setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
         }else{
-            props.addToCart(dataPacket)
             dispatch({
                 type: 'addToCart',
                 properties: dataPacket
