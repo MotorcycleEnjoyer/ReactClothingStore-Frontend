@@ -25,8 +25,6 @@ export default function App() {
       type: 'getCart'
     })
   },[])
-  //console.log(initialVal())
-  // console.log(shoppingCart)
 
   return (
     <>
@@ -37,12 +35,6 @@ export default function App() {
     </ShoppingCartContext.Provider>
     </>
   );
-}
-
-async function initialVal(){
-  const cart = await getShoppingCart() || []
-  // console.log(cart)
-  return cart
 }
 
 /*
@@ -69,28 +61,19 @@ const useAsyncReducer = (reducer, initialState) => {
   return [state, dispatch]
 }
 
-async function shoppingCartReducer(shoppingCart, action){
+function shoppingCartReducer(shoppingCart, action){
   switch(action.type){
     case 'getCart':{
       return getShoppingCart()
     }
     case 'addToCart':{
-      console.log(action.type, action.properties)
-      await addToCart(action.properties)
-      const cart = await getShoppingCart()
-      return cart
+      return addToCart(action.properties)
     }
     case 'editCartItem':{
-      console.log(action.type, action.properties)
-      await editCartItem(action.properties)
-      const cart = await getShoppingCart()
-      return cart
+      return editCartItem(action.properties)
     }
     case 'deleteCartItem':{
-      console.log(action.type, action.properties)
-      await removeFromCart(action.properties)
-      const cart = await getShoppingCart()
-      return cart
+      return removeFromCart(action.properties)
     }
   }
 }
