@@ -1,22 +1,13 @@
 import React from 'react'
-import { Outlet, useLoaderData } from "react-router-dom"
-import { getShoppingCart } from "../API/apiCalls"
+import { Outlet } from "react-router-dom"
 import NavBar from '../Components/NavBar/NavBar'
 import { logout } from '../API/apiCalls'
 import { useContext } from 'react'
 import { ShoppingCartContext } from '../Contexts/ShoppingContext'
 
-export async function loader(){
-    const shoppingCart = await getShoppingCart()
-    console.log("GET SHOPPING CART: ", {shoppingCart})
-    return { shoppingCart }
-}
 
 export default function NewNav(){
-    const { shoppingCart } = useLoaderData()
-
-    const secondItem = useContext(ShoppingCartContext)
-    console.log(secondItem)
+    const cart = useContext(ShoppingCartContext)
 
     const [modalStatus, setModalStatus] = React.useState(false)
     function hideModal(){
@@ -43,7 +34,7 @@ export default function NewNav(){
     return(
         <div onClick={toggleModal}>
             <NavBar 
-                length={shoppingCart?.length || 0}
+                length={cart.length}
                 logout = {logout}
                 modalStatus = {modalStatus}
                 hideModal = {hideModal}
