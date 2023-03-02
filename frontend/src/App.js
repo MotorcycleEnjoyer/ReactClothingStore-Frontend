@@ -11,10 +11,13 @@ import './Components/SmallComponents/ColorSelector/ColorSelector.css'
 import NewNav from "./Routes/NewNav"
 import NewSearch, { loader as SearchLoader } from "./Routes/NewSearch"
 import NewProduct, { loader as NewProductLoader } from "./Routes/NewProduct"
-import NewCart, {loader as NewCartLoader} from './Routes/NewCart';
+import NewCart, { loader as NewCartLoader } from './Routes/NewCart';
+import NewLogin, { action as LoginAction } from "./Routes/NewLogin"
+import NewRegister from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart } from './API/apiCalls';
 import { ShoppingCartContext, ShoppingCartDispatchContext } from './Contexts/ShoppingContext';
+import Login from './Routes/NewLogin';
 
 export const LoginContext = React.createContext();
 
@@ -102,7 +105,18 @@ const router = createBrowserRouter([
         element: <NewCart />,
         errorElement: <h1>Cart Failed to Load</h1>,
         // loader: NewCartLoader,
-      }
+      },
     ]
+  },
+  {
+    path: "/login",
+    element: <NewLogin />,
+    // action: LoginAction,
+    errorElement: <h1>Login Error</h1>
+  },
+  {
+    path: "/register",
+    element: <NewRegister />,
+    errorElement: <h1>Registration Error</h1>
   }
 ])
