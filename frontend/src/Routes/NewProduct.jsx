@@ -14,7 +14,7 @@ export default function NewProduct(){
     const { searchResults } = useLoaderData()
     const product = <ShoppingProduct {...searchResults} addToCart={addToCart} view="fullSize"/>
     
-    console.log(searchResults)
+    // console.log(searchResults)
     return(
         <>
             {product ?? <h1>no product</h1>}
