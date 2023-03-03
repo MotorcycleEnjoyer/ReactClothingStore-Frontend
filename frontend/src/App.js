@@ -17,10 +17,10 @@ import NewRegister from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart } from './API/apiCalls';
 import { ShoppingCartContext, ShoppingCartDispatchContext } from './Contexts/ShoppingContext';
-export const LoginContext = React.createContext();
+export const LoginContext = React.createContext(null);
 
 export default function App() {
-  const [shoppingCart, dispatch] = useAsyncReducer(shoppingCartReducer, [])
+  const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
   React.useEffect(()=>{
     var online = navigator.onLine
     if(!online){
@@ -33,13 +33,19 @@ export default function App() {
     }
   },[])
 
+  if(shoppingCartAndAuth === null){
+    return <h1>Loading...</h1>
+  }
+
   return (
     <>
-    <ShoppingCartContext.Provider value={shoppingCart}>
-      <ShoppingCartDispatchContext.Provider value={dispatch}>
-        <RouterProvider router={router}  />
-      </ShoppingCartDispatchContext.Provider>
-    </ShoppingCartContext.Provider>
+      <LoginContext.Provider value={shoppingCartAndAuth.type === "user" ? true:false}>
+        <ShoppingCartContext.Provider value={shoppingCartAndAuth.shoppingCart}>
+          <ShoppingCartDispatchContext.Provider value={dispatch}>
+            <RouterProvider router={router}  />
+          </ShoppingCartDispatchContext.Provider>
+        </ShoppingCartContext.Provider>
+        </LoginContext.Provider>
     </>
   );
 }
