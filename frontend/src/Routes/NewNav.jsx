@@ -32,9 +32,9 @@ export default function NewNav(){
     }
     
     return(
-        <div onClick={toggleModal}>
+        <div onClick={toggleModal} className="navRoot">
             <NavBar 
-                length={cart.length}
+                length={cart?.length || 0}
                 logout = {logout}
                 modalStatus = {modalStatus}
                 hideModal = {hideModal}
