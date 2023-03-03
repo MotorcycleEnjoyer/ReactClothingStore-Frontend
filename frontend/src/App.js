@@ -17,16 +17,20 @@ import NewRegister from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart } from './API/apiCalls';
 import { ShoppingCartContext, ShoppingCartDispatchContext } from './Contexts/ShoppingContext';
-import Login from './Routes/NewLogin';
-
 export const LoginContext = React.createContext();
 
 export default function App() {
   const [shoppingCart, dispatch] = useAsyncReducer(shoppingCartReducer, [])
   React.useEffect(()=>{
-    dispatch({
-      type: 'getCart'
-    })
+    var online = navigator.onLine
+    if(!online){
+      document.querySelector("#root").innerText = "Not connected to internet."
+      return;
+    }else{
+      dispatch({
+        type: 'getCart'
+      })
+    }
   },[])
 
   return (
@@ -52,6 +56,10 @@ const useAsyncReducer = (reducer, initialState) => {
     if(typeof result.then === "function"){
       try{
         const newState = await result;
+        if(newState === undefined){
+          document.querySelector("#root").innerText = "Server unavailable"
+          return;
+        }
         setState(newState);
       } catch(err){
         setState({...state, error: err})
@@ -85,7 +93,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <NewNav />,
-    errorElement: <h1>Error???</h1>,
+    errorElement: <h1>No server connection.</h1>,
     // loader: NavLoader,
     children: [
       {
