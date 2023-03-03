@@ -9,6 +9,14 @@ export default function SearchBar({...props}){
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
     const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
 
+    React.useEffect(()=>{
+        const searchQuery = window.location.href.split("s/")[1]
+        if(searchQuery !== undefined){
+            const withoutPlusSigns = searchQuery.split("+").join(" ")
+            setSearchVal(withoutPlusSigns)
+        } 
+    },[])
+
     async function fetchNewSuggestionList(value){
         const data = {
             searchTerm: value
