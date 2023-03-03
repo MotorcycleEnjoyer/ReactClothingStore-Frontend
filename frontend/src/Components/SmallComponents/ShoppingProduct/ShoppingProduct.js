@@ -50,7 +50,7 @@ export default function ShoppingProduct({...props}){
                 type: 'editCartItem',
                 properties: dataPacket
             })
-            setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 2005)
+            setTimeout(() => {document.querySelector(".cartItem--modal").style.display = "none";}, 1200)
         }else{
             dispatch({
                 type: 'addToCart',
@@ -80,7 +80,7 @@ export default function ShoppingProduct({...props}){
             props.view === "searchResult" &&
                 <div className="shoppingProduct--searchResult--mid" onClick={()=> redirectToProductView(props.details.id)}>
                     <Link className={`Link${props.details.id}`} style={{display: "none"}} to={`/p/${props.details.name.split(" ").join("+")}/id/${props.details.id}`}></Link>
-                    <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
+                    <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.details.name}</h1>
                         <div>
@@ -97,7 +97,7 @@ export default function ShoppingProduct({...props}){
             props.view === "cart" &&
             <div style={{display:"flex"}}>
                 <div className="shoppingProduct--searchResult--mid" style={{flex: "1"}} onClick={() => props.toggleCartModal(props)}>
-                    <img src={shirt} className="shoppingProduct--searchResult--mid--image"></img>
+                    <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                     <div className="shoppingProduct--searchResult--mid--details">
                         <h1>{props.details.name}</h1>
                         <div>
@@ -129,7 +129,7 @@ export default function ShoppingProduct({...props}){
                     <h3>by {props.details.manufacturerOrBrand}</h3>
                 </div>
                 <div className="productDetails">
-                    <div><img src={shirt}></img></div>
+                    <div><img src={shirt} alt={props.name}></img></div>
                     <div>TYPE: {props.details.typeOfClothing}</div>
                     <div>PRICE: {props.details.price}</div>
                     <div>Polyester: {props.details.materials.polyester}</div>
