@@ -18,7 +18,7 @@ export async function getShoppingCart(){
                 return
             }
             else{
-                return response.data.shoppingCart
+                return response.data
             }
           }).catch(error => console.error(error))
 }
@@ -55,7 +55,7 @@ export async function addToCart(dataObjectHeaders){
     .then(response => {
         let fadeModalContent = document.querySelector(".fadeModal--content")
         fadeModalContent.innerText = "Added to cart"
-        return response.data.shoppingCart
+        return response.data
     })
     .catch(error => console.error(error))
   }
@@ -64,14 +64,14 @@ export async function editCartItem(dataObjectHeaders){
   .then(response => {
     let fadeModalContent = document.querySelector(".fadeModal--content")
     fadeModalContent.innerText = "Edit completed."
-    return response.data.shoppingCart
+    return response.data
   }).catch(error => console.error(error))
 }
 export async function removeFromCart(index){
   console.log(index)
   return axios.post(DELETION_URL, {indexOfCartItem: index}, {withCredentials: true})
   .then(response => {
-      return response.data.shoppingCart
+      return response.data
   })
   .catch(error => console.error(error))
 }
