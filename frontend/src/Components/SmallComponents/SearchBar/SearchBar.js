@@ -1,13 +1,11 @@
 import React from "react"
 import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
-import axios from "axios"
 import { getSuggestions } from "../../../API/apiCalls"
 
 export default function SearchBar({...props}){
     const [searchVal, setSearchVal] = React.useState("")
     const [suggestions, setSuggestions] = React.useState([])
     const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
-    const SUGGESTIONS_URL = "http://localhost:5000/suggestions"
 
     React.useEffect(()=>{
         const searchQuery = window.location.href.split("s/")[1]
