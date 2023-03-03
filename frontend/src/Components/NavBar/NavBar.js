@@ -30,16 +30,20 @@ export default function NavBar({...props}){
 
             <Link reloadDocument to="/" className="homeLogo" >HOME</Link>
             <Search navigateWithoutRefresh={navigateWithoutRefresh}/>
-            <Link to="/cart" className="shoppingCartIcon" style={{backgroundImage: `url('${shoppingCartLogo}')`}}><span className="cartIconSpan">{amountInCart}</span></Link>
+            <Link to="/cart" onClick={props.hideModal} className="shoppingCartIcon" style={{backgroundImage: `url('${shoppingCartLogo}')`}}><span className="cartIconSpan">{amountInCart}</span></Link>
 
-            <div className="homeLogo" onClick={()=> props.logout()}>LOGOUT</div>
+            {loggedIn && 
+                <div className="homeLogo" onClick={()=> props.logout()}>LOGOUT</div>
+            }            
 
-            { !loggedIn && 
+            {!loggedIn &&
                 <>
                     <Link className="homeLogo" to="/login">LOGIN</Link> 
                     <Link className="homeLogo" to="/register">REGISTER</Link>
-                </>
+                </>            
             }
+                
+            
         </nav>
     )
 }
