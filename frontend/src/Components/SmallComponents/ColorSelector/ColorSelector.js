@@ -2,7 +2,7 @@ import React from "react"
 
 export default function ColorSelector ({ colorArray, colorOverride }) {
     const [activeColor, setActiveColor] = React.useState(null)
-    const [colorsAsHTML, setColorsAsHTML] = React.useState(colorArray.map((item, index) => {
+    const colorsAsHTML = colorArray.map((item, index) => {
         return (
             <div
                 name="color"
@@ -13,7 +13,7 @@ export default function ColorSelector ({ colorArray, colorOverride }) {
                 value={item}
             ></div>
         )
-    }))
+    })
 
     function testing (e, item) {
         setActiveColor(item)

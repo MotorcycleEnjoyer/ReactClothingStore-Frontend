@@ -5,7 +5,7 @@ import { getSuggestions } from "../../../API/apiCalls"
 export default function SearchBar ({ ...props }) {
     const [searchVal, setSearchVal] = React.useState("")
     const [suggestions, setSuggestions] = React.useState([])
-    const [blockedCharacters, setBlockedCharacters] = React.useState(new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]"))
+    const blockedCharacters = new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]")
 
     React.useEffect(() => {
         const searchQuery = window.location.href.split("s/")[1]

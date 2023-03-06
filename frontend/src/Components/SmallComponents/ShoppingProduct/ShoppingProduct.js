@@ -44,7 +44,7 @@ export default function ShoppingProduct ({ ...props }) {
                 color: props.userSelectedParameters.color
             }
             if (oldAndNewDataAreIdentical(dataPacket.oldData, dataPacket.data)) {
-                if (props.amount === parseInt(dataPacket.amount)){
+                if (props.amount === parseInt(dataPacket.amount)) {
                     return
                 }
             }
@@ -72,7 +72,7 @@ export default function ShoppingProduct ({ ...props }) {
     return (
         <>
             {
-                props.view === "searchDropDown" &&  
+                props.view === "searchDropDown" &&
                     <div className="shoppingProduct--searchResult--minimum" onClick={() => props.storeSearchValFromClick(props.name)}>
                         <h3>{props.name}</h3>
                     </div>
@@ -81,7 +81,7 @@ export default function ShoppingProduct ({ ...props }) {
             {
                 props.view === "searchResult" &&
                     <div className="shoppingProduct--searchResult--mid" onClick={() => redirectToProductView(props.details.id)}>
-                        <Link className={`Link${props.details.id}`} style={{display: "none"}} to={`/p/${props.details.name.split(" ").join("+")}/id/${props.details.id}`}></Link>
+                        <Link className={`Link${props.details.id}`} style={{ display: "none" }} to={`/p/${props.details.name.split(" ").join("+")}/id/${props.details.id}`}></Link>
                         <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                         <div className="shoppingProduct--searchResult--mid--details">
                             <h1>{props.details.name}</h1>
