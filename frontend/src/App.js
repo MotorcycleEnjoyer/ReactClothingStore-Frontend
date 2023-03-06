@@ -103,6 +103,11 @@ const router = createBrowserRouter([
         // loader: NavLoader,
         children: [
             {
+                path: "/",
+                element: <h1>Hi this is the homepage</h1>,
+                errorElement: <h1>Homepage Failed to Load</h1>
+            },
+            {
                 path: "/s/:productName",
                 element: <NewSearch />,
                 errorElement: <h1>Search Failed</h1>,
