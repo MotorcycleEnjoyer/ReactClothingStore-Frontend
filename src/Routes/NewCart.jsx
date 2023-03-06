@@ -33,6 +33,15 @@ export default function NewCart () {
         })
     }
 
+    function clearCart () {
+        const yesIWantToDelete = confirm("Are you sure you want to clear your cart?")
+        if (yesIWantToDelete) {
+            dispatch({
+                type: "clearCart"
+            })
+        }
+    }
+
     function showCartModal (e) {
         const modalStyle = document.querySelector(".cartItem--modal").style
         modalStyle.display = "block"
@@ -64,6 +73,7 @@ export default function NewCart () {
                 {cartAsHTML}
             </div>
             <h1>TOTAL: {totalCost.toFixed(2) }</h1>
+            <button onClick={clearCart}>CLEAR CART</button>
         </>
     )
 }

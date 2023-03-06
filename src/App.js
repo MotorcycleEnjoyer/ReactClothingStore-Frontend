@@ -13,7 +13,7 @@ import NewCart from "./Routes/NewCart"
 import NewLogin from "./Routes/NewLogin"
 import NewRegister from "./Routes/NewRegister"
 
-import { editCartItem, getShoppingCart, removeFromCart, addToCart } from "./API/apiCalls"
+import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart } from "./API/apiCalls"
 import { ShoppingCartContext, ShoppingCartDispatchContext } from "./Contexts/ShoppingContext"
 export const LoginContext = React.createContext(null)
 
@@ -88,6 +88,9 @@ function shoppingCartReducer (shoppingCart, action) {
     }
     case "deleteCartItem":{
         return removeFromCart(action.properties)
+    }
+    case "clearCart":{
+        return clearCart()
     }
     default: {
         return getShoppingCart()

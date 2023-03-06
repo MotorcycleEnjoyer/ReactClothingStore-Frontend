@@ -7,6 +7,7 @@ const SEARCH_URL = BASE_URL + "/s?k="
 const ADD_TO_CART_URL = BASE_URL + "/addToCart"
 const REGISTER_URL = BASE_URL + "/register"
 const DELETION_URL = BASE_URL + "/deleteCartItem"
+const CLEAR_CART_URL = BASE_URL + "/clearCart"
 const SUGGESTIONS_URL = BASE_URL + "/suggestions"
 const EDIT_CART_URL = BASE_URL + "/editCartItem"
 
@@ -65,12 +66,21 @@ export async function editCartItem (dataObjectHeaders) {
             return response.data
         }).catch(error => console.error(error))
 }
+
 export async function removeFromCart (index) {
     return axios.post(DELETION_URL, { indexOfCartItem: index }, { withCredentials: true })
         .then(response => {
             return response.data
         })
         .catch(error => console.error(error))
+}
+
+export async function clearCart () {
+    return axios.post(CLEAR_CART_URL, { }, { withCredentials: true })
+        .then(response => {
+            console.log(response.data)
+            return response.data
+        }).catch(error => console.error(error))
 }
 
 export async function register (credentials) {
