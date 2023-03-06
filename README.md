@@ -1,6 +1,6 @@
 Basic Frontend "Shopping" app.
 
-Functionality:
+Functionality (with ReactClothingStore-Backend also running):
     - Get search "suggestions" as you type in searchbar
     - Search by clicking on a "suggestion" or pressing "Enter
     - View a product by clicking on a "Search Result", or via direct URL
