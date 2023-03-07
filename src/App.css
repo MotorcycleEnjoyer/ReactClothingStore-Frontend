@@ -7,3 +7,27 @@ body{
   background-color: darkcyan;
   text-align: center;
 }
+
+.homepageArrowBackground{
+  height: 2000px;
+  background-position: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+@container(max-width: 400px){
+  body{
+    background-color: pink;
+  }
+
+  .homepageArrowBackground{
+    height: 50px;
+    background-position: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10%;
+  }
+}
