@@ -73,7 +73,9 @@ export default function NewCart () {
                 {cartAsHTML}
             </div>
             <h1>TOTAL: {totalCost.toFixed(2) }</h1>
-            <button onClick={clearCart}>CLEAR CART</button>
+            {
+                shoppingCart.length > 0 &&
+                <button onClick={clearCart}>CLEAR CART</button>}
         </>
     )
 }
