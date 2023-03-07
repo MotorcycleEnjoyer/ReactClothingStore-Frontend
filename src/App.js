@@ -15,6 +15,7 @@ import NewRegister from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart } from "./API/apiCalls"
 import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "./Contexts/ShoppingContext"
+import NewHomePage from "./Routes/NewHomePage"
 
 export default function App () {
     const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
@@ -106,7 +107,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <h1>Hi this is the homepage</h1>,
+                element: <NewHomePage />,
                 errorElement: <h1>Homepage Failed to Load</h1>
             },
             {
