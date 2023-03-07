@@ -14,8 +14,7 @@ import NewLogin from "./Routes/NewLogin"
 import NewRegister from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart } from "./API/apiCalls"
-import { ShoppingCartContext, ShoppingCartDispatchContext } from "./Contexts/ShoppingContext"
-export const LoginContext = React.createContext(null)
+import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "./Contexts/ShoppingContext"
 
 export default function App () {
     const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
