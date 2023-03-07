@@ -91,7 +91,9 @@ export async function register (credentials) {
             }
         })
         .catch(error => {
-            console.log(error.response.status)
+            // console.log(error.response.status)
+            console.log(error.response.data)
+            alert(error.response.data)
         })
 }
 
