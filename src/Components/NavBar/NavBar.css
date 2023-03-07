@@ -37,7 +37,7 @@
 }
 
 
-.homeLogo{
+.navBarButton{
     min-width: 100px;
     transition: 0.25s;
     transition-timing-function: ease-in-out;
@@ -47,7 +47,7 @@
     color: white;
 }
 
-.homeLogo:hover{
+.navBarButton:hover{
     font-weight: bold;
     box-shadow: gray 5px 5px 5px;
     transition: 0.25s;
@@ -56,3 +56,21 @@
     background-color: red;
 }
 
+.homeLogo{
+    min-width: 100px;
+    min-height: 50px;
+    background-position: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65%;
+    text-align: center;
+    border: 1px solid black;
+    margin-left: 0px;
+}
+
+.homeLogo:hover{
+    transition: 0.25s;
+    background-color: darkslategray;
+    border-radius: 5px;
+    cursor: pointer;
+}
