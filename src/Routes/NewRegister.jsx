@@ -28,9 +28,9 @@ export default function Register () {
         <>
             <h1>Register account!</h1>
             <form onSubmit={handleSubmit}>
-                <input id="username" name="username" placeholder="Username" required></input>
-                <input id="password" onChange={handlePwChange} name="password" placeholder="Password" value={password} required></input>
-                <input id="confirmPassword" onChange={handleConfirmPwChange} name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" required></input>
+                <input id="username" name="username" placeholder="Username" required maxLength="30"></input>
+                <input type="password" id="password" onChange={handlePwChange} name="password" placeholder="Password" value={password} required maxLength="30"></input>
+                <input type="password" id="confirmPassword" onChange={handleConfirmPwChange} name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" required maxLength="30"></input>
                 {
                     (password === confirmPassword && confirmPassword.length >= 8) &&
                     <button>Submit</button>
