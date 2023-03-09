@@ -2,7 +2,10 @@
     min-height: 60px;
     background-color: black;
     display: flex;
-    justify-content: right;
+}
+
+.navRoot{
+    container-type: inline-size;
 }
 
 .shoppingCartIcon{
@@ -28,6 +31,17 @@
     text-align: center;
 }
 
+.cartIconSpan-small{
+    display: inline-block;
+    background-color: white;
+    min-height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
 .shoppingCartIcon:hover{
     transition: 0.25s;
     background-color: darkslategray;
@@ -35,7 +49,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
 
 .navBarButton{
     min-width: 100px;
@@ -73,4 +86,78 @@
     background-color: darkslategray;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.mobileDropdown{
+    display: none;
+}
+
+.mobileDropDownContent{
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    background-color: #8b0000;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    text-align: left;
+}
+
+.mobileDropDownContent > * {
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+
+.mobileDropdown > * :hover{
+    font-weight: bold;
+    box-shadow: gray 5px 5px 5px;
+    transition: 0.25s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+    background-color: red;
+}
+
+.dropDownIcon{
+    display: none;
+    min-width: 50px;
+    height: 60px;
+    background-position: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65%;
+}
+
+.dropDownIcon:hover{
+    transition: 0.25s;
+    background-color: darkslategray;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-timing-function: ease-in-out;
+}
+
+@container (max-width: 650px){
+    .navBarButton{
+        min-width: 60px;
+        font-size: 13px;
+        text-decoration: none;
+    }
+    /* SEARCHBAR rule specified in ./SmallComponents/SearchBar/SEARCHBAR.css */
+}
+
+@container (max-width: 720px){
+    .homeLogo{
+        display: none;
+    }
+    .shoppingCartIcon{
+        display: none;
+    }
+    .dropDownIcon{
+        display:block
+    }
 }

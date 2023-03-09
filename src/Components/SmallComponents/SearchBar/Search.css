@@ -26,7 +26,43 @@
     position: absolute;
     top: 60px;
     height: 100%;
+    min-height: 100%;
     width: 100%;
     left: 0px;
     z-index: 1;
+}
+
+.navRoot{
+    container-type: inline-size;
+}
+
+@container (max-width: 500px){
+    .search--inputBox{
+        min-width: 0px;
+        width: 50vw;
+    }
+    .search--modal--searchResultContainer{
+        min-width: 0px;
+        width: 52vw;
+    }
+    .search{
+        width: 50vw;
+    }
+}
+
+@container (max-width: 385px){
+    .search--inputBox .search{
+        width: 20vw;
+        max-width: 20px;
+    }
+
+    .search > input{
+        max-width: 30vw;
+        text-align: left;
+        float: left;
+    }
+
+    .search--modal--searchResultContainer{
+        max-width: 33vw;
+    }
 }
