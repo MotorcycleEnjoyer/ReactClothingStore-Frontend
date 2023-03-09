@@ -1,6 +1,5 @@
 html{
   height: 100%;
-  overflow: auto;
 }
 
 body{
@@ -18,16 +17,12 @@ body{
   margin: auto;
 }
 
-@container(max-width: 400px){
-  body{
-    background-color: pink;
-  }
+.navRoot {
+  container-type: inline-size;
+}
 
+@container (max-width: 650px){
   .homepageArrowBackground{
-    height: 50px;
-    background-position: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 10%;
+    height: 800px;
   }
 }
