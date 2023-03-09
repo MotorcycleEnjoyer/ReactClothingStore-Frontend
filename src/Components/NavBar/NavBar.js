@@ -4,6 +4,7 @@ import houseLogo from "../../krita-house-icon.png"
 import React from "react"
 import { LoginContext } from "../../Contexts/ShoppingContext"
 import { Link } from "react-router-dom"
+import dropdownIcon from "../../dropdownBarIcon.png"
 
 export default function NavBar ({ ...props }) {
     const amountInCart = props.length
@@ -24,8 +25,25 @@ export default function NavBar ({ ...props }) {
         }
     }, [searchDestination])
 
+    function toggleDropDown () {
+        const dropDown = document.querySelector(".mobileDropdown").style
+        console.log(dropDown.display)
+        if (dropDown.display === "none" || dropDown.display === "") {
+            dropDown.display = "block"
+            setTimeout(() => { dropDown.display = "none" }, 3000)
+        }
+    }
+
     return (
         <nav className="navBar">
+            <div className="dropDownIcon" onClick={toggleDropDown} style={{ backgroundImage: `url('${dropdownIcon}')` }}></div>
+            <div className="mobileDropdown">
+                <div className="mobileDropDownContent" >
+                    <Link reloadDocument to="/">HOME</Link>
+                    <Link to="/cart" onClick={props.hideModal}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
+                </div>
+            </div>
+
             <Link id="searchBox" to={`/s/${searchDestination}`} style={{ display: "none" }} value={searchDestination}></Link>
 
             <Link reloadDocument to="/" className="homeLogo" style={{ backgroundImage: `url('${houseLogo}')` }} ></Link>
