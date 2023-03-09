@@ -12,8 +12,9 @@ export default function NewSearch () {
     const { searchResults } = useLoaderData()
     const products = searchResults.map((item, index) => <ShoppingProduct key={index} {...item} view="searchResult"/>)
     return (
-        <>
+        <div className = "productSearchContainer">
+            <div className="filterContainer">Filter</div>
             {products}
-        </>
+        </div>
     )
 }
