@@ -11,12 +11,12 @@
 }
 
 .shoppingProduct--searchResult--mid{
-    opacity: 50%;
+    opacity: 80%;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
+    border: 5px cyan dashed;
     border-radius: 5px;
-    margin: 5px;
+    margin: auto;
     max-width: 1500px;
     background-color: lightcoral;
 }
@@ -161,4 +161,19 @@
     justify-content: space-between;
     border-radius: 5px;
     margin-top: 10px;
+}
+
+.productMidView{
+    border: 5px dashed cyan;
+}
+
+.navRoot {
+    container-type: inline-size;
+}
+
+@container (max-width: 1110px){
+    .shoppingProduct--searchResult--mid--image{
+        max-height: min(30vw, 200px);
+        max-width: min(30vw, 200px);
+    }
 }
