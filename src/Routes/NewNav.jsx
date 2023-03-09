@@ -7,15 +7,12 @@ import { ShoppingCartContext } from "../Contexts/ShoppingContext"
 export default function NewNav () {
     const cart = useContext(ShoppingCartContext)
 
-    const [modalStatus, setModalStatus] = React.useState(false)
     function hideModal () {
         document.querySelector(".search--modal").style.display = "none"
-        setModalStatus(false)
     }
 
     function showModal () {
         document.querySelector(".search--modal").style.display = "block"
-        setModalStatus(true)
     }
 
     function toggleModal (e) {
@@ -34,7 +31,6 @@ export default function NewNav () {
             <NavBar
                 length={cart?.length || 0}
                 logout = {logout}
-                modalStatus = {modalStatus}
                 hideModal = {hideModal}
             />
             <Outlet />
