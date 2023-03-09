@@ -96,7 +96,7 @@ export default function ShoppingProduct ({ ...props }) {
 
             {
                 props.view === "cart" &&
-                <div style={{ display: "flex" }}>
+                <div className="productMidView">
                     <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} onClick={() => props.toggleCartModal(props)}>
                         <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                         <div className="shoppingProduct--searchResult--mid--details">
@@ -108,11 +108,11 @@ export default function ShoppingProduct ({ ...props }) {
                                 <div>color: {props.userSelectedParameters.color}</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="cartButtons">
-                        <button className="editCartItemButton" onClick={() => props.toggleCartModal(props)}>Edit</button>
-                        <button className="removeFromCartButton" onClick={() => props.removeFromCart(props.index)}>Remove</button>
-                        <div className="cartItemCost">Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
+                        <div className="cartButtons">
+                            <button className="editCartItemButton" onClick={() => props.toggleCartModal(props)}>Edit</button>
+                            <button className="removeFromCartButton" onClick={() => props.removeFromCart(props.index)}>Remove</button>
+                            <div className="cartItemCost">Cost: ${(props.amount * props.details.price).toFixed(2)}</div>
+                        </div>
                     </div>
                 </div>
             }
