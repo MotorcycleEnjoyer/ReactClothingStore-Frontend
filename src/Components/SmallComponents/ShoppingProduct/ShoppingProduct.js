@@ -181,11 +181,14 @@ export default function ShoppingProduct ({ ...props }) {
                                 <option value="adults">adults</option>
                                 <option value="kids">kids</option>
                             </select>
+                            <br></br>
                             <label htmlFor="sexSelector">M/F: </label>
                             <select className="sexSelector">
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
+                            <br></br>
+                            <br></br>
                             <div>COLOR OPTIONS:
                                 <label htmlFor="colorSelector"></label>
                                 <select className="colorSelector">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select>
@@ -216,7 +219,9 @@ export default function ShoppingProduct ({ ...props }) {
                                     <option value="20">20</option>
                                 </select>
                             </div>
-                            <button onClick={submitToServer}>Add To Cart</button>
+                            <br></br>
+                            <br></br>
+                            <button className="submitProductButton" onClick={submitToServer}>Add To Cart</button>
                         </fieldset>
                     </form>
                 </div>
