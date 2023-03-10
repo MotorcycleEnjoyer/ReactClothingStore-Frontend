@@ -22,6 +22,12 @@ export default function ShoppingProduct ({ ...props }) {
         return allEqual
     }
 
+    function checkIfButton (e) {
+        if (e.target.nodeName !== "BUTTON") {
+            props.toggleCartModal(props)
+        }
+    }
+
     function submitToServer (e) {
         e.preventDefault()
         const userChoices = {}
@@ -96,8 +102,8 @@ export default function ShoppingProduct ({ ...props }) {
 
             {
                 props.view === "cart" &&
-                <div className="productMidView">
-                    <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} onClick={() => props.toggleCartModal(props)}>
+                <div className="productMidView" onClick={checkIfButton}>
+                    <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} >
                         <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                         <div className="shoppingProduct--searchResult--mid--details">
                             <h1>{props.details.name}</h1>
