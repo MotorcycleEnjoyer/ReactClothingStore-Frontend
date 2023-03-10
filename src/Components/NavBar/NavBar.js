@@ -30,8 +30,19 @@ export default function NavBar ({ ...props }) {
         console.log(dropDown.display)
         if (dropDown.display === "none" || dropDown.display === "") {
             dropDown.display = "block"
-            setTimeout(() => { dropDown.display = "none" }, 3000)
+            setTimeout(() => {
+                if (dropDown !== null) {
+                    dropDown.display = "none"
+                }
+            }, 3000)
         }
+    }
+
+    function hideDropDown () {
+        const dropDown = document.querySelector(".mobileDropdown").style
+        dropDown.display = "none"
+        // in case the search thing is still up.
+        props.hideModal()
     }
 
     return (
@@ -40,7 +51,7 @@ export default function NavBar ({ ...props }) {
             <div className="mobileDropdown">
                 <div className="mobileDropDownContent" >
                     <Link reloadDocument to="/">HOME</Link>
-                    <Link to="/cart" onClick={props.hideModal}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
+                    <Link to="/cart" onClick={hideDropDown}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
                 </div>
             </div>
 
