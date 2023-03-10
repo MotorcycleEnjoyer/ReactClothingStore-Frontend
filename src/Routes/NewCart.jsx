@@ -47,11 +47,15 @@ export default function NewCart () {
         modalStyle.display = "block"
     }
 
-    function hideCartModal (e) {
+    function checkClickClassName (e) {
         if (e.target.className === "cartItem--modal") {
-            const modalStyle = document.querySelector(".cartItem--modal").style
-            modalStyle.display = "none"
+            hideCartModal()
         }
+    }
+
+    function hideCartModal () {
+        const modalStyle = document.querySelector(".cartItem--modal").style
+        modalStyle.display = "none"
     }
 
     function activateCartModal (propsFromCartItem) {
@@ -63,8 +67,9 @@ export default function NewCart () {
 
     return (
         <>
-            <div className="cartItem--modal" style={{ display: "none" }} onClick={hideCartModal}>
+            <div className="cartItem--modal" style={{ display: "none" }} onClick={checkClickClassName}>
                 <div className="cartItem--modal--content" >
+                    <button onClick={hideCartModal} style={{ padding: "20px", marginRight: "0px" }}>Close Edit Menu</button>
                     <h1 className="modalContentHeader">Edit Item</h1>
                     {activeCartItem}
                 </div>
