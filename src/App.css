@@ -20,6 +20,7 @@ body{
 
 .navRoot {
   height: 100vh;
+  overflow: auto;
   container-type: inline-size;
 }
 
