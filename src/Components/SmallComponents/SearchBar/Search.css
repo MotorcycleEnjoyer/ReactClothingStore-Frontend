@@ -6,6 +6,7 @@
     min-width: 300px;
     min-height: 30px;
     font-size: 1.3em;
+    width: 100%;
 }
 
 .search--modal{
@@ -39,11 +40,10 @@
 @container (max-width: 500px){
     .search--inputBox{
         min-width: 0px;
-        width: 50vw;
     }
     .search--modal--searchResultContainer{
         min-width: 0px;
-        width: 52vw;
+        width: 70%;
     }
     .search{
         width: 50vw;
@@ -51,18 +51,5 @@
 }
 
 @container (max-width: 385px){
-    .search--inputBox .search{
-        width: 20vw;
-        max-width: 20px;
-    }
 
-    .search > input{
-        max-width: 30vw;
-        text-align: left;
-        float: left;
-    }
-
-    .search--modal--searchResultContainer{
-        max-width: 33vw;
-    }
 }
