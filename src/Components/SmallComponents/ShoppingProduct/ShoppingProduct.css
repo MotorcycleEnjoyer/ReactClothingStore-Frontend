@@ -14,6 +14,8 @@
     opacity: 80%;
     display: flex;
     margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     flex-direction: row;
     border-radius: 5px;
     max-width: 1500px;
