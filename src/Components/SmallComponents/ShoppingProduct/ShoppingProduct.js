@@ -128,7 +128,7 @@ export default function ShoppingProduct ({ ...props }) {
                         <h3>by {props.details.manufacturerOrBrand}</h3>
                     </div>
                     <div className="productDetails">
-                        <div><img src={shirt} alt={props.name}></img></div>
+                        <div><img className="fullSize-Image" src={shirt} alt={props.name}></img></div>
                         <div>TYPE: {props.details.typeOfClothing}</div>
                         <div>PRICE: {props.details.price}</div>
                         <div>Polyester: {props.details.materials.polyester}</div>
