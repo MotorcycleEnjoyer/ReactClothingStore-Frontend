@@ -27,14 +27,13 @@ body{
 .productSearchContainer {
   background-color: brown;
   height: 100vh;
-  border: 5px dashed pink;
 }
 
 .filterContainer{
   color: white;
   background-color: darkgreen;
-  border: 5px dashed yellow;
   height: 50px;
+  margin-bottom: 10px;
 }
 
 @container (max-width: 800px){
