@@ -31,7 +31,7 @@ export default function ColorSelector ({ colorArray, colorOverride }) {
     }, [activeColor])
 
     return (
-        <div style={{ minWidth: "200px", display: "flex" }}>
+        <div id="colorSelectorContainer" >
             {colorsAsHTML}
         </div>
     )
