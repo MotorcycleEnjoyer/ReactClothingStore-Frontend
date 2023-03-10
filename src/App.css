@@ -19,6 +19,7 @@ body{
 }
 
 .navRoot {
+  height: 100vh;
   container-type: inline-size;
 }
 
@@ -35,8 +36,16 @@ body{
   height: 50px;
 }
 
-@container (max-width: 650px){
+@container (max-width: 800px){
   .homepageArrowBackground{
     height: 800px;
+    max-width: 450px;
+  }
+}
+
+@container (max-width: 450px){
+  .homepageArrowBackground{
+    height: 533px;
+    max-width: 300px;
   }
 }
