@@ -221,7 +221,7 @@ export default function ShoppingProduct ({ ...props }) {
                             </div>
                             <br></br>
                             <br></br>
-                            <button className="submitProductButton" onClick={submitToServer}>Add To Cart</button>
+                            <button className="submitProductButton" onClick={submitToServer}>{ document.querySelector(".cartItem--modal") !== null ? "Submit Changes" : "Add To Cart" }</button>
                         </fieldset>
                     </form>
                 </div>
