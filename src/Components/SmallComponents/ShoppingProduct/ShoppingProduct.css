@@ -224,3 +224,9 @@ select, .submitProductButton{
         padding: 0px;
     }
 }
+
+@container (max-width: 380px){
+    .cartItem--modal--content{
+        padding: 0px;
+    }
+}
