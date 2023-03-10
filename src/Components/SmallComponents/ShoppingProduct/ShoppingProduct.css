@@ -218,7 +218,7 @@ select, .submitProductButton{
         padding-bottom: 5px;
     }
     .cartItem--modal{
-        padding-top: 30px;
+        padding-top: 0px;
     }
     .productHeader{
         padding: 0px;
