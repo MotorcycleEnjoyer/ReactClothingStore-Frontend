@@ -130,7 +130,7 @@ export async function sendProductRating (productRating, productId) {
         .then(response => {
             const { averageRating } = response.data
             if (averageRating !== undefined) {
-                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(2)})`
+                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(1)})`
             }
             console.log(response.data)
         })
@@ -142,7 +142,7 @@ export async function getStarAverage (productId) {
         .then(response => {
             const { averageRating } = response.data
             if (averageRating !== undefined && averageRating !== null) {
-                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(2)})`
+                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(1)})`
             }
             console.log(response.data)
         })
