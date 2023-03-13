@@ -140,7 +140,7 @@ export default function ShoppingProduct ({ ...props }) {
                         <div>PRICE: {props.details.price}</div>
                         <div>Polyester: {props.details.materials.polyester}</div>
                         <div>Cotton: {props.details.materials.cotton}</div>
-                        <StarRating />
+                        <StarRating productId = {props.details.id}/>
                     </div>
                     <form id="addToCart">
                         { props.modal === true &&
