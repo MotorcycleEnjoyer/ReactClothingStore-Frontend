@@ -27,6 +27,7 @@ export async function getSuggestions (data) {
         return response.data || []
     }).catch(error => {
         if (error.response) {
+            alert(error.message)
             console.log(error.response.data, error.response.status, error.response.headers)
         }
     })
@@ -37,7 +38,10 @@ export async function getSearchResults (query) {
         .then(response => {
             return response.data
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.error(error)
+            alert(error.message)
+        })
 }
 
 export async function getProduct (id) {
