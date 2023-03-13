@@ -1,18 +1,21 @@
 import React from "react"
 import { sendProductRating, getStarAverage } from "../../../API/apiCalls"
+import { LoginContext } from "../../../Contexts/ShoppingContext"
 
 export default function StarRating ({ productId }) {
+    const isLoggedIn = React.useContext(LoginContext)
     React.useEffect(() => {
         getStarAverage(productId)
     }, [])
 
     function setStarRating (finalIndex) {
-        // starSelector.forEach((item) => item.classList.add("active"))
         const allStars = document.querySelectorAll(".star")
         allStars.forEach(item => item.classList.remove("alreadyVoted"))
         allStars.forEach((item, currIndex) => currIndex <= finalIndex && item.classList.add("alreadyVoted"))
         // due to ZERO INDEX, will add one here.
-        sendProductRating(finalIndex + 1, productId)
+        if (isLoggedIn) {
+            sendProductRating(finalIndex + 1, productId)
+        }
     }
 
     function starHover (finalIndex) {
@@ -33,7 +36,7 @@ export default function StarRating ({ productId }) {
     return (
         <div className="stars" >
             {starSelector}
-            <span className="avgStarRating">({ 0 })</span>
+            <span className="avgStarRating">(0)</span>
         </div>
     )
 }
