@@ -20,7 +20,8 @@
     border-radius: 5px;
     max-width: 1500px;
     background-color: lightcoral;
-    padding-right: 5px;
+    padding: 10px 5px;
+    border: 1px solid black;
 }
 
 .shoppingProduct--searchResult--mid:hover{
