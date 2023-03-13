@@ -62,7 +62,7 @@ export default function SearchBar ({ ...props }) {
 
     return (
         <div className="search">
-            <input type="text" value={searchVal} onKeyDown={checkEnter} onChange={handleChange} placeholder="Search" className="search--inputBox"></input>
+            <input type="text" value={searchVal} onKeyDown={checkEnter} onChange={handleChange} placeholder="Search" className="search--inputBox" maxLength="50"></input>
             <div className="search--modal">
                 <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
                 <div className="search--modal--clickListener"></div>
