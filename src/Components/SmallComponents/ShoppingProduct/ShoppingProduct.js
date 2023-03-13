@@ -3,6 +3,7 @@ import shirt from "../../../t-shirt-preview.png"
 import ColorSelector from "../ColorSelector/ColorSelector"
 import { Link } from "react-router-dom"
 import { ShoppingCartDispatchContext } from "../../../Contexts/ShoppingContext"
+import StarRating from "../StarRatingSelector/StarRating"
 
 export default function ShoppingProduct ({ ...props }) {
     const dispatch = useContext(ShoppingCartDispatchContext)
@@ -139,6 +140,7 @@ export default function ShoppingProduct ({ ...props }) {
                         <div>PRICE: {props.details.price}</div>
                         <div>Polyester: {props.details.materials.polyester}</div>
                         <div>Cotton: {props.details.materials.cotton}</div>
+                        <StarRating />
                     </div>
                     <form id="addToCart">
                         { props.modal === true &&
@@ -195,6 +197,7 @@ export default function ShoppingProduct ({ ...props }) {
                             </div>
 
                             <ColorSelector colorArray={props.details.colorOptions} />
+
                             <div>Quantity:
                                 <select className="quantitySelector">
                                     <option value="1">1</option>
