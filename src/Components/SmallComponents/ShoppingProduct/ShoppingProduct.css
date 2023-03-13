@@ -182,7 +182,7 @@ select, .submitProductButton{
     padding-bottom: 5px;
 }
 
-@container (max-width: 700px){
+@container (max-width: 1120px){
     .fullSize-Image{
         max-height: min(30vw, 300px);
         max-width: min(30vw, 300px);
