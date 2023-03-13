@@ -1,11 +1,17 @@
 import React from "react"
+import { sendProductRating, getStarAverage } from "../../../API/apiCalls"
 
-export default function StarRating () {
+export default function StarRating ({ productId }) {
+    React.useEffect(() => {
+        getStarAverage(productId)
+    }, [])
+
     function setStarRating (finalIndex) {
         // starSelector.forEach((item) => item.classList.add("active"))
         const allStars = document.querySelectorAll(".star")
         allStars.forEach(item => item.classList.remove("alreadyVoted"))
         allStars.forEach((item, currIndex) => currIndex <= finalIndex && item.classList.add("alreadyVoted"))
+        sendProductRating(finalIndex, productId)
     }
 
     function starHover (finalIndex) {
