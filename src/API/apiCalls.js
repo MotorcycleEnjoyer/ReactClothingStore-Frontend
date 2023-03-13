@@ -10,6 +10,8 @@ const DELETION_URL = BASE_URL + "/deleteCartItem"
 const CLEAR_CART_URL = BASE_URL + "/clearCart"
 const SUGGESTIONS_URL = BASE_URL + "/suggestions"
 const EDIT_CART_URL = BASE_URL + "/editCartItem"
+const RATING_URL = BASE_URL + "/ratings"
+const GET_RATING_URL = BASE_URL + "/getRatings"
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -119,6 +121,30 @@ export async function logout () {
             if (response.data === "POST/logout: Logged out successfully!") {
                 window.location = "/"
             }
+        })
+        .catch(error => console.error(error))
+}
+
+export async function sendProductRating (productRating, productId) {
+    axios.post(RATING_URL, { rating: productRating, id: productId }, { withCredentials: true })
+        .then(response => {
+            const { averageRating } = response.data
+            if (averageRating !== undefined) {
+                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(2)})`
+            }
+            console.log(response.data)
+        })
+        .catch(error => console.error(error))
+}
+
+export async function getStarAverage (productId) {
+    axios.post(GET_RATING_URL, { id: productId }, { withCredentials: true })
+        .then(response => {
+            const { averageRating } = response.data
+            if (averageRating !== undefined) {
+                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(2)})`
+            }
+            console.log(response.data)
         })
         .catch(error => console.error(error))
 }
