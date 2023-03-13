@@ -141,7 +141,7 @@ export async function getStarAverage (productId) {
     axios.post(GET_RATING_URL, { id: productId }, { withCredentials: true })
         .then(response => {
             const { averageRating } = response.data
-            if (averageRating !== undefined) {
+            if (averageRating !== undefined && averageRating !== null) {
                 document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(2)})`
             }
             console.log(response.data)
