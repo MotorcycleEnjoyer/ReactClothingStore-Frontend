@@ -55,7 +55,7 @@ export default function NavBar ({ ...props }) {
                 </div>
             </div>
 
-            <Link id="searchBox" to={`/s/${searchDestination}`} style={{ display: "none" }} value={searchDestination}></Link>
+            <Link id="searchBox" reloadDocument to={`/s/${searchDestination}`} style={{ display: "none" }} value={searchDestination}></Link>
 
             <Link reloadDocument to="/" className="homeLogo" style={{ backgroundImage: `url('${houseLogo}')` }} ></Link>
             <Search navigateWithoutRefresh={navigateWithoutRefresh}/>
