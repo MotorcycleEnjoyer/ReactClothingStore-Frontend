@@ -183,12 +183,13 @@ select, .submitProductButton{
 }
 
 .stars{
-    display: flex;
     margin: auto;
+    display: flex;
+    min-height: 80px;
 }
 
 .stars > div{
-    opacity: 50%;
+    opacity: 40%;
     font-size: 50px;
 }
 
@@ -198,10 +199,11 @@ select, .submitProductButton{
 
 .stars > div.hoverState{
     opacity: 100%;
+    font-size: 60px;
 }
 
-.stars > div.alreadyVoted:hover{
-    cursor: auto;
+.avgStarRating{
+    font-size: 30px;
 }
 
 div.alreadyVoted{
@@ -216,7 +218,7 @@ div.alreadyVoted{
     }
 }
 
-@container (max-width: 575px){
+@container (max-width: 890px){
     .shoppingProduct--fullSize{
         flex-direction: column;
     }
@@ -249,6 +251,9 @@ div.alreadyVoted{
     }
     .productHeader{
         padding: 0px;
+    }
+    .stars > div{
+        font-size: max(5vw, 30px);
     }
 }
 
