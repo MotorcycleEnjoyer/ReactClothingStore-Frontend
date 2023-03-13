@@ -11,7 +11,8 @@ export default function StarRating ({ productId }) {
         const allStars = document.querySelectorAll(".star")
         allStars.forEach(item => item.classList.remove("alreadyVoted"))
         allStars.forEach((item, currIndex) => currIndex <= finalIndex && item.classList.add("alreadyVoted"))
-        sendProductRating(finalIndex, productId)
+        // due to ZERO INDEX, will add one here.
+        sendProductRating(finalIndex + 1, productId)
     }
 
     function starHover (finalIndex) {
@@ -25,9 +26,6 @@ export default function StarRating ({ productId }) {
         allStars.forEach(item => item.classList.remove("hoverState"))
     }
 
-    // avgRating will be given via the productSearch.
-    const averageRating = 3.5326.toFixed(2)
-
     const starArr = ["⭐", "⭐", "⭐", "⭐", "⭐"]
 
     const starSelector = starArr.map((value, index) => <div className="star" key={index} onClick={() => { setStarRating(index) }} onMouseEnter={() => { starHover(index) }} onMouseLeave={() => { starClear(index) }}>{value}</div>)
@@ -35,7 +33,7 @@ export default function StarRating ({ productId }) {
     return (
         <div className="stars" >
             {starSelector}
-            <span className="avgStarRating">({ averageRating })</span>
+            <span className="avgStarRating">({ 0 })</span>
         </div>
     )
 }
