@@ -1,20 +1,19 @@
 import React from "react"
-import { sendProductRating, getStarAverage } from "../../../API/apiCalls"
+import { addProductRating } from "../../../API/apiCalls"
 import { LoginContext } from "../../../Contexts/ShoppingContext"
 
-export default function StarRating ({ productId }) {
+export default function StarRating ({ productId, initialAverageRating }) {
     const isLoggedIn = React.useContext(LoginContext)
-    React.useEffect(() => {
-        getStarAverage(productId)
-    }, [])
+    const [avgRating, setAvgRating] = React.useState(initialAverageRating || 0)
 
-    function setStarRating (finalIndex) {
+    async function setStarRating (finalIndex) {
         const allStars = document.querySelectorAll(".star")
         allStars.forEach(item => item.classList.remove("alreadyVoted"))
         allStars.forEach((item, currIndex) => currIndex <= finalIndex && item.classList.add("alreadyVoted"))
         // due to ZERO INDEX, will add one here.
         if (isLoggedIn) {
-            sendProductRating(finalIndex + 1, productId)
+            const { averageRating } = addProductRating(finalIndex + 1, productId)
+            setAvgRating(averageRating)
         }
     }
 
@@ -36,7 +35,7 @@ export default function StarRating ({ productId }) {
     return (
         <div className="stars" >
             {starSelector}
-            <span className="avgStarRating">(0)</span>
+            <span className="avgStarRating">({avgRating})</span>
         </div>
     )
 }
