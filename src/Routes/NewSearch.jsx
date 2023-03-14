@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom"
 import React from "react"
 import { getSearchResults } from "../API/apiCalls"
-import ShoppingProduct from "../Components/SmallComponents/ShoppingProduct/ShoppingProduct"
+import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 
 export async function loader ({ params }) {
     document.title = `React Clothing Store Search: ${params.productName}`

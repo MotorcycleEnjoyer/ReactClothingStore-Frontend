@@ -1,5 +1,5 @@
 import React from "react"
-import ShoppingProduct from "../ShoppingProduct/ShoppingProduct"
+import ShoppingProduct from "../../ShoppingProduct/ShoppingProduct"
 import { getSuggestions } from "../../../API/apiCalls"
 
 export default function SearchBar ({ ...props }) {

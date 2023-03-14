@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
-import shirt from "../../../t-shirt-preview.png"
-import ColorSelector from "../ColorSelector/ColorSelector"
+import shirt from "../../t-shirt-preview.png"
+import ColorSelector from "../SmallComponents/ColorSelector/ColorSelector"
 import { Link } from "react-router-dom"
-import { ShoppingCartDispatchContext } from "../../../Contexts/ShoppingContext"
-import StarRating from "../StarRatingSelector/StarRating"
+import { ShoppingCartDispatchContext } from "../../Contexts/ShoppingContext"
+import StarRating from "../SmallComponents/StarRatingSelector/StarRating"
 
 export default function ShoppingProduct ({ ...props }) {
     const dispatch = useContext(ShoppingCartDispatchContext)

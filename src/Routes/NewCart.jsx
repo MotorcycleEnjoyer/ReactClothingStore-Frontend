@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import ShoppingProduct from "../Components/SmallComponents/ShoppingProduct/ShoppingProduct"
+import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 import { ShoppingCartContext, ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
 
 export default function NewCart () {

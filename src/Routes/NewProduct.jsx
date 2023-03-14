@@ -2,7 +2,7 @@ import React from "react"
 import { useLoaderData } from "react-router-dom"
 import { getProduct, addToCart, getInitialRatingsAndReviews } from "../API/apiCalls"
 import { LoginContext } from "../Contexts/ShoppingContext"
-import ShoppingProduct from "../Components/SmallComponents/ShoppingProduct/ShoppingProduct"
+import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 import ReviewBox from "../Components/SmallComponents/ReviewBox/ReviewBox"
 
 export async function loader ({ params }) {
