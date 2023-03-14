@@ -58,8 +58,9 @@ export async function getProduct (id) {
 export async function addToCart (dataObjectHeaders) {
     return axios.post(ADD_TO_CART_URL, dataObjectHeaders, { withCredentials: true })
         .then(response => {
-            const fadeModalContent = document.querySelector(".fadeModal--content")
-            fadeModalContent.innerText = "Added to cart"
+            // const fadeModalContent = document.querySelector(".fadeModal--content")
+            // fadeModalContent.innerText = "Added to cart"
+            alert("Added to Cart")
             return response.data
         })
         .catch(error => console.error(error))
@@ -68,8 +69,9 @@ export async function addToCart (dataObjectHeaders) {
 export async function editCartItem (dataObjectHeaders) {
     return axios.post(EDIT_CART_URL, dataObjectHeaders, { withCredentials: true })
         .then(response => {
-            const fadeModalContent = document.querySelector(".fadeModal--content")
-            fadeModalContent.innerText = "Edit completed."
+            alert("Edit Completed")
+            // const fadeModalContent = document.querySelector(".fadeModal--content")
+            // fadeModalContent.innerText = "Edit completed."
             return response.data
         }).catch(error => console.error(error))
 }
@@ -147,6 +149,7 @@ export async function addProductRating (productRating, productId) {
 export async function addProductReview (productId, review) {
     return axios.post(POST_REVIEW_URL, { id: productId, review }, { withCredentials: true })
         .then(response => {
+            alert("Review Received.")
             const { reviews } = response.data
             return { reviews }
         })
