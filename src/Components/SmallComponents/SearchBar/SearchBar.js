@@ -58,7 +58,7 @@ export default function SearchBar ({ ...props }) {
         }
     }, [searchVal])
 
-    const resultsAsHTML = suggestions.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>)
+    const resultsAsHTML = suggestions?.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>)
 
     return (
         <div className="search">
