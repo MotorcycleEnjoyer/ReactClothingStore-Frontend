@@ -2,7 +2,7 @@ import React from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./App.css"
 import "./Components/SmallComponents/SearchBar/Search.css"
-import "./Components/SmallComponents/ShoppingProduct/ShoppingProduct.css"
+import "./Components/ShoppingProduct/ShoppingProduct.css"
 import "./Components/NavBar/NavBar.css"
 import "./Components/SmallComponents/ColorSelector/ColorSelector.css"
 
