@@ -11,7 +11,8 @@ const CLEAR_CART_URL = BASE_URL + "/clearCart"
 const SUGGESTIONS_URL = BASE_URL + "/suggestions"
 const EDIT_CART_URL = BASE_URL + "/editCartItem"
 const RATING_URL = BASE_URL + "/ratings"
-const GET_RATING_URL = BASE_URL + "/getRatings"
+const GET_RATING_URL = BASE_URL + "/getRatingsAndReviews"
+const POST_REVIEW_URL = BASE_URL + "/reviews"
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -125,26 +126,29 @@ export async function logout () {
         .catch(error => console.error(error))
 }
 
-export async function sendProductRating (productRating, productId) {
-    axios.post(RATING_URL, { rating: productRating, id: productId }, { withCredentials: true })
+export async function getInitialRatingsAndReviews (productId) {
+    return axios.post(GET_RATING_URL, { id: productId }, { withCredentials: true })
         .then(response => {
-            const { averageRating } = response.data
-            if (averageRating !== undefined) {
-                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(1)})`
-            }
-            console.log(response.data)
+            const { averageRating, reviews } = response.data
+            return { averageRating, reviews }
         })
         .catch(error => console.error(error))
 }
 
-export async function getStarAverage (productId) {
-    axios.post(GET_RATING_URL, { id: productId }, { withCredentials: true })
+export async function sendProductRating (productRating, productId) {
+    return axios.post(RATING_URL, { rating: productRating, id: productId }, { withCredentials: true })
         .then(response => {
             const { averageRating } = response.data
-            if (averageRating !== undefined && averageRating !== null) {
-                document.querySelector(".avgStarRating").innerText = `(${averageRating.toFixed(1)})`
-            }
-            console.log(response.data)
+            return { averageRating }
+        })
+        .catch(error => console.error(error))
+}
+
+export async function submitReview (productId, review) {
+    return axios.post(POST_REVIEW_URL, { id: productId, review }, { withCredentials: true })
+        .then(response => {
+            const { reviews } = response.data
+            return { reviews }
         })
         .catch(error => console.error(error))
 }
