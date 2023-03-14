@@ -87,6 +87,7 @@
 .cartItem--modal--content{
     background-color: orange;
     display: inline-block;
+    width: 100cqw;
     padding: 20px;
     border-radius: 5px;
 }
@@ -167,6 +168,14 @@
 }
 
 .navRoot {
+    container-name: navRoot;
+    container-type: inline-size;
+    max-width: 100cqw;
+    margin: auto;
+}
+
+.shoppingProduct--fullSize{
+    container-name: shoppingProduct;
     container-type: inline-size;
 }
 
@@ -192,6 +201,7 @@ select, .submitProductButton{
 .stars > div{
     opacity: 40%;
     font-size: 50px;
+    border: 1px solid orange;
 }
 
 .stars > div:hover{
@@ -199,8 +209,7 @@ select, .submitProductButton{
 }
 
 .stars > div.hoverState{
-    opacity: 100%;
-    font-size: 60px;
+    border: 1px solid red;
 }
 
 .avgStarRating{
@@ -211,15 +220,57 @@ div.alreadyVoted{
     opacity: 100%;
 }
 
+.productReviewContainer{
+    grid-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+}
 
-@container (max-width: 1120px){
+.productReviewInput{
+    width: 50%;
+    height: 300px;
+    font-size: min(5vw, 30px);
+}
+
+.reviewsAsHTML{
+    font-size: min(5vw, 30px);
+    text-align: left;
+    max-width: 90%;
+    margin: auto;
+}
+
+.review{
+    border-radius: 5px;
+    border: 1px solid purple;
+    background-color: pink;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    overflow-wrap: break-word;
+}
+
+@container navRoot (max-width: 5000px) {
+    .productReviewContainer{
+        border-radius: 5px;
+        margin: auto;
+        margin-top: 10px;
+        padding: 30px 0px;
+        background-color: silver;
+    }
+}
+
+@container navRoot (max-width: 1120px){
     .fullSize-Image{
         max-height: min(30vw, 300px);
         max-width: min(30vw, 300px);
     }
+    .cartItem--modal--content{
+        width: 100cqw;
+    }
 }
 
-@container (max-width: 890px){
+@container navRoot (max-width: 890px){
     .shoppingProduct--fullSize{
         flex-direction: column;
     }
@@ -258,7 +309,7 @@ div.alreadyVoted{
     }
 }
 
-@container (max-width: 380px){
+@container navRoot (max-width: 380px){
     .cartItem--modal--content{
         padding: 0px;
     }
