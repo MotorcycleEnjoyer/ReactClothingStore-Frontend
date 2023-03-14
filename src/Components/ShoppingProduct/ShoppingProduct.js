@@ -67,13 +67,13 @@ export default function ShoppingProduct ({ ...props }) {
             })
         }
 
-        setTimeout(() => { document.querySelector(".fadeModal").style.visibility = "visible" }, 50)
+        /* setTimeout(() => { document.querySelector(".fadeModal").style.visibility = "visible" }, 50)
         setTimeout(() => {
             const fadeModal = document.querySelector(".fadeModal")
             if (fadeModal !== null) {
                 fadeModal.style.visibility = "hidden"
             }
-        }, 1200)
+        }, 1200) */
     }
 
     return (
