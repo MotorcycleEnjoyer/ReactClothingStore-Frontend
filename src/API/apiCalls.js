@@ -135,7 +135,7 @@ export async function getInitialRatingsAndReviews (productId) {
         .catch(error => console.error(error))
 }
 
-export async function sendProductRating (productRating, productId) {
+export async function addProductRating (productRating, productId) {
     return axios.post(RATING_URL, { rating: productRating, id: productId }, { withCredentials: true })
         .then(response => {
             const { averageRating } = response.data
@@ -144,7 +144,7 @@ export async function sendProductRating (productRating, productId) {
         .catch(error => console.error(error))
 }
 
-export async function submitReview (productId, review) {
+export async function addProductReview (productId, review) {
     return axios.post(POST_REVIEW_URL, { id: productId, review }, { withCredentials: true })
         .then(response => {
             const { reviews } = response.data
