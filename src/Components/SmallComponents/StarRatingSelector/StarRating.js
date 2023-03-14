@@ -12,8 +12,9 @@ export default function StarRating ({ productId, initialAverageRating }) {
         allStars.forEach((item, currIndex) => currIndex <= finalIndex && item.classList.add("alreadyVoted"))
         // due to ZERO INDEX, will add one here.
         if (isLoggedIn) {
-            const { averageRating } = addProductRating(finalIndex + 1, productId)
-            setAvgRating(averageRating)
+            const { averageRating } = await addProductRating(finalIndex + 1, productId)
+            console.log(averageRating)
+            setAvgRating(averageRating || 0)
         }
     }
 
@@ -35,7 +36,7 @@ export default function StarRating ({ productId, initialAverageRating }) {
     return (
         <div className="stars" >
             {starSelector}
-            <span className="avgStarRating">({avgRating})</span>
+            <span className="avgStarRating">({avgRating.toFixed(1)})</span>
         </div>
     )
 }
