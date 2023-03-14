@@ -20,7 +20,7 @@ export default function NewProduct () {
     return (
         <>
             {product ?? <h1>no product</h1>}
-            {isLoggedIn && <ReviewBox initialReviews={reviews} productId = {searchResults.details.id} />}
+            <ReviewBox initialReviews={reviews} loggedIn={isLoggedIn} productId = {searchResults.details.id} />
         </>
     )
 }
