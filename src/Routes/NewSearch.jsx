@@ -17,10 +17,10 @@ export default function NewSearch () {
     function pickSortingFunction (desiredSortMethod) {
         switch (desiredSortMethod) {
         case "alphabetical": {
-            return function (a, b) { return a.details.name > b.details.name }
+            return function (a, b) { return a.details.name.toLowerCase() > b.details.name.toLowerCase() }
         }
         case "reverseAlphabetical": {
-            return function (a, b) { return b.details.name > a.details.name }
+            return function (a, b) { return b.details.name.toLowerCase() > a.details.name.toLowerCase() }
         }
         case "priceHiLo": {
             return function (a, b) { return b.details.price - a.details.price }
