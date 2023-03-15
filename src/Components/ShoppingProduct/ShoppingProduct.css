@@ -86,10 +86,9 @@
 
 .cartItem--modal--content{
     background-color: orange;
-    display: inline-block;
-    width: 100cqw;
-    padding: 20px;
+    display: block;
     border-radius: 5px;
+    padding: 10px;
 }
 
 .fadeModal{
@@ -250,24 +249,16 @@ div.alreadyVoted{
     overflow-wrap: break-word;
 }
 
-@container navRoot (max-width: 5000px) {
-    .productReviewContainer{
-        border-radius: 5px;
-        margin: auto;
-        margin-top: 10px;
-        padding: 30px 0px;
-        background-color: silver;
-    }
+.productReviewContainer{
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 30px 0px;
+    background-color: silver;
 }
 
-@container navRoot (max-width: 1120px){
-    .fullSize-Image{
-        max-height: min(30vw, 300px);
-        max-width: min(30vw, 300px);
-    }
-    .cartItem--modal--content{
-        width: 100cqw;
-    }
+.fullSize-Image{
+    max-width: 400px;
 }
 
 @container navRoot (max-width: 890px){
