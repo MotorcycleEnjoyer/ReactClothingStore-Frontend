@@ -36,8 +36,175 @@ body{
   margin-bottom: 10px;
 }
 
+
+
+
 .clearCartButton{
   padding: 10px;
+}
+
+.cartButtons{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: fit-content;
+}
+
+.cartButtons > button{
+  margin-top: auto;
+  margin-bottom: 0px
+}
+
+.cartItem--modal{
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  z-index: 3;
+  position: absolute;
+  padding-bottom: 500px;
+  background-color:rgba(0,0,0,0.4);
+}
+
+.cartItem--modal--content{
+  background-color: orange;
+  display: block;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.editCartItemButton{
+  padding: 30px;
+}
+
+.removeFromCartButton{
+  padding: 20px;   
+}
+
+.cartItemCost{
+  background-color: lightgoldenrodyellow;
+  border-radius: 5px;
+}
+
+.cartItems{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  grid-gap: 5px;
+  padding-top: 10px;
+}
+
+
+
+
+.productReviewContainer{
+  grid-gap: 5px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+}
+
+.productReviewInput{
+  width: 50%;
+  height: 300px;
+  font-size: min(5vw, 30px);
+}
+
+.reviewsAsHTML{
+  font-size: min(5vw, 30px);
+  text-align: left;
+  max-width: 90%;
+  margin: auto;
+}
+
+.review{
+  border-radius: 5px;
+  border: 1px solid purple;
+  background-color: pink;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  padding: 20px;
+  overflow-wrap: break-word;
+}
+
+.productReviewContainer{
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 30px 0px;
+  background-color: silver;
+}
+
+
+
+
+.stars{
+  margin: auto;
+  display: flex;
+  min-height: 80px;
+}
+
+.stars > div{
+  opacity: 40%;
+  font-size: 50px;
+  border: 1px solid orange;
+}
+
+.stars > div:hover{
+  cursor: pointer;
+}
+
+.stars > div.hoverState{
+  border: 1px solid red;
+}
+
+.avgStarRating{
+  font-size: 30px;
+}
+
+div.alreadyVoted{
+  opacity: 100%;
+}
+
+
+
+
+@container navRoot (min-width: 1000px){
+  .cartItem--modal{
+      padding-top: 100px;
+  }
+}
+
+@container (max-width: 890px){
+  .fadeModal{
+      left: 0;
+      right: 0;
+      min-width: 200px;
+  }
+
+  .editCartItemButton{
+      padding: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+
+  .removeFromCartButton{
+      padding: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+
+  .cartItem--modal{
+      padding-top: 0px;
+  }
+
+  .stars > div{
+      font-size: max(5vw, 30px);
+  }
 }
 
 @container (max-width: 800px){
@@ -51,5 +218,11 @@ body{
   .homepageArrowBackground{
     height: 533px;
     max-width: 300px;
+  }
+}
+
+@container navRoot (max-width: 380px){
+  .cartItem--modal--content{
+      padding: 0px;
   }
 }
