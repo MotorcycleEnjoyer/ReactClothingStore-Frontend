@@ -31,17 +31,17 @@ export default function ShoppingProduct ({ ...props }) {
 
     function submitToServer (e) {
         e.preventDefault()
-        const userChoices = {}
-        userChoices.size = document.querySelector(".sizeSelector").value
-        userChoices.ageCategory = document.querySelector(".ageSelector").value
-        userChoices.sexCategory = document.querySelector(".sexSelector").value
-        userChoices.color = document.querySelector(".colorSelector").value
+        const rawFormData = new FormData(e.target)
+        const { size, ageCategory, sexCategory, color, quantity } = Object.fromEntries(rawFormData)
+        const userChoices = { size, ageCategory, sexCategory, color }
 
         const dataPacket = {}
         dataPacket.productName = props.details.name
         dataPacket.productId = props.details.id
-        dataPacket.amount = document.querySelector(".quantitySelector").value
+        dataPacket.amount = quantity
         dataPacket.data = userChoices
+
+        console.log(dataPacket)
 
         if (props.modal === true) {
             dataPacket.oldData = {
@@ -142,7 +142,7 @@ export default function ShoppingProduct ({ ...props }) {
                         <div>Cotton: {props.details.materials.cotton}</div>
                         { !props.modal && <StarRating productId={props.details.id} initialAverageRating={props.averageRating}/> }
                     </div>
-                    <form id="addToCart">
+                    <form onSubmit={submitToServer} id="addToCart">
                         { props.modal === true &&
                             <div>
                                 <fieldset className="oldData">
@@ -171,7 +171,7 @@ export default function ShoppingProduct ({ ...props }) {
                             <b>New Selection:</b>
                             <br></br>
                             <label htmlFor="sizeSelector">SIZE:</label>
-                            <select className="sizeSelector">
+                            <select className="sizeSelector" name="size">
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
@@ -179,13 +179,13 @@ export default function ShoppingProduct ({ ...props }) {
                                 <option value="XXL">XXL</option>
                             </select>
                             <label htmlFor="ageSelector">AGE RANGE:</label>
-                            <select className="ageSelector">
+                            <select className="ageSelector" name="ageCategory">
                                 <option value="adults">adults</option>
                                 <option value="kids">kids</option>
                             </select>
                             <br></br>
                             <label htmlFor="sexSelector">M/F: </label>
-                            <select className="sexSelector">
+                            <select className="sexSelector" name="sexCategory">
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
@@ -193,13 +193,13 @@ export default function ShoppingProduct ({ ...props }) {
                             <br></br>
                             <div>COLOR OPTIONS:
                                 <label htmlFor="colorSelector"></label>
-                                <select className="colorSelector">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select>
+                                <select className="colorSelector" name="color">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select>
                             </div>
 
                             <ColorSelector colorArray={props.details.colorOptions} />
 
                             <div>Quantity:
-                                <select className="quantitySelector">
+                                <select className="quantitySelector" name="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -224,7 +224,7 @@ export default function ShoppingProduct ({ ...props }) {
                             </div>
                             <br></br>
                             <br></br>
-                            <button className="submitProductButton" onClick={submitToServer}>{ document.querySelector(".cartItem--modal") !== null ? "Submit Changes" : "Add To Cart" }</button>
+                            <button className="submitProductButton">{ document.querySelector(".cartItem--modal") !== null ? "Submit Changes" : "Add To Cart" }</button>
                         </fieldset>
                     </form>
                 </div>
