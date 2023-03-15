@@ -1,5 +1,6 @@
 import React from "react"
 import { login } from "../API/apiCalls"
+import { LoginContext } from "../Contexts/ShoppingContext"
 
 async function handleSubmit (e) {
     e.preventDefault()
@@ -12,15 +13,26 @@ async function handleSubmit (e) {
 }
 
 export default function Login () {
+    const isLoggedIn = React.useContext(LoginContext)
+    React.useEffect(() => {
+        if (isLoggedIn) {
+            window.location.href = "/"
+        }
+    }, [])
+
     return (
         <>
-            <h1>Please enter your credentials</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" id="username" name="username" placeholder='Username' required maxLength="30"></input>
-                <input type="password" id="password" name="password" placeholder='Password' required maxLength="30"></input>
-                <button>Submit</button>
-            </form>
-            <div className="serverResponse"></div>
+            { !isLoggedIn &&
+                <>
+                    <h1>Please enter your credentials</h1>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" id="username" name="username" placeholder='Username' required maxLength="30"></input>
+                        <input type="password" id="password" name="password" placeholder='Password' required maxLength="30"></input>
+                        <button>Submit</button>
+                    </form>
+                    <div className="serverResponse"></div>
+                </>
+            }
         </>
     )
 }
