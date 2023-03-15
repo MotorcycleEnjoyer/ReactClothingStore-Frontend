@@ -79,8 +79,7 @@
     top: 0px;
     z-index: 3;
     position: absolute;
-    padding-top: 100px;
-    padding-bottom: 200px;
+    padding-bottom: 500px;
     background-color:rgba(0,0,0,0.4);
 }
 
@@ -169,8 +168,6 @@
 .navRoot {
     container-name: navRoot;
     container-type: inline-size;
-    max-width: 100cqw;
-    margin: auto;
 }
 
 .shoppingProduct--fullSize{
@@ -246,6 +243,7 @@ div.alreadyVoted{
     margin: auto;
     margin-bottom: 20px;
     margin-top: 30px;
+    padding: 20px;
     overflow-wrap: break-word;
 }
 
@@ -261,6 +259,16 @@ div.alreadyVoted{
     max-width: 400px;
 }
 
+.cartItem--modal--content{
+    max-width: 1280px;
+    margin: auto;
+}
+
+@container navRoot (min-width: 1000px){
+    .cartItem--modal{
+        padding-top: 100px;
+    }
+}
 @container navRoot (max-width: 890px){
     .shoppingProduct--fullSize{
         flex-direction: column;
