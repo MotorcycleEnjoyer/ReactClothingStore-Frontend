@@ -63,7 +63,7 @@ export default function NewCart () {
         setActiveCartItem(itemToAppend)
     }
 
-    const cartAsHTML = shoppingCart?.map((item, index) => <ShoppingProduct key={index} removeFromCart={() => deleteCartItem(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
+    const cartAsHTML = shoppingCart?.map((item, index) => <ShoppingProduct key={index} index={index} removeFromCart={() => deleteCartItem(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
 
     return (
         <>
