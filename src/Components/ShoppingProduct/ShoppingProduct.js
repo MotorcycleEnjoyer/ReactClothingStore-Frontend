@@ -39,22 +39,23 @@ export default function ShoppingProduct ({ ...props }) {
         dataPacket.productName = props.details.name
         dataPacket.productId = props.details.id
         dataPacket.amount = quantity
-        dataPacket.data = userChoices
+        dataPacket.newUserChoices = userChoices
 
         console.log(dataPacket)
 
         if (props.modal === true) {
-            dataPacket.oldData = {
+            dataPacket.oldUserChoices = {
                 size: props.userSelectedParameters.size,
                 ageCategory: props.userSelectedParameters.ageCategory,
                 sexCategory: props.userSelectedParameters.sexCategory,
                 color: props.userSelectedParameters.color
             }
-            if (oldAndNewDataAreIdentical(dataPacket.oldData, dataPacket.data)) {
+            if (oldAndNewDataAreIdentical(dataPacket.oldUserChoices, dataPacket.newUserChoices)) {
                 if (props.amount === parseInt(dataPacket.amount)) {
                     return
                 }
             }
+            dataPacket.index = props.index
             dispatch({
                 type: "editCartItem",
                 properties: dataPacket
@@ -67,6 +68,7 @@ export default function ShoppingProduct ({ ...props }) {
             })
         }
 
+        e.target.reset()
         /* setTimeout(() => { document.querySelector(".fadeModal").style.visibility = "visible" }, 50)
         setTimeout(() => {
             const fadeModal = document.querySelector(".fadeModal")
