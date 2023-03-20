@@ -20,7 +20,7 @@ body{
 
 .navRoot {
   height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   container-type: inline-size;
 }
 
@@ -29,13 +29,51 @@ body{
   height: 100vh;
 }
 
-.filterContainer{
-  color: white;
-  background-color: darkgreen;
-  height: 50px;
-  margin-bottom: 10px;
+.filterButton{
+  padding: 20px;
+  font-weight: bold;
+  font-size: medium;
 }
 
+.filterModal{
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  z-index: 3;
+  position: absolute;
+  padding-bottom: 500px;
+  background-color:rgba(0,0,0,0.4);
+}
+
+.filterModal--content{
+  background-color: orange;
+  display: block;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 1280px;
+  margin: auto;
+}
+.searchFilterHeader{
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+}
+.cancelButton{
+  color: black;
+  font-size: medium;
+  font-weight: bold;
+  padding: 20px;
+}
+.filterButtons{
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+.filterButtons > button {
+  padding: 20px;
+  font-size: medium;
+}
 
 
 
@@ -174,7 +212,7 @@ div.alreadyVoted{
 
 
 @container navRoot (min-width: 1000px){
-  .cartItem--modal{
+  .cartItem--modal, .filterModal{
       padding-top: 100px;
   }
 }

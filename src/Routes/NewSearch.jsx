@@ -34,15 +34,37 @@ export default function NewSearch () {
     function sortArray (sortingFunction) {
         const sortedArr = [...resultsState].sort(sortingFunction)
         setResultsState(sortedArr)
+        hideFilterModal()
+    }
+
+    function showFilterModal () {
+        document.querySelector(".filterModal").style.display = "block"
+    }
+
+    function hideFilterModal () {
+        document.querySelector(".filterModal").style.display = "none"
+    }
+
+    function toggleFilterModal (e) {
+        if (e.target.className === "filterModal") {
+            hideFilterModal()
+        }
     }
 
     return (
         <div className = "productSearchContainer">
-            <div className="filterContainer">
-                <button onClick={() => { sortArray(pickSortingFunction("alphabetical")) }}>Alphabetical</button>
-                <button onClick={() => { sortArray(pickSortingFunction("reverseAlphabetical")) }}>Reverse Alphabetical</button>
-                <button onClick={() => { sortArray(pickSortingFunction("priceHiLo")) }}>Price High to Low</button>
-                <button onClick={() => { sortArray(pickSortingFunction("priceLoHi")) }}>Price Low to High</button>
+            <button onClick={showFilterModal} className="filterButton">Filters</button>
+            <div onClick={toggleFilterModal} className="filterModal" style={{ display: "none" }}>
+                <div className="filterModal--content">
+                    <h1 className="searchFilterHeader">Search Filter</h1>
+                    <button className="cancelButton" onClick={hideFilterModal}>Cancel</button>
+                    <div className="filterButtons">
+                        <button onClick={() => { sortArray(pickSortingFunction("alphabetical")) }}>Alphabetical</button>
+                        <button onClick={() => { sortArray(pickSortingFunction("reverseAlphabetical")) }}>Reverse Alphabetical</button>
+                        <button onClick={() => { sortArray(pickSortingFunction("priceHiLo")) }}>Price High to Low</button>
+                        <button onClick={() => { sortArray(pickSortingFunction("priceLoHi")) }}>Price Low to High</button>
+                    </div>
+                </div>
             </div>
             {products}
         </div>
