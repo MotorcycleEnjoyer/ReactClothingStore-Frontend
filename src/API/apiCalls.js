@@ -1,5 +1,5 @@
 import axios from "axios"
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = "http://localhost:5000/backend"
 const GET_CART_URL = BASE_URL + "/shoppingCart"
 const LOGIN_URL = BASE_URL + "/login"
 const LOGOUT_URL = BASE_URL + "/logout"
