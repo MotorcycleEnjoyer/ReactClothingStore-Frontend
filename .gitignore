@@ -24,3 +24,5 @@ yarn-error.log*
 
 # folder that won't delete
 /frontend
+/src/minified-images
+/src/original-images
