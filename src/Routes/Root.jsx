@@ -4,7 +4,7 @@ import NavBar from "../Components/NavBar/NavBar"
 import { logout } from "../API/apiCalls"
 import { ShoppingCartContext } from "../Contexts/ShoppingContext"
 
-export default function NewNav () {
+export default function Root () {
     const cart = useContext(ShoppingCartContext)
 
     function hideModal () {
