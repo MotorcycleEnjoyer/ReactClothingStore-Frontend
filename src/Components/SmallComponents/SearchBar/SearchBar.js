@@ -1,11 +1,11 @@
-import React from "react"
+import React, { useCallback } from "react"
+import debounce from "lodash.debounce"
 import ShoppingProduct from "../../ShoppingProduct/ShoppingProduct"
 import { getSuggestions } from "../../../API/apiCalls"
 
 export default function SearchBar ({ ...props }) {
     const [searchVal, setSearchVal] = React.useState("")
     const [suggestions, setSuggestions] = React.useState([])
-    const blockedCharacters = new RegExp("[~`!@#$%^&()_={}\\[\\]\\:;,\\.\\/<>\\\\*\\-+\\?]")
 
     React.useEffect(() => {
         const searchQuery = window.location.href.split("s/")[1]
@@ -39,16 +39,14 @@ export default function SearchBar ({ ...props }) {
     }
 
     function changeSearchValueIfProperRegex (value) {
-        if (blockedCharacters.test(value)) {
-            console.log("INVALID REGEX CHARS SPOTTED")
-        } else {
-            setSearchVal(value)
-        }
+        setSearchVal(value)
     }
 
     function handleChange (e) {
         changeSearchValueIfProperRegex(e.target.value)
     }
+
+    const debouncedChangeHandler = useCallback(debounce(handleChange, 500), [])
 
     React.useEffect(() => {
         if (searchVal === "") {
@@ -62,7 +60,7 @@ export default function SearchBar ({ ...props }) {
 
     return (
         <div className="search">
-            <input type="text" value={searchVal} onKeyDown={checkEnter} onChange={handleChange} placeholder="Search" className="search--inputBox" maxLength="50"></input>
+            <input type="text" onKeyDown={checkEnter} onChange={debouncedChangeHandler} placeholder="Search" className="search--inputBox" maxLength="50"></input>
             <div className="search--modal">
                 <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
                 <div className="search--modal--clickListener"></div>
