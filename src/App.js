@@ -6,7 +6,7 @@ import "./Components/ShoppingProduct/ShoppingProduct.css"
 import "./Components/NavBar/NavBar.css"
 import "./Components/SmallComponents/ColorSelector/ColorSelector.css"
 
-import NewNav from "./Routes/NewNav"
+import Root from "./Routes/Root"
 import NewSearch, { loader as SearchLoader } from "./Routes/NewSearch"
 import NewProduct, { loader as NewProductLoader } from "./Routes/NewProduct"
 import NewCart from "./Routes/NewCart"
@@ -101,9 +101,8 @@ function shoppingCartReducer (shoppingCart, action) {
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <NewNav />,
+        element: <Root />,
         errorElement: <h1>No server connection.</h1>,
-        // loader: NavLoader,
         children: [
             {
                 path: "/",
@@ -126,14 +125,12 @@ const router = createBrowserRouter([
                 path: "/cart",
                 element: <NewCart />,
                 errorElement: <h1>Cart Failed to Load</h1>
-                // loader: NewCartLoader,
             }
         ]
     },
     {
         path: "/login",
         element: <NewLogin />,
-        // action: LoginAction,
         errorElement: <h1>Login Error</h1>
     },
     {
