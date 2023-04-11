@@ -1,9 +1,8 @@
 import React, { useContext } from "react"
 import shirt from "../../t-shirt-preview.png"
-import ColorSelector from "../SmallComponents/ColorSelector/ColorSelector"
-import { Link } from "react-router-dom"
+import SearchResult from "./variations/searchResult"
 import { ShoppingCartDispatchContext } from "../../Contexts/ShoppingContext"
-import StarRating from "../SmallComponents/StarRatingSelector/StarRating"
+import FullSize from "./variations/fullSize"
 
 export default function ShoppingProduct ({ ...props }) {
     const dispatch = useContext(ShoppingCartDispatchContext)
@@ -41,8 +40,6 @@ export default function ShoppingProduct ({ ...props }) {
         dataPacket.amount = quantity
         dataPacket.newUserChoices = userChoices
 
-        console.log(dataPacket)
-
         if (props.modal === true) {
             dataPacket.oldUserChoices = {
                 size: props.userSelectedParameters.size,
@@ -69,13 +66,6 @@ export default function ShoppingProduct ({ ...props }) {
         }
 
         e.target.reset()
-        /* setTimeout(() => { document.querySelector(".fadeModal").style.visibility = "visible" }, 50)
-        setTimeout(() => {
-            const fadeModal = document.querySelector(".fadeModal")
-            if (fadeModal !== null) {
-                fadeModal.style.visibility = "hidden"
-            }
-        }, 1200) */
     }
 
     return (
@@ -89,18 +79,11 @@ export default function ShoppingProduct ({ ...props }) {
 
             {
                 props.view === "searchResult" &&
-                    <div className="shoppingProduct--searchResult--mid" onClick={() => redirectToProductView(props.details.id)}>
-                        <Link className={`Link${props.details.id}`} style={{ display: "none" }} to={`/p/${props.details.name.split(" ").join("+")}/id/${props.details.id}`}></Link>
-                        <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
-                        <div className="shoppingProduct--searchResult--mid--details">
-                            <h1>{props.details.name}</h1>
-                            <div>
-                                <div>price: ${props.details.price}</div>
-                                <div>maker: {props.details.manufacturerOrBrand}</div>
-                                <div>colors: {props.details.colorOptions.length}</div>
-                            </div>
-                        </div>
-                    </div>
+                    <SearchResult
+                        redirectToProductView = {redirectToProductView}
+                        details = {props.details}
+                        name = {props.name}
+                    />
             }
 
             {
@@ -128,108 +111,15 @@ export default function ShoppingProduct ({ ...props }) {
 
             {
                 props.view === "fullSize" &&
-                <div className="shoppingProduct--fullSize">
-                    <div className="fadeModal">
-                        <div className="fadeModal--content">SampleText</div>
-                    </div>
-                    <div className="productHeader">
-                        <h1>{props.details.name}</h1>
-                        <h3>by {props.details.manufacturerOrBrand}</h3>
-                    </div>
-                    <div className="productDetails">
-                        <div><img className="fullSize-Image" src={shirt} alt={props.name}></img></div>
-                        <div>TYPE: {props.details.typeOfClothing}</div>
-                        <div>PRICE: {props.details.price}</div>
-                        <div>Polyester: {props.details.materials.polyester}</div>
-                        <div>Cotton: {props.details.materials.cotton}</div>
-                        { !props.modal && <StarRating productId={props.details.id} initialAverageRating={props.averageRating}/> }
-                    </div>
-                    <form onSubmit={submitToServer} id="addToCart">
-                        { props.modal === true &&
-                            <div>
-                                <fieldset className="oldData">
-                                    <label htmlFor="oldData">Old Selection</label>
-                                    <br></br>
-                                    <label htmlFor="size">SIZE:</label>
-                                    <select className="size" disabled><option>{props.userSelectedParameters.size}</option></select>
-
-                                    <label htmlFor="age">AGE RANGE:</label>
-                                    <select className="age" disabled><option>{props.userSelectedParameters.ageCategory}</option></select>
-
-                                    <label htmlFor="sex">M/F:</label>
-                                    <select className="sex" disabled><option>{props.userSelectedParameters.sexCategory}</option></select>
-
-                                    <br></br>
-                                    <label htmlFor="color">COLOR OPTIONS:</label>
-                                    <select className="color" disabled><option>{props.userSelectedParameters.color}</option></select>
-
-                                    <br></br>
-                                    <label htmlFor="amount">Quantity:</label>
-                                    <select className="amount" disabled><option>{props.amount}</option></select>
-                                </fieldset>
-                            </div>
-                        }
-                        <fieldset>
-                            <b>New Selection:</b>
-                            <br></br>
-                            <label htmlFor="sizeSelector">SIZE:</label>
-                            <select className="sizeSelector" name="size">
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
-                            <label htmlFor="ageSelector">AGE RANGE:</label>
-                            <select className="ageSelector" name="ageCategory">
-                                <option value="adults">adults</option>
-                                <option value="kids">kids</option>
-                            </select>
-                            <br></br>
-                            <label htmlFor="sexSelector">M/F: </label>
-                            <select className="sexSelector" name="sexCategory">
-                                <option value="M">M</option>
-                                <option value="F">F</option>
-                            </select>
-                            <br></br>
-                            <br></br>
-                            <div>COLOR OPTIONS:
-                                <label htmlFor="colorSelector"></label>
-                                <select className="colorSelector" name="color">{props.details.colorOptions.map((item, index) => <option key={index} value={item}>{item}</option>)}</select>
-                            </div>
-
-                            <ColorSelector colorArray={props.details.colorOptions} />
-
-                            <div>Quantity:
-                                <select className="quantitySelector" name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                </select>
-                            </div>
-                            <br></br>
-                            <br></br>
-                            <button className="submitProductButton">{ document.querySelector(".cartItem--modal") !== null ? "Submit Changes" : "Add To Cart" }</button>
-                        </fieldset>
-                    </form>
-                </div>
+                <FullSize
+                    name = {props.name}
+                    amount = {props.amount}
+                    details = {props.details}
+                    userSelectedParameters = {props.userSelectedParameters}
+                    modal = {props.modal}
+                    averageRating = {props.averageRating}
+                    submitToServer = { submitToServer }
+                />
             }
         </>
     )
