@@ -2,17 +2,17 @@ import React from "react"
 import { login } from "../API/apiCalls"
 import { LoginContext } from "../Contexts/ShoppingContext"
 
-async function handleSubmit (e) {
-    e.preventDefault()
-    const rawFormData = new FormData(e.target)
-    const credentials = Object.fromEntries(rawFormData)
-    const result = await login(credentials)
-    if (result?.status === 401) {
-        document.querySelector(".serverResponse").innerText = result.data
-    }
-}
-
 export default function Login () {
+    async function handleSubmit (e) {
+        e.preventDefault()
+        const rawFormData = new FormData(e.target)
+        const credentials = Object.fromEntries(rawFormData)
+        const result = await login(credentials)
+        if (result?.status === 401) {
+            document.querySelector(".serverResponse").innerText = result.data
+        }
+    }
+
     const isLoggedIn = React.useContext(LoginContext)
     React.useEffect(() => {
         if (isLoggedIn) {
