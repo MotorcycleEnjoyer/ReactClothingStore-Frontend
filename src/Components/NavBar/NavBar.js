@@ -31,10 +31,10 @@ export default function NavBar ({ ...props }) {
         if (dropDown.display === "none" || dropDown.display === "") {
             dropDown.display = "block"
             setTimeout(() => {
-                if (dropDown !== null) {
+                if (dropDown) {
                     dropDown.display = "none"
                 }
-            }, 3000)
+            }, 1750)
         }
     }
 
@@ -50,8 +50,8 @@ export default function NavBar ({ ...props }) {
             <div className="dropDownIcon" onClick={toggleDropDown} style={{ backgroundImage: `url('${dropdownIcon}')` }}></div>
             <div className="mobileDropdown">
                 <div className="mobileDropDownContent" >
-                    <Link reloadDocument to="/">HOME</Link>
-                    <Link to="/cart" onClick={hideDropDown}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
+                    <Link className="mobileDropdownHome" reloadDocument to="/">HOME</Link>
+                    <Link className="mobileDropDownCart" to="/cart" onClick={hideDropDown}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
                 </div>
             </div>
 
