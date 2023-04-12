@@ -115,7 +115,7 @@
     color: white;
 }
 
-.mobileDropdown > * :hover{
+.mobileDropdownHome:hover, .mobileDropDownCart:hover{
     font-weight: bold;
     box-shadow: gray 5px 5px 5px;
     transition: 0.25s;
