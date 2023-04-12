@@ -25,10 +25,7 @@ export default function SearchBar ({ ...props }) {
 
     function checkEnter (e) {
         if (e.key === "Enter") {
-            if (searchVal === "") {
-                return
-            }
-            props.navigateWithoutRefresh(searchVal)
+            props.navigateWithoutRefresh(e.target.value)
             document.activeElement.blur()
         }
     }
@@ -46,7 +43,7 @@ export default function SearchBar ({ ...props }) {
         changeSearchValueIfProperRegex(e.target.value)
     }
 
-    const debouncedChangeHandler = useCallback(debounce(handleChange, 500), [])
+    const debouncedChangeHandler = useCallback(debounce(handleChange, 400), [])
 
     React.useEffect(() => {
         if (searchVal === "") {
