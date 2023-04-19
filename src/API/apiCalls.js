@@ -1,5 +1,5 @@
 import axios from "axios"
-const BASE_URL = "/backend"
+const BASE_URL = "http://localhost:5000/backend"
 const GET_CART_URL = BASE_URL + "/shoppingCart"
 const LOGIN_URL = BASE_URL + "/login"
 const LOGOUT_URL = BASE_URL + "/logout"
@@ -13,6 +13,7 @@ const EDIT_CART_URL = BASE_URL + "/editCartItem"
 const RATING_URL = BASE_URL + "/ratings"
 const GET_RATING_URL = BASE_URL + "/getRatingsAndReviews"
 const POST_REVIEW_URL = BASE_URL + "/reviews"
+const GET_USER_DATA_URL = BASE_URL + "/myDetails"
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -154,4 +155,12 @@ export async function addProductReview (productId, review) {
             return { reviews }
         })
         .catch(error => console.error(error))
+}
+
+export async function getUserDetails () {
+    return axios.get(GET_USER_DATA_URL, { withCredentials: true })
+        .then(response => {
+            return response.data
+        })
+        .catch(error => { return error.response.data })
 }
