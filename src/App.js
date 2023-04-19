@@ -17,6 +17,8 @@ import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart } f
 import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "./Contexts/ShoppingContext"
 import NewHomePage from "./Routes/NewHomePage"
 
+import UserPage from "./Routes/UserPage"
+
 export default function App () {
     const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
     React.useEffect(() => {
@@ -32,19 +34,19 @@ export default function App () {
 
     if (shoppingCartAndAuth === null) {
         return <h1>Loading...</h1>
+    } else {
+        return (
+            <>
+                <LoginContext.Provider value={shoppingCartAndAuth.type === "user"}>
+                    <ShoppingCartContext.Provider value={shoppingCartAndAuth.shoppingCart}>
+                        <ShoppingCartDispatchContext.Provider value={dispatch}>
+                            <RouterProvider router={router} />
+                        </ShoppingCartDispatchContext.Provider>
+                    </ShoppingCartContext.Provider>
+                </LoginContext.Provider>
+            </>
+        )
     }
-
-    return (
-        <>
-            <LoginContext.Provider value={shoppingCartAndAuth.type === "user"}>
-                <ShoppingCartContext.Provider value={shoppingCartAndAuth.shoppingCart}>
-                    <ShoppingCartDispatchContext.Provider value={dispatch}>
-                        <RouterProvider router={router} />
-                    </ShoppingCartDispatchContext.Provider>
-                </ShoppingCartContext.Provider>
-            </LoginContext.Provider>
-        </>
-    )
 }
 
 /*
@@ -137,5 +139,32 @@ const router = createBrowserRouter([
         path: "/register",
         element: <NewRegister />,
         errorElement: <h1>Registration Error</h1>
+    },
+    {
+        path: "/userpage",
+        element: <UserPage />,
+        errorElement: <h1>Could not retrieve user details.</h1>,
+        children: [
+            {
+                path: "/userpage",
+                element: <h1>Welcome!</h1>,
+                errorElement: <h1>REEE</h1>
+            },
+            {
+                path: "/userpage/orderHistory",
+                element: <h1>OLD ORDERS</h1>,
+                errorElement: <h1>Not logged in!</h1>
+            },
+            {
+                path: "/userpage/resetPassword",
+                element: <h1>Reset User Password Element</h1>,
+                errorElement: <h1>Not logged in!</h1>
+            },
+            {
+                path: "/userpage/ratingAndReviewHistory",
+                element: <h1>Rating/Review History Element</h1>,
+                errorElement: <h1>Not logged in!</h1>
+            }
+        ]
     }
 ])
