@@ -17,7 +17,6 @@ export default function NewHomePage () {
                         <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
                         <div className="popularItem--details">
                             <h1>Generic T Shirt</h1>
-                            <p>No.1 item purchased</p>
                             <p>⭐⭐⭐⭐⭐</p>
                         </div>
                     </Link>
@@ -25,7 +24,6 @@ export default function NewHomePage () {
                         <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
                         <div className="popularItem--details">
                             <h1>Specific T Shirt</h1>
-                            <p>No.2 item purchased</p>
                             <p>⭐⭐⭐⭐</p>
                         </div>
                     </Link>
@@ -33,31 +31,27 @@ export default function NewHomePage () {
                         <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
                         <div className="popularItem--details">
                             <h1>T Shirt 3</h1>
-                            <p>No.3 item purchased</p>
                             <p>⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
                         <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
                         <div className="popularItem--details">
-                            <h1>T Shirt 3</h1>
-                            <p>No.3 item purchased</p>
-                            <p>⭐⭐⭐</p>
+                            <h1>Generic T Shirt</h1>
+                            <p>⭐⭐⭐⭐⭐</p>
+                        </div>
+                    </Link>
+                    <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
+                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--details">
+                            <h1>Specific T Shirt</h1>
+                            <p>⭐⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
                         <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
                         <div className="popularItem--details">
                             <h1>T Shirt 3</h1>
-                            <p>No.3 item purchased</p>
-                            <p>⭐⭐⭐</p>
-                        </div>
-                    </Link>
-                    <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
-                        <div className="popularItem--details">
-                            <h1>T Shirt 3</h1>
-                            <p>No.3 item purchased</p>
                             <p>⭐⭐⭐</p>
                         </div>
                     </Link>
