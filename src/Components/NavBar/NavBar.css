@@ -52,18 +52,19 @@
 
 .navBarButton{
     min-width: 100px;
-    transition: 0.25s;
+    transition: var(--buttonHoverTiming);
     transition-timing-function: ease-in-out;
     background-color: darkred;
     border: 1px solid black;
     border-radius: 5px;
     color: white;
+    text-decoration: none;
 }
 
 .navBarButton:hover{
     font-weight: bold;
-    box-shadow: gray 5px 5px 5px;
-    transition: 0.25s;
+    box-shadow: white 1px 5px 10px;
+    transition: var(--buttonHoverTiming);
     transition-timing-function: ease-in-out;
     cursor: pointer;
     background-color: red;
@@ -142,7 +143,7 @@
     transition-timing-function: ease-in-out;
 }
 
-@container (max-width: 650px){
+@container (max-width: 900px){
     .navBarButton{
         min-width: 60px;
         font-size: 13px;
@@ -151,7 +152,7 @@
     /* SEARCHBAR rule specified in ./SmallComponents/SearchBar/SEARCHBAR.css */
 }
 
-@container (max-width: 720px){
+@container (max-width: 600px){
     .homeLogo{
         display: none;
     }
