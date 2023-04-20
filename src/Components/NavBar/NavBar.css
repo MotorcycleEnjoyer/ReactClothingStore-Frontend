@@ -156,10 +156,10 @@
     .homeLogo{
         display: none;
     }
-    .shoppingCartIcon{
-        display: none;
-    }
     .dropDownIcon{
         display:block
+    }
+    .navBarButton{
+        display: none;
     }
 }
