@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 import { ShoppingCartContext, ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
+import { Link } from "react-router-dom"
 
 export default function NewCart () {
     const shoppingCart = useContext(ShoppingCartContext)
@@ -67,20 +68,28 @@ export default function NewCart () {
 
     return (
         <>
-            <div className="cartItem--modal" style={{ display: "none" }} onClick={checkClickClassName}>
-                <div className="cartItem--modal--content" >
-                    <button onClick={hideCartModal} style={{ padding: "20px", marginRight: "0px" }}>Close Edit Menu</button>
-                    <h1 className="modalContentHeader">Edit Item</h1>
-                    {activeCartItem}
+            { shoppingCart?.length > 0 &&
+            <>
+                <div className="cartItem--modal" style={{ display: "none" }} onClick={checkClickClassName}>
+                    <div className="cartItem--modal--content" >
+                        <button onClick={hideCartModal} style={{ padding: "20px", marginRight: "0px" }}>Close Edit Menu</button>
+                        <h1 className="modalContentHeader">Edit Item</h1>
+                        {activeCartItem}
+                    </div>
+                    <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>
                 </div>
-            </div>
-            <div className="cartItems" >
-                {cartAsHTML}
-            </div>
-            <h1>TOTAL: {totalCost.toFixed(2) }</h1>
-            {
-                shoppingCart.length > 0 &&
-                <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>}
+                <div className="cartItems" >
+                    {cartAsHTML}
+                </div>
+                <h1>TOTAL: {totalCost.toFixed(2) }</h1>
+            </>
+            }
+            { shoppingCart?.length === 0 &&
+            <>
+                <h1>Your shopping cart is empty</h1>
+                <Link to="/"><button style={{ padding: "1rem" }}>Back to home</button></Link>
+            </>
+            }
         </>
     )
 }
