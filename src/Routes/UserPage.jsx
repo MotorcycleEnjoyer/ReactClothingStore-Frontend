@@ -2,6 +2,7 @@ import React from "react"
 import { LoginContext } from "../Contexts/ShoppingContext"
 import { Link, Outlet } from "react-router-dom"
 import { getUserDetails } from "../API/apiCalls"
+import "../Components/UserPage/UserPage.css"
 
 export default function UserPage () {
     const [data, setData] = React.useState(null)
@@ -33,23 +34,22 @@ export default function UserPage () {
                 !loggedIn &&
                 <>
                     {loginPlease()}
-                    <div style={{ backgroundColor: "orange", padding: "2rem", border: "1px solid black", height: "100rem" }}>
+                    <div className="loginModal" >
                         <h1>You must be logged in to access this page.</h1>
                         <h2>{`Redirecting to homepage automatically in ${timer}`}</h2>
                     </div>
                 </>
             }
             {
-                loggedIn && <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
-                    <div style={{ flex: "1", display: "flex", flexDirection: "column", maxWidth: "15rem", backgroundColor: "black", color: "white", border: "5px solid orange" }}>
+                loggedIn && <div className="userPageContainer">
+                    <div className="userPageNav">
                         <h1>Welcome {data?.username || "[...]"}</h1>
-                        <Link reloadDocument to="/" className="homeLogo">HOME</Link>
-                        <Link to="/userpage/orderHistory" className="homeLogo">Order History</Link>
-                        <Link to="/userPage/resetPassword" className="homeLogo">Change Password</Link>
-                        <Link to="/userPage/ratingAndReviewHistory" className="homeLogo">Review/Rating History</Link>
-                        <div className="homeLogo">Welcome {data?.username || "[...]"}</div>
+                        <Link to="/" className="userPageNavButton">&larr; Back to home</Link>
+                        <Link to="/userpage/orderHistory" className="userPageNavButton">Order History</Link>
+                        <Link to="/userpage/resetPassword" className="userPageNavButton">Change Password</Link>
+                        <Link to="/userpage/ratingAndReviewHistory" className="userPageNavButton">Review/Rating History</Link>
                     </div>
-                    <div style={{ flex: "1", backgroundColor: "#a52a2a" }}>
+                    <div className="userPageContent">
                         <Outlet />
                     </div>
                 </div>
