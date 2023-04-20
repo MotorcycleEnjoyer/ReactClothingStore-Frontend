@@ -18,6 +18,7 @@ import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "
 import NewHomePage from "./Routes/NewHomePage"
 
 import UserPage from "./Routes/UserPage"
+import OrderHistory from "./Components/UserPage/OrderHistory/OrderHistory"
 
 export default function App () {
     const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
@@ -152,7 +153,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/userpage/orderHistory",
-                element: <h1>OLD ORDERS</h1>,
+                element: <OrderHistory />,
                 errorElement: <h1>Not logged in!</h1>
             },
             {
