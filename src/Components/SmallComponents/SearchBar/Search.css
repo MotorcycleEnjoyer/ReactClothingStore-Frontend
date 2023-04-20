@@ -37,7 +37,7 @@
     container-type: inline-size;
 }
 
-@container (max-width: 500px){
+@container (max-width: 600px){
     .search--inputBox{
         min-width: 0px;
     }
@@ -48,8 +48,4 @@
     .search{
         width: 50vw;
     }
-}
-
-@container (max-width: 385px){
-
 }
