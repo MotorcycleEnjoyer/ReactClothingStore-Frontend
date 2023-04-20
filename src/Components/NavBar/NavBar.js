@@ -51,7 +51,18 @@ export default function NavBar ({ ...props }) {
             <div className="mobileDropdown">
                 <div className="mobileDropDownContent" >
                     <Link className="mobileDropdownHome" reloadDocument to="/">HOME</Link>
-                    <Link className="mobileDropDownCart" to="/cart" onClick={hideDropDown}>CART: <span className="cartIconSpan-small">{amountInCart}</span></Link>
+                    {
+                        !loggedIn && <>
+                            <Link className="mobileDropdownHome" to="/login">LOGIN</Link>
+                            <Link className="mobileDropdownHome" to="/register">REGISTER</Link>
+                        </>
+                    }
+                    {
+                        loggedIn && <>
+                            <Link className="mobileDropdownHome" to="/userpage">My Info</Link>
+                            <div className="mobileDropdownHome" onClick={() => props.logout()}>LOGOUT</div>
+                        </>
+                    }
                 </div>
             </div>
 
