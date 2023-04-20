@@ -1,3 +1,7 @@
+:root{
+  --buttonHoverTiming: 0.1s
+}
+
 html{
   height: 100%;
 }
@@ -8,20 +12,21 @@ body{
 }
 
 .homepageArrowBackground{
-  height: 1420px;
-  max-width: 800px;
   background-position: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   text-align: center;
   margin: auto;
+  height: 533px;
+  max-width: 300px;
 }
 
 .navRoot {
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
   container-type: inline-size;
+  background-color: gray;
 }
 
 .productSearchContainer {
@@ -210,57 +215,142 @@ div.alreadyVoted{
 
 
 
+.homePageContainer{
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
 
-@container navRoot (min-width: 1000px){
+.categoryButtonContainer{
+  margin: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  overflow: auto;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  scrollbar-width: none;
+  border: 2px solid black;
+}
+
+.categoryButton{
+  min-width: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: white;
+  background-color: black;
+  font-size: 2rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  transition-timing-function: ease-in-out;
+  transition: var(--buttonHoverTiming);
+  flex: 1;
+}
+
+.categoryButton:hover{
+  transition: var(--buttonHoverTiming);
+  transition-timing-function: ease-in-out;
+  background-color: rgb(120, 118, 118);
+  font-weight: bold;
+  box-shadow: white 1px 5px 10px;
+}
+
+.bestsellerContainer{
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.bestsellerContainer--title{
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.popularItemsContainer{
+  min-height: 500px;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.25rem;
+  border-radius: 1rem;
+}
+
+.popularItem{
+  min-width: 400px;
+  min-height: 400px;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: black;
+  transition: var(--buttonHoverTiming);
+}
+
+.popularItem:hover{
+  transition: var(--buttonHoverTiming);
+  background-color: lightblue;
+}
+
+.popularItem--image{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60%;
+  border: 2px solid black;
+  border-radius: 1rem;
+}
+
+
+
+@container (max-width: 900px){
   .cartItem--modal, .filterModal{
-      padding-top: 100px;
-  }
+    padding-top: 100px;
 }
-
-@container (max-width: 890px){
   .fadeModal{
-      left: 0;
-      right: 0;
-      min-width: 200px;
-  }
-
-  .editCartItemButton{
-      padding: 0px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-  }
-
-  .removeFromCartButton{
-      padding: 0px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-  }
-
-  .cartItem--modal{
-      padding-top: 0px;
-  }
-
-  .stars > div{
-      font-size: max(5vw, 30px);
-  }
+    left: 0;
+    right: 0;
+    min-width: 200px;
 }
 
-@container (max-width: 800px){
-  .homepageArrowBackground{
-    height: 800px;
-    max-width: 450px;
-  }
+.editCartItemButton{
+    padding: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-@container (max-width: 450px){
-  .homepageArrowBackground{
-    height: 533px;
-    max-width: 300px;
-  }
+.removeFromCartButton{
+    padding: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-@container navRoot (max-width: 380px){
+.cartItem--modal{
+    padding-top: 0px;
+}
+
+.stars > div{
+    font-size: max(5vw, 30px);
+}
+
+.popularItem{
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.popularItemsContainer{
+  scrollbar-width: none;
+}
+}
+
+@container (max-width: 600px){
   .cartItem--modal--content{
-      padding: 0px;
-  }
+    padding: 0px;
+}
 }
