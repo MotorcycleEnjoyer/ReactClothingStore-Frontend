@@ -1,13 +1,13 @@
 import React from "react"
 
-export default function ColorSelector ({ colorArray, colorOverride }) {
+export default function ColorSelector ({ colorArray, defaultValue }) {
     const [activeColor, setActiveColor] = React.useState(null)
     const colorsAsHTML = colorArray.map((item, index) => {
         return (
             <div
                 name="color"
                 key={index}
-                className="colorInput"
+                className={`colorInput ${defaultValue === item && "colorInput--active"}`}
                 style={{ backgroundColor: item }}
                 onClick={(e) => { testing(e, item) }}
                 value={item}
