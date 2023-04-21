@@ -61,7 +61,7 @@ export default function NewCart () {
     }
 
     function activateCartModal (propsFromCartItem) {
-        const itemToAppend = <ShoppingProduct {...propsFromCartItem} modal={true} editCartItem={changeCartItem} toggleCartModal={activateCartModal} view="fullSize"/>
+        const itemToAppend = <ShoppingProduct {...propsFromCartItem} modal={true} editCartItem={changeCartItem} hideCartModal={hideCartModal} toggleCartModal={activateCartModal} view="fullSize"/>
         setActiveCartItem(itemToAppend)
     }
 
