@@ -55,8 +55,9 @@ export default function NewCart () {
     }
 
     function hideCartModal () {
-        const modalStyle = document.querySelector(".cartItem--modal").style
-        modalStyle.display = "none"
+        const modalStyle = document.querySelector(".cartItem--modal")
+        modalStyle.style.display = "none"
+        setActiveCartItem(() => null)
     }
 
     function activateCartModal (propsFromCartItem) {
@@ -76,17 +77,17 @@ export default function NewCart () {
                         <h1 className="modalContentHeader">Edit Item</h1>
                         {activeCartItem}
                     </div>
-                    <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>
                 </div>
                 <div className="cartItems" >
                     {cartAsHTML}
                 </div>
-                <h1>TOTAL: {totalCost.toFixed(2) }</h1>
+                <h1 style={{ color: "white" }}>TOTAL: {totalCost.toFixed(2) }</h1>
+                <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>
             </>
             }
             { shoppingCart?.length === 0 &&
             <>
-                <h1>Your shopping cart is empty</h1>
+                <h1 style={{ color: "white" }}>Your shopping cart is empty</h1>
                 <Link to="/"><button style={{ padding: "1rem" }}>Back to home</button></Link>
             </>
             }
