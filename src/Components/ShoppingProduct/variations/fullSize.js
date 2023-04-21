@@ -19,84 +19,88 @@ export default function FullSize ({ name, amount, details, userSelectedParameter
             </div>
             <div className="productDetails">
                 <div><img className="fullSize-Image" src={shirt} alt={name}></img></div>
-                <div>TYPE: {details.typeOfClothing}</div>
-                <div>PRICE: {details.price}</div>
-                <div>Polyester: {details.materials.polyester}</div>
-                <div>Cotton: {details.materials.cotton}</div>
                 { !modal &&
-                    <StarRating productId={details.id} initialAverageRating={averageRating}/>
+                    <>
+                        <div>TYPE: {details.typeOfClothing}</div>
+                        <div>PRICE: {details.price}</div>
+                        <div>Polyester: {details.materials.polyester}</div>
+                        <div>Cotton: {details.materials.cotton}</div>
+                        <StarRating productId={details.id} initialAverageRating={averageRating}/>
+                    </>
                 }
             </div>
             <form onSubmit={submitToServer} className="addToCartForm">
-                <div>
-                    <label htmlFor="sizeSelector">SIZE:</label>
-                    <select className="sizeSelector" name="size" defaultValue={userSelectedParameters?.size}>
-                        {["S", "M", "L", "XL", "XXL"].map((item, index) => {
-                            const isSelected = item === userSelectedParameters?.size
-                            return (
-                                <option
-                                    key={index}
-                                    value={item}
-                                >{item} {isSelected && "(Current)"}</option>
-                            )
-                        })}
-                    </select>
+                <div className="addToCartForm--left">
+                    <div>
+                        <label htmlFor="sizeSelector">SIZE:</label>
+                        <select className="sizeSelector" name="size" defaultValue={userSelectedParameters?.size}>
+                            {["S", "M", "L", "XL", "XXL"].map((item, index) => {
+                                const isSelected = item === userSelectedParameters?.size
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item} {isSelected && "(Current)"}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="ageSelector">AGE RANGE:</label>
+                        <select className="ageSelector" name="ageCategory" defaultValue={userSelectedParameters?.ageCategory}>
+                            {["adults", "kids"].map((item, index) => {
+                                const isSelected = item === userSelectedParameters?.ageCategory
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item} {isSelected && "(Current)"}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="sexSelector">M/F: </label>
+                        <select className="sexSelector" name="sexCategory" defaultValue={userSelectedParameters?.sexCategory}>
+                            {["M", "F"].map((item, index) => {
+                                const isSelected = item === userSelectedParameters?.sexCategory
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item} {isSelected && "(Current)"}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+
+                    <div>COLOR OPTIONS:
+                        <label htmlFor="colorSelector"></label>
+                        <select className="colorSelector" name="color" defaultValue={userSelectedParameters?.color} onChange={handleColorChange}>
+                            {details.colorOptions.map((item, index) => {
+                                const isSelected = item === userSelectedParameters?.color
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item} {isSelected && "(Current)"}</option>
+                                )
+                            }
+                            )}
+                        </select>
+                    </div>
+                    <div>Quantity:
+                        <select className="quantitySelector" name="quantity" defaultValue={amount}>
+                            {
+                                Array.from(Array(20)).map((x, index) => <option key={index} value={index + 1}>{index + 1} {amount === (index + 1) && "(Current)"}</option>)
+                            }
+                        </select>
+                    </div>
                 </div>
-
-                <div>
-                    <label htmlFor="ageSelector">AGE RANGE:</label>
-                    <select className="ageSelector" name="ageCategory" defaultValue={userSelectedParameters?.ageCategory}>
-                        {["adults", "kids"].map((item, index) => {
-                            const isSelected = item === userSelectedParameters?.ageCategory
-                            return (
-                                <option
-                                    key={index}
-                                    value={item}
-                                >{item} {isSelected && "(Current)"}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-
-                <div>
-                    <label htmlFor="sexSelector">M/F: </label>
-                    <select className="sexSelector" name="sexCategory" defaultValue={userSelectedParameters?.sexCategory}>
-                        {["M", "F"].map((item, index) => {
-                            const isSelected = item === userSelectedParameters?.sexCategory
-                            return (
-                                <option
-                                    key={index}
-                                    value={item}
-                                >{item} {isSelected && "(Current)"}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-
-                <div>COLOR OPTIONS:
-                    <label htmlFor="colorSelector"></label>
-                    <select className="colorSelector" name="color" defaultValue={userSelectedParameters?.color} onChange={handleColorChange}>
-                        {details.colorOptions.map((item, index) => {
-                            const isSelected = item === userSelectedParameters?.color
-                            return (
-                                <option
-                                    key={index}
-                                    value={item}
-                                >{item} {isSelected && "(Current)"}</option>
-                            )
-                        }
-                        )}
-                    </select>
-                </div>
-
-                <ColorSelector colorArray={details.colorOptions} defaultValue={userSelectedParameters?.color}/>
-
-                <div>Quantity:
-                    <select className="quantitySelector" name="quantity" defaultValue={amount}>
-                        {
-                            Array.from(Array(20)).map((x, index) => <option key={index} value={index + 1}>{index + 1} {amount === (index + 1) && "(Current)"}</option>)
-                        }
-                    </select>
+                <div className="addToCartForm--right">
+                    <ColorSelector colorArray={details.colorOptions} defaultValue={userSelectedParameters?.color}/>
                 </div>
                 <button className="submitProductButton">{ modal ? "Submit Edited Item" : "Add To Cart" }</button>
             </form>
