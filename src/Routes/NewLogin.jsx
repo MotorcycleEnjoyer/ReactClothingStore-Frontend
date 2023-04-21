@@ -23,15 +23,17 @@ export default function Login () {
     return (
         <>
             { !isLoggedIn &&
-                <>
+                <div className="auth">
                     <h1>Please enter your credentials</h1>
                     <form onSubmit={handleSubmit}>
-                        <input type="text" id="username" name="username" placeholder='Username' required maxLength="30"></input>
-                        <input type="password" id="password" name="password" placeholder='Password' required maxLength="30"></input>
+                        <div className="credentialBox">
+                            <input type="text" id="username" name="username" placeholder='Username' required maxLength="30"></input>
+                            <input type="password" id="password" name="password" placeholder='Password' required maxLength="30"></input>
+                        </div>
                         <button>Submit</button>
                     </form>
                     <div className="serverResponse"></div>
-                </>
+                </div>
             }
         </>
     )
