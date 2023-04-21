@@ -31,7 +31,7 @@ body{
 
 .productSearchContainer {
   background-color: brown;
-  height: 100vh;
+  height: 100ch;
 }
 
 .filterButton{
@@ -276,9 +276,12 @@ div.alreadyVoted{
   overflow-x: auto;
   padding: 0.25rem;
   border-radius: 1rem;
+  scroll-snap-type: inline mandatory;
+  scroll-padding: 1rem;
 }
 
 .popularItem{
+  scroll-snap-align: start;
   min-width: 25rem;
   min-height: 25rem;
   background-color: gray;
