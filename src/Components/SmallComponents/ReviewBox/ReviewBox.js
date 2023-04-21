@@ -38,7 +38,7 @@ export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
         <div className="productReviewContainer">
             { loggedIn &&
             <>
-                { !hasNotSubmitted && <button onClick={() => { setHasNotSubmitted(() => true) }}>Write a Review</button> }
+                { !hasNotSubmitted && <button className="productReviewButton" onClick={() => { setHasNotSubmitted(() => true) }}>Write a Review</button> }
 
                 { hasNotSubmitted &&
                     <form className="productReviewForm" onSubmit={handleReviewSubmission}>
@@ -50,8 +50,8 @@ export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
                             value={review}>
                         </textarea>
                         <div><span style={remainingCharactersStyle}>{200 - remainingChars}</span>/200</div>
-                        <button onClick={() => { setReview(() => ""); setHasNotSubmitted(() => false) }}>Cancel</button>
-                        <button type="submit">Submit Review</button>
+                        <button className="productReviewButton" onClick={() => { setReview(() => ""); setHasNotSubmitted(() => false) }}>Cancel</button>
+                        <button className="productReviewButton" type="submit">Submit Review</button>
                     </form>
                 }
             </>
