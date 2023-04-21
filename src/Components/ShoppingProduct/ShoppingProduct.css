@@ -22,14 +22,17 @@
     flex-direction: row;
     border-radius: 5px;
     max-width: 1500px;
-    background-color: lightcoral;
+    background-color: lightgray;
     padding: 10px 5px;
     border: 1px solid black;
+    transition: var(--buttonHoverTiming);
 }
 
 .shoppingProduct--searchResult--mid:hover{
     opacity: 100%;
     cursor: pointer;
+    transition: var(--buttonHoverTiming);
+    background-color: orange;
 }
 
 .shoppingProduct--searchResult--mid--image{
@@ -124,17 +127,26 @@
     border-radius: 5px;
 }
 
-#addToCart{
-    padding: 5px;
-}
-
 select, .submitProductButton{
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }  
+    padding: 1rem;
+}  
 
 .fullSize-Image{
     max-width: 400px;
+}
+
+.addToCartForm{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 1rem;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.addToCartForm > div > select {
+    color: black;
 }
 
 .navRoot {
