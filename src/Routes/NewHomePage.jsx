@@ -55,6 +55,11 @@ export default function NewHomePage () {
                             <p>⭐⭐⭐</p>
                         </div>
                     </Link>
+                    <Link to={"/s/Shirt"} style={{ backgroundColor: "#808080", color: "white" }} className="popularItem">
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }} className="popularItem--details">
+                            <h1 style={{ margin: "none" }}>More</h1>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>
