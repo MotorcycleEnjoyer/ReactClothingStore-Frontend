@@ -7,7 +7,7 @@ html{
 }
 
 body{
-  background-color: darkcyan;
+  background-color: gray;
   text-align: center;
 }
 
@@ -25,12 +25,11 @@ body{
 .navRoot {
   height: 100vh;
   overflow-y: scroll;
+  background-color: #373333;
   container-type: inline-size;
-  background-color: gray;
 }
 
 .productSearchContainer {
-  background-color: brown;
   height: 100ch;
 }
 
@@ -148,6 +147,11 @@ body{
   display: flex;
   flex-direction: column;
   max-width: 1280px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 30px 0px;
+  background-color: orange;
 }
 
 .productReviewInput{
@@ -166,20 +170,12 @@ body{
 .review{
   border-radius: 5px;
   border: 1px solid purple;
-  background-color: pink;
+  background-color: orange;
   margin: auto;
   margin-bottom: 20px;
   margin-top: 30px;
   padding: 20px;
   overflow-wrap: break-word;
-}
-
-.productReviewContainer{
-  border-radius: 5px;
-  margin: auto;
-  margin-top: 10px;
-  padding: 30px 0px;
-  background-color: silver;
 }
 
 
@@ -228,7 +224,7 @@ div.alreadyVoted{
   display: flex;
   gap: 1rem;
   overflow: auto;
-  background-color: white;
+  background-color: orange;
   padding: 0.5rem;
   border-radius: 1rem;
   scrollbar-width: none;
@@ -252,14 +248,14 @@ div.alreadyVoted{
 .categoryButton:hover{
   transition: var(--buttonHoverTiming);
   transition-timing-function: ease-in-out;
-  background-color: rgb(120, 118, 118);
+  color: white;
   font-weight: bold;
   box-shadow: white 1px 5px 10px;
 }
 
 .bestsellerContainer{
   border: 2px solid black;
-  background-color: white;
+  background-color: orange;
   border-radius: 1rem;
   padding: 0.5rem;
   margin: 0.5rem;
@@ -284,20 +280,21 @@ div.alreadyVoted{
   scroll-snap-align: start;
   min-width: 25rem;
   min-height: 25rem;
-  background-color: gray;
+  background-color: black;
   display: flex;
   flex-direction: column;
   border: 2px solid black;
   padding: 0.25rem;
   border-radius: 1rem;
   text-decoration: none;
-  color: black;
+  color: white;
   transition: var(--buttonHoverTiming);
 }
 
 .popularItem:hover{
   transition: var(--buttonHoverTiming);
-  background-color: lightblue;
+  background-color: white;
+  color: black;
 }
 
 .popularItem--image{
