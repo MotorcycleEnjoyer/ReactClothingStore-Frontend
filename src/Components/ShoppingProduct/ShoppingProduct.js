@@ -65,6 +65,8 @@ export default function ShoppingProduct ({ ...props }) {
             })
         }
 
+        const selectedColorbox = document.querySelector(".colorInput--active")
+        selectedColorbox?.classList.remove("colorInput--active")
         e.target.reset()
     }
 
