@@ -38,13 +38,6 @@ export default function NavBar ({ ...props }) {
         }
     }
 
-    function hideDropDown () {
-        const dropDown = document.querySelector(".mobileDropdown").style
-        dropDown.display = "none"
-        // in case the search thing is still up.
-        props.hideModal()
-    }
-
     return (
         <nav className="navBar">
             <div className="dropDownIcon" onClick={toggleDropDown} style={{ backgroundImage: `url('${dropdownIcon}')` }}></div>
