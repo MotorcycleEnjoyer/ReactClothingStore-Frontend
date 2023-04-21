@@ -40,7 +40,7 @@ export default function ShoppingProduct ({ ...props }) {
         dataPacket.amount = quantity
         dataPacket.newUserChoices = userChoices
 
-        if (props.modal === true) {
+        if (props.modal) {
             dataPacket.oldUserChoices = {
                 size: props.userSelectedParameters.size,
                 ageCategory: props.userSelectedParameters.ageCategory,
@@ -57,17 +57,16 @@ export default function ShoppingProduct ({ ...props }) {
                 type: "editCartItem",
                 properties: dataPacket
             })
-            setTimeout(() => { document.querySelector(".cartItem--modal").style.display = "none" }, 1200)
+            props.hideCartModal()
         } else {
             dispatch({
                 type: "addToCart",
                 properties: dataPacket
             })
+            const selectedColorbox = document.querySelector(".colorInput--active")
+            selectedColorbox?.classList.remove("colorInput--active")
+            e.target.reset()
         }
-
-        const selectedColorbox = document.querySelector(".colorInput--active")
-        selectedColorbox?.classList.remove("colorInput--active")
-        e.target.reset()
     }
 
     return (
@@ -90,8 +89,8 @@ export default function ShoppingProduct ({ ...props }) {
 
             {
                 props.view === "cart" &&
-                <div className="productMidView" onClick={checkIfButton}>
-                    <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} >
+                <div className="productMidView">
+                    <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} onClick={checkIfButton} >
                         <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
                         <div className="shoppingProduct--searchResult--mid--details">
                             <h1>{props.details.name}</h1>
