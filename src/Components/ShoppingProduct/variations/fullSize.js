@@ -98,7 +98,7 @@ export default function FullSize ({ name, amount, details, userSelectedParameter
                         }
                     </select>
                 </div>
-                <button className="submitProductButton">{ document.querySelector(".cartItem--modal") !== null ? "Submit Edited Item" : "Add To Cart" }</button>
+                <button className="submitProductButton">{ modal ? "Submit Edited Item" : "Add To Cart" }</button>
             </form>
         </div>
     )
