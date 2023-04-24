@@ -48,7 +48,7 @@ export default function NewHomePage () {
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/EmiyaKiritsugu.jpg')" }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>T Shirt 3</h1>
                             <p>⭐⭐⭐</p>
