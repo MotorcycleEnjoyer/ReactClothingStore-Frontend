@@ -14,14 +14,13 @@
 
 
 .shoppingProduct--searchResult--mid{
-    opacity: 80%;
     display: flex;
     margin:auto;
     margin-top: 10px;
     margin-bottom: 10px;
     flex-direction: row;
     border-radius: 5px;
-    max-width: 1500px;
+    max-width: 1000px;
     background-color: lightgray;
     padding: 10px 5px;
     border: 1px solid black;
@@ -32,14 +31,20 @@
     opacity: 100%;
     cursor: pointer;
     transition: var(--buttonHoverTiming);
-    background-color: orange;
+    background-color: rgb(10, 93, 121);
+    color: white;
 }
 
 .shoppingProduct--searchResult--mid--image{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
     max-width: 200px;
-    background-color: cyan;
-    margin-right: 5px;
-    border-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 2px solid black;
+    border-radius: 1rem;
 }
 
 .shoppingProduct--searchResult--mid--details{
@@ -118,7 +123,6 @@ select, .submitProductButton{
     gap: 1rem;
     padding: 1rem;
     border-radius: 1rem;
-    margin: auto;
 }
 
 .addToCartForm--left{
@@ -139,10 +143,6 @@ select, .submitProductButton{
     .fullSize-Image{
         max-height: min(100vw, 300px);
         max-width: min(100vw, 300px);
-    }
-    .shoppingProduct--searchResult--mid--image{
-        max-height: min(30vw, 250px);
-        max-width: min(30vw, 250px);
     }
     .productHeader{
         padding: 0px;
