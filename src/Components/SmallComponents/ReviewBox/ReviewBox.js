@@ -1,12 +1,12 @@
 import React from "react"
-import { addProductReview } from "../../../API/apiCalls"
+import StarRating from "../StarRatingSelector/StarRating"
 
-export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
-    const [reviewArray, setReviewArray] = React.useState(initialReviews || [])
+export default function ReviewBox ({ initialReviews, loggedIn, getNewData }) {
     const [review, setReview] = React.useState("")
     const [hasNotSubmitted, setHasNotSubmitted] = React.useState(false)
+    const [starRating, setStarRating] = React.useState(null)
     const remainingChars = 200 - review.length
-    const reviewsAsHTML = reviewArray.map((item, index) => <div className="review" key={index}>{item}</div>)
+    const reviewsAsHTML = initialReviews.map((item, index) => <div className="review" key={index}>{item}</div>)
 
     function handleChange (e) {
         const value = e.target.value
@@ -15,23 +15,25 @@ export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
 
     async function handleReviewSubmission (e) {
         e.preventDefault()
-        const rawFormData = new FormData(e.target)
-        const { productReview } = Object.fromEntries(rawFormData)
-        if (productReview === "") {
-            return
+        const payload = {
+            review, starRating
         }
-        // const result = await login(credentials)
-        const { reviews } = await addProductReview(productId, productReview)
-        setReviewArray(() => reviews)
+        getNewData(payload)
         setReview(() => "")
         setHasNotSubmitted(() => false)
-        console.log(reviews)
+        setStarRating(() => null)
     }
 
     const remainingCharactersStyle = {
         color: remainingChars >= 50 ? "palegreen" : "yellow",
         fontWeight: "bold",
         fontSize: "50px"
+    }
+
+    function clearState () {
+        setReview(() => "")
+        setHasNotSubmitted(() => false)
+        setStarRating(() => null)
     }
 
     return (
@@ -50,8 +52,9 @@ export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
                             value={review}>
                         </textarea>
                         <div><span style={remainingCharactersStyle}>{200 - remainingChars}</span>/200</div>
-                        <button className="productReviewButton" onClick={() => { setReview(() => ""); setHasNotSubmitted(() => false) }}>Cancel</button>
-                        <button className="productReviewButton" type="submit">Submit Review</button>
+                        <StarRating setRating={setStarRating} rating={starRating}/>
+                        <button className="productReviewButton" onClick={clearState}>Cancel</button>
+                        <button className="productReviewButton" type="submit" disabled = {!starRating}>Submit Review</button>
                     </form>
                 }
             </>
@@ -59,7 +62,7 @@ export default function ReviewBox ({ productId, initialReviews, loggedIn }) {
             }
             <h1>REVIEWS</h1>
             <div className="reviewsAsHTML" >
-                {((reviewsAsHTML.length > 0) && reviewsAsHTML) || <h3 style={{ textAlign: "center", color: "darkgreen" }}>Be the first to review!</h3>}
+                {((reviewsAsHTML.length > 0) && reviewsAsHTML) || <h3 style={{ textAlign: "center", color: "white" }}>Be the first to review!</h3>}
             </div>
         </div>
     )
