@@ -1,6 +1,6 @@
 import React from "react"
 import shirt from "../../../t-shirt-preview.png"
-import StarRating from "../../SmallComponents/StarRatingSelector/StarRating"
+// import StarRating from "../../SmallComponents/StarRatingSelector/StarRating"
 import ColorSelector from "../../SmallComponents/ColorSelector/ColorSelector"
 
 export default function FullSize ({ name, amount, details, userSelectedParameters, modal, averageRating, submitToServer }) {
@@ -25,7 +25,12 @@ export default function FullSize ({ name, amount, details, userSelectedParameter
                         <div>PRICE: {details.price}</div>
                         <div>Polyester: {details.materials.polyester}</div>
                         <div>Cotton: {details.materials.cotton}</div>
-                        <StarRating productId={details.id} initialAverageRating={averageRating}/>
+                        {/* <StarRating productId={details.id} initialAverageRating={averageRating}/> */}
+                        <div className="stars">{["⭐", "⭐", "⭐", "⭐", "⭐"].map((item, index) => {
+                            return <div key={index} className={`star ${index + 1 < averageRating && "alreadyVoted"}`}>{item}</div>
+                        })}
+                        <span className="avgStarRating">({averageRating.toFixed(1)})</span>
+                        </div>
                     </>
                 }
             </div>
