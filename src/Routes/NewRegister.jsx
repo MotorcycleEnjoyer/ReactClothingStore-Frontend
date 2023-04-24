@@ -39,7 +39,7 @@ export default function Register () {
                     <h1>Register account!</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="credentialBox">
-                            <input id="username" name="username" placeholder="Username" required maxLength="30"></input>
+                            <input id="username" name="username" placeholder="Username" required maxLength="30" autoFocus></input>
                             <input type="password" id="password" onChange={handlePwChange} name="password" placeholder="Password" value={password} required maxLength="30"></input>
                             <input type="password" id="confirmPassword" onChange={handleConfirmPwChange} name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" required maxLength="30"></input>
                         </div>
