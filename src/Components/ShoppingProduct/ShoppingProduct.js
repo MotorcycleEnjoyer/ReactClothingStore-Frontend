@@ -1,5 +1,4 @@
 import React, { useContext } from "react"
-import shirt from "../../t-shirt-preview.png"
 import SearchResult from "./variations/searchResult"
 import { ShoppingCartDispatchContext } from "../../Contexts/ShoppingContext"
 import FullSize from "./variations/fullSize"
@@ -91,7 +90,7 @@ export default function ShoppingProduct ({ ...props }) {
                 props.view === "cart" &&
                 <div className="productMidView">
                     <div className="shoppingProduct--searchResult--mid" style={{ flex: "1" }} onClick={checkIfButton} >
-                        <img src={shirt} className="shoppingProduct--searchResult--mid--image" alt={props.name}></img>
+                        <div className="shoppingProduct--searchResult--mid--image" style={{ backgroundImage: `url(/backend/ProductImages/${props.details.imageName})` }}></div>
                         <div className="shoppingProduct--searchResult--mid--details">
                             <h1>{props.details.name}</h1>
                             <div>

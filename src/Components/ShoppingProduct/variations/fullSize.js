@@ -1,5 +1,4 @@
 import React from "react"
-import shirt from "../../../t-shirt-preview.png"
 // import StarRating from "../../SmallComponents/StarRatingSelector/StarRating"
 import ColorSelector from "../../SmallComponents/ColorSelector/ColorSelector"
 
@@ -18,7 +17,7 @@ export default function FullSize ({ name, amount, details, userSelectedParameter
                 <h3>by {details.manufacturerOrBrand}</h3>
             </div>
             <div className="productDetails">
-                <div><img className="fullSize-Image" src={shirt} alt={name}></img></div>
+                <div><img className="fullSize-Image" src={`/backend/ProductImages/${details.imageName}`} alt={name}></img></div>
                 { !modal &&
                     <>
                         <div>TYPE: {details.typeOfClothing}</div>
