@@ -147,12 +147,11 @@ export async function addProductRating (productRating, productId) {
         .catch(error => console.error(error))
 }
 
-export async function addProductReview (productId, review) {
-    return axios.post(POST_REVIEW_URL, { id: productId, review }, { withCredentials: true })
+export async function addProductReview (productId, payload) {
+    return axios.post(POST_REVIEW_URL, { id: productId, ...payload }, { withCredentials: true })
         .then(response => {
             alert("Review Received.")
-            const { reviews } = response.data
-            return { reviews }
+            return response.data
         })
         .catch(error => console.error(error))
 }
