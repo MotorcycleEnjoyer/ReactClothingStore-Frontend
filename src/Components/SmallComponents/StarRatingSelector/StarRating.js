@@ -31,7 +31,7 @@ export default function StarRating ({ productId, initialAverageRating }) {
 
     const starArr = ["⭐", "⭐", "⭐", "⭐", "⭐"]
 
-    const starSelector = starArr.map((value, index) => <div className="star" key={index} onClick={() => { setStarRating(index) }} onMouseEnter={() => { starHover(index) }} onMouseLeave={() => { starClear(index) }}>{value}</div>)
+    const starSelector = starArr.map((value, index) => <div className={`star ${index + 1 <= avgRating && "alreadyVoted"}`} key={index} onClick={() => { setStarRating(index) }} onMouseEnter={() => { starHover(index) }} onMouseLeave={() => { starClear(index) }}>{value}</div>)
 
     return (
         <div className="stars" >
