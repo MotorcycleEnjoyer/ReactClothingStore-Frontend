@@ -27,7 +27,7 @@ export default function Login () {
                     <h1>Please enter your credentials</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="credentialBox">
-                            <input type="text" id="username" name="username" placeholder='Username' required maxLength="30"></input>
+                            <input type="text" id="username" name="username" placeholder='Username' required maxLength="30" autoFocus></input>
                             <input type="password" id="password" name="password" placeholder='Password' required maxLength="30"></input>
                         </div>
                         <button>Submit</button>
