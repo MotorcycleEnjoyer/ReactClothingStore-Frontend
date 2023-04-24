@@ -53,7 +53,6 @@ export default function NewSearch () {
 
     return (
         <div className = "productSearchContainer">
-            <button onClick={showFilterModal} className="filterButton">Filters</button>
             <div onClick={toggleFilterModal} className="filterModal" style={{ display: "none" }}>
                 <div className="filterModal--content">
                     <h1 className="searchFilterHeader">Search Filter</h1>
@@ -66,7 +65,7 @@ export default function NewSearch () {
                     </div>
                 </div>
             </div>
-            {products}
+            {products.length > 0 ? <><button onClick={showFilterModal} className="filterButton">Filters</button>{products}</> : <h1>That item is not in our catalogue.</h1>}
         </div>
     )
 }
