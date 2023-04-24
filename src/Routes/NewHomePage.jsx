@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import shirt from "../t-shirt-preview.png"
 
 export default function NewHomePage () {
     return (
@@ -14,42 +13,42 @@ export default function NewHomePage () {
                 <h1 className="bestsellerContainer--title">Best Sellers</h1>
                 <div className="popularItemsContainer">
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>Generic T Shirt</h1>
                             <p>⭐⭐⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>Specific T Shirt</h1>
                             <p>⭐⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>T Shirt 3</h1>
                             <p>⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>Generic T Shirt</h1>
                             <p>⭐⭐⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/t-shirt-preview.png')" }}></div>
                         <div className="popularItem--details">
                             <h1>Specific T Shirt</h1>
                             <p>⭐⭐⭐⭐</p>
                         </div>
                     </Link>
                     <Link to={"/p/Generic+T+Shirt/id/0"} className="popularItem">
-                        <div className="popularItem--image" style={{ backgroundImage: `url(${shirt})` }}></div>
+                        <div className="popularItem--image" style={{ backgroundImage: "url('/backend/productImages/EmiyaKiritsugu.jpg')" }}></div>
                         <div className="popularItem--details">
                             <h1>T Shirt 3</h1>
                             <p>⭐⭐⭐</p>
