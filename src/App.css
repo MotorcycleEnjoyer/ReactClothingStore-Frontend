@@ -7,7 +7,6 @@ html{
 }
 
 body{
-  background-color: gray;
   text-align: center;
 }
 
@@ -25,7 +24,7 @@ body{
 .navRoot {
   height: 100vh;
   overflow-y: scroll;
-  background-color: #373333;
+  background-color: white;
   container-type: inline-size;
 }
 
@@ -128,6 +127,7 @@ body{
 
 .cartItemCost{
   background-color: lightgoldenrodyellow;
+  color:black;
   border-radius: 5px;
 }
 
@@ -151,7 +151,11 @@ body{
   margin: auto;
   margin-top: 10px;
   padding: 30px 0px;
-  background-color: orange;
+  background-color: rgb(10, 93, 121);;
+}
+
+.productReviewContainer > h1 {
+  color: white;
 }
 
 .productReviewButton {
@@ -176,8 +180,8 @@ body{
 
 .review{
   border-radius: 5px;
-  border: 1px solid purple;
-  background-color: orange;
+  border: 1px solid black;
+  background-color: white;
   margin: auto;
   margin-bottom: 20px;
   margin-top: 30px;
@@ -192,27 +196,29 @@ body{
   margin: auto;
   display: flex;
   min-height: 80px;
+  justify-content: center;
+  color: yellow;
 }
 
-.stars > div{
-  opacity: 40%;
+.star, .staticStar {
   font-size: 50px;
-  border: 1px solid orange;
+  opacity: 40%;
+  margin-bottom: 3rem;
 }
 
-.stars > div:hover{
+.star:hover{
   cursor: pointer;
 }
 
-.stars > div.hoverState{
-  border: 1px solid red;
+.star.hoverState{
+  opacity: 100%;
 }
 
 .avgStarRating{
   font-size: 30px;
 }
 
-div.alreadyVoted{
+.alreadyVoted{
   opacity: 100%;
 }
 
@@ -231,7 +237,7 @@ div.alreadyVoted{
   display: flex;
   gap: 1rem;
   overflow: auto;
-  background-color: orange;
+  background-color: rgb(10, 93, 121);;
   padding: 0.5rem;
   border-radius: 1rem;
   scrollbar-width: none;
@@ -262,8 +268,9 @@ div.alreadyVoted{
 
 .bestsellerContainer{
   border: 2px solid black;
-  background-color: orange;
+  color: white;
   border-radius: 1rem;
+  background-color: rgb(10, 93, 121);
   padding: 0.5rem;
   margin: 0.5rem;
 }
@@ -385,10 +392,6 @@ div.alreadyVoted{
     padding-top: 0px;
 }
 
-.stars > div{
-    font-size: max(5vw, 30px);
-}
-
 .popularItemsContainer{
   scrollbar-width: none;
 }
@@ -402,4 +405,13 @@ div.alreadyVoted{
   min-width: 200px;
   min-height: 200px;
 }
+}
+
+@container (max-width: 400px) {
+  .staticStar{
+    font-size: 2rem;
+  }
+  .star{
+    font-size: 2.3rem;
+  }
 }
