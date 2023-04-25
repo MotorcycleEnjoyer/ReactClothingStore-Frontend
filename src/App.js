@@ -13,7 +13,7 @@ import NewCart from "./Routes/NewCart"
 import NewLogin from "./Routes/NewLogin"
 import NewRegister from "./Routes/NewRegister"
 
-import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart } from "./API/apiCalls"
+import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart, submitOrder } from "./API/apiCalls"
 import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "./Contexts/ShoppingContext"
 import NewHomePage from "./Routes/NewHomePage"
 
@@ -93,7 +93,10 @@ function shoppingCartReducer (shoppingCart, action) {
         return removeFromCart(action.properties)
     }
     case "clearCart":{
-        return clearCart()
+        return clearCart(action.properties)
+    }
+    case "submitOrder": {
+        return submitOrder()
     }
     default: {
         return getShoppingCart()
