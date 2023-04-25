@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 export default function NewCart () {
     const shoppingCart = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
+    const [modal, setModal] = React.useState(null)
 
     const iniVal = 0
     const totalCost = shoppingCart
@@ -65,6 +66,14 @@ export default function NewCart () {
         setActiveCartItem(itemToAppend)
     }
 
+    function handleFormSubmit () {
+        setModal(() => null)
+        dispatch({
+            type: "submitOrder",
+            properties: shoppingCart
+        })
+    }
+
     const cartAsHTML = shoppingCart?.map((item, index) => <ShoppingProduct key={index} index={index} removeFromCart={() => deleteCartItem(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
 
     return (
@@ -78,10 +87,13 @@ export default function NewCart () {
                         {activeCartItem}
                     </div>
                 </div>
+                <div>
+                    <h1 style={{ color: "black" }}>TOTAL: {totalCost.toFixed(2) }<span></span></h1>
+                    <button style={{ padding: "1rem" }} onClick={() => { setModal(() => true) }}>Checkout</button>
+                </div>
                 <div className="cartItems" >
                     {cartAsHTML}
                 </div>
-                <h1 style={{ color: "white" }}>TOTAL: {totalCost.toFixed(2) }</h1>
                 <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>
             </>
             }
@@ -91,6 +103,54 @@ export default function NewCart () {
                 <Link to="/"><button style={{ padding: "1rem" }}>Back to home</button></Link>
             </>
             }
+            {
+                modal && <div className="cartItem--modal">
+                    <div className="cartItem--modal--content">
+                        <Checkout shoppingCart={shoppingCart}/>
+                        <button style={{ padding: "1rem" }} onClick={handleFormSubmit}>Submit</button>
+                        {/* <form onSubmit={handleFormSubmit}>
+                            <input type="email" placeholder="email"></input>
+                            <input type="text" placeholder="firstName"></input>
+                            <input type="text" placeholder="lastName"></input>
+                            <input type="text" placeholder="address"></input>
+                            <input type="text" placeholder="city"></input>
+                            <input type="text" placeholder="state"></input>
+                            <input type="text" placeholder="12345"></input>
+                            <input type="tel" placeholder="123 456 7890"></input>
+                            <button>Submit</button>
+                        </form> */}
+                        <button style={{ padding: "1rem" }} onClick={() => { setModal(() => null) }}>Cancel</button>
+                    </div>
+                </div>
+            }
         </>
+    )
+}
+
+function Checkout ({ shoppingCart }) {
+    return (
+        <>
+            <div className="checkoutContainer">
+                {shoppingCart.map((item, index) => {
+                    return <CheckoutItem key={index} {...item} />
+                })}
+            </div>
+        </>
+    )
+}
+
+function CheckoutItem ({ amount, details, userSelectedParameters }) {
+    return (
+        <div className="checkoutItem">
+            <div className="checkoutItemDetails">
+                <div className="checkoutItemName">{details.name}</div>
+                <div className="checkoutItemParams">
+                    {Array.from(Object.entries(userSelectedParameters).map(([key, value], index) => {
+                        return <div key={index}>{`${value}`}</div>
+                    }))}
+                    <div>{amount}</div>
+                </div>
+            </div>
+        </div>
     )
 }
