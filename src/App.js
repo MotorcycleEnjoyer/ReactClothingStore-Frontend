@@ -96,7 +96,7 @@ function shoppingCartReducer (shoppingCart, action) {
         return clearCart(action.properties)
     }
     case "submitOrder": {
-        return submitOrder()
+        return submitOrder(action.properties)
     }
     default: {
         return getShoppingCart()
