@@ -14,6 +14,7 @@ const RATING_URL = BASE_URL + "/ratings"
 const GET_RATING_URL = BASE_URL + "/getRatingsAndReviews"
 const POST_REVIEW_URL = BASE_URL + "/reviews"
 const GET_USER_DATA_URL = BASE_URL + "/myDetails"
+const SUBMIT_ORDER_URL = BASE_URL + "/submitOrder"
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -162,4 +163,12 @@ export async function getUserDetails () {
             return response.data
         })
         .catch(error => { return error.response.data })
+}
+
+export async function submitOrder (payload) {
+    return axios.post(SUBMIT_ORDER_URL, payload, { withCredentials: true })
+        .then(response => {
+            return response.data
+        })
+        .catch(error => console.log(error))
 }
