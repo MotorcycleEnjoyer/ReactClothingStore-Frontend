@@ -15,6 +15,7 @@ const GET_RATING_URL = BASE_URL + "/getRatingsAndReviews"
 const POST_REVIEW_URL = BASE_URL + "/reviews"
 const GET_USER_DATA_URL = BASE_URL + "/myDetails"
 const SUBMIT_ORDER_URL = BASE_URL + "/submitOrder"
+const STRIPE_CHECKOUT_URL = BASE_URL + "/stripeCheckout"
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -171,4 +172,13 @@ export async function submitOrder (payload) {
             return response.data
         })
         .catch(error => console.log(error))
+}
+
+export async function checkoutWithStripe (payload) {
+    return axios.post(STRIPE_CHECKOUT_URL, payload, { withCredentials: true })
+        .then(response => {
+            const { url } = response.data
+            window.location = url
+        })
+        .catch(error => console.error(error))
 }
