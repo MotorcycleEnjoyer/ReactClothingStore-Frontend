@@ -26,9 +26,9 @@ export default function FullSize ({ name, amount, details, userSelectedParameter
                         <div>Cotton: {details.materials.cotton}</div>
                         {/* <StarRating productId={details.id} initialAverageRating={averageRating}/> */}
                         <div className="stars">{["⭐", "⭐", "⭐", "⭐", "⭐"].map((item, index) => {
-                            return <div key={index} className={`staticStar ${index + 1 < averageRating && "alreadyVoted"}`}>{item}</div>
+                            return <div key={index} className={`staticStar ${index + 1 <= averageRating && "alreadyVoted"}`}>{item}</div>
                         })}
-                        <span className="avgStarRating">({averageRating?.toFixed(1)})</span>
+                        <span className="avgStarRating">({averageRating?.toFixed(2)})</span>
                         </div>
                     </>
                 }
