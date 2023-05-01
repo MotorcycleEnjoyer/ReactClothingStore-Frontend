@@ -96,25 +96,19 @@ export async function clearCart () {
 }
 
 export async function register (credentials) {
-    axios.post(REGISTER_URL, credentials, { withCredentials: true })
+    return axios.post(REGISTER_URL, credentials, { withCredentials: true })
         .then(response => {
-            if (response.status === 200) {
-                window.location = "/"
-            }
+            return response
         })
         .catch(error => {
-            // console.log(error.response.status)
-            console.log(error.response.data)
-            alert(error.response.data)
+            return error.response
         })
 }
 
 export async function login (credentials) {
     return axios.post(LOGIN_URL, credentials, { withCredentials: true })
         .then(response => {
-            if (response?.status === 200) {
-                window.location = "/"
-            }
+            return response
         }).catch(err => {
             return err.response
         })
