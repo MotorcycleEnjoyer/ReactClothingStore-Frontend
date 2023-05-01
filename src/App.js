@@ -10,8 +10,8 @@ import Root from "./Routes/Root"
 import NewSearch, { loader as SearchLoader } from "./Routes/NewSearch"
 import NewProduct, { loader as NewProductLoader } from "./Routes/NewProduct"
 import NewCart from "./Routes/NewCart"
-import NewLogin from "./Routes/NewLogin"
-import NewRegister from "./Routes/NewRegister"
+import NewLogin, { action as loginAction } from "./Routes/NewLogin"
+import NewRegister, { action as registerAction } from "./Routes/NewRegister"
 
 import { editCartItem, getShoppingCart, removeFromCart, addToCart, clearCart, submitOrder } from "./API/apiCalls"
 import { ShoppingCartContext, ShoppingCartDispatchContext, LoginContext } from "./Contexts/ShoppingContext"
@@ -137,10 +137,12 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <NewLogin />,
+        action: loginAction,
         errorElement: <h1>Login Error</h1>
     },
     {
         path: "/register",
+        action: registerAction,
         element: <NewRegister />,
         errorElement: <h1>Registration Error</h1>
     },
