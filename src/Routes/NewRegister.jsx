@@ -1,25 +1,27 @@
 import React from "react"
 import { register } from "../API/apiCalls"
 import { LoginContext } from "../Contexts/ShoppingContext"
+import { Form, redirect } from "react-router-dom"
 
-function handleSubmit (e) {
-    e.preventDefault()
-    const rawFormData = new FormData(e.target)
-    const credentials = Object.fromEntries(rawFormData)
+export async function action ({ request }) {
+    const data = await request.formData()
+    const credentials = Object.fromEntries(data)
     if (credentials.password === credentials.confirmPassword) {
-        register(credentials)
-    } else {
-        document.querySelector("#message").innerText = "Password and Confirm Password do not match."
+        const response = await register(credentials)
+        if (response.status === 200) {
+            return redirect("/")
+        } else {
+            alert(response.data)
+            return redirect("/register")
+        }
     }
 }
 
 export default function Register () {
     const isLoggedIn = React.useContext(LoginContext)
-    React.useEffect(() => {
-        if (isLoggedIn) {
-            window.location.href = "/"
-        }
-    }, [])
+    if (isLoggedIn) {
+        window.location.href = "/"
+    }
 
     const [password, setPassword] = React.useState("")
     const [confirmPassword, setConfirmPassword] = React.useState("")
@@ -32,23 +34,35 @@ export default function Register () {
         setPassword(e.target.value)
     }
 
+    const passwordStyle = {
+        pw: {
+            border: password.length >= 8 ? "5px solid green" : "5px solid black"
+        },
+        cpw: {
+            border: confirmPassword.length >= 8 && confirmPassword === password ? "5px solid green" : "5px solid black"
+        }
+    }
+
     return (
         <>
             { !isLoggedIn &&
                 <div className="auth">
                     <h1>Register account!</h1>
-                    <form onSubmit={handleSubmit}>
+                    <Form
+                        method="post"
+                        replace
+                    >
                         <div className="credentialBox">
                             <input id="username" name="username" placeholder="Username" required maxLength="30" autoFocus></input>
-                            <input type="password" id="password" onChange={handlePwChange} name="password" placeholder="Password" value={password} required maxLength="30"></input>
-                            <input type="password" id="confirmPassword" onChange={handleConfirmPwChange} name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" required maxLength="30"></input>
+                            <input style={ passwordStyle.pw } type="password" id="password" onChange={handlePwChange} name="password" placeholder="Password" value={password} required maxLength="30"></input>
+                            <input style={ passwordStyle.cpw } type="password" id="confirmPassword" onChange={handleConfirmPwChange} name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" required maxLength="30"></input>
                         </div>
 
                         {
                             (password === confirmPassword && confirmPassword.length >= 8) &&
                             <button>Submit</button>
                         }
-                    </form>
+                    </Form>
                     <div id="message"></div>
                 </div>
             }
