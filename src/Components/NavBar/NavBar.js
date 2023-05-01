@@ -3,23 +3,36 @@ import shoppingCartLogo from "../../shopping-cart-icon.png"
 import houseLogo from "../../krita-house-icon.png"
 import React from "react"
 import { LoginContext } from "../../Contexts/ShoppingContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import dropdownIcon from "../../dropdownBarIcon.png"
 
 export default function NavBar ({ ...props }) {
     const amountInCart = props.length
     const loggedIn = React.useContext(LoginContext)
     const [searchDestination, setSearchDestination] = React.useState("")
+    const navigate = useNavigate()
 
     function navigateWithoutRefresh (query) {
         const productNameWithPlusSigns = query.split(" ").join("+")
         setSearchDestination(productNameWithPlusSigns)
     }
 
+    function alreadyOnSearchPage () {
+        const url = window.location.href
+        if (!url.split("/s/")[1]) {
+            return false
+        }
+        return true
+    }
+
     React.useEffect(() => {
         if (searchDestination !== "") {
-            const linkItem = document.querySelector("#searchBox")
-            linkItem.click()
+            const destination = `/s/${searchDestination}`
+            if (alreadyOnSearchPage()) {
+                window.location.href = destination
+            }
+            navigate(destination)
+            console.log(`SEARCH DESTINATION: [${searchDestination}]`)
             setSearchDestination("")
             props.hideModal()
         }
@@ -58,8 +71,6 @@ export default function NavBar ({ ...props }) {
                     }
                 </div>
             </div>
-
-            <Link id="searchBox" reloadDocument to={`/s/${searchDestination}`} style={{ display: "none" }} value={searchDestination}></Link>
 
             <Link reloadDocument to="/" className="homeLogo" style={{ backgroundImage: `url('${houseLogo}')` }} ></Link>
             <Search navigateWithoutRefresh={navigateWithoutRefresh}/>
