@@ -26,38 +26,26 @@ export default function SearchBar ({ ...props }) {
     function checkEnter (e) {
         if (e.key === "Enter") {
             props.navigateWithoutRefresh(e.target.value)
-            document.activeElement.blur()
         }
     }
 
     function storeSearchValFromClick (value) {
-        setSearchVal(value)
         props.navigateWithoutRefresh(value)
     }
 
-    function changeSearchValueIfProperRegex (value) {
-        setSearchVal(value)
-    }
-
     function handleChange (e) {
-        changeSearchValueIfProperRegex(e.target.value)
+        setSearchVal(e.target.value)
+        if (e.target.value !== "") {
+            fetchNewSuggestionList(e.target.value)
+        }
     }
 
     const debouncedChangeHandler = useCallback(debounce(handleChange, 400), [])
-
-    React.useEffect(() => {
-        if (searchVal === "") {
-            setSuggestions([])
-        } else {
-            fetchNewSuggestionList(searchVal)
-        }
-    }, [searchVal])
-
     const resultsAsHTML = suggestions?.map((x, index) => <ShoppingProduct key={index} name={x} storeSearchValFromClick={storeSearchValFromClick} view="searchDropDown"/>)
 
     return (
         <div className="search">
-            <input type="text" onKeyDown={checkEnter} onChange={debouncedChangeHandler} placeholder="Search" className="search--inputBox" maxLength="50"></input>
+            <input type="text" onKeyDown={checkEnter} onChange={debouncedChangeHandler} placeholder={searchVal || "Search"} className="search--inputBox" maxLength="50"></input>
             <div className="search--modal">
                 <div className="search--modal--searchResultContainer">{resultsAsHTML}</div>
                 <div className="search--modal--clickListener"></div>
