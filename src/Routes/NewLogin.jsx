@@ -1,14 +1,14 @@
 import React from "react"
 import { login } from "../API/apiCalls"
 import { LoginContext } from "../Contexts/ShoppingContext"
-import { Form, redirect } from "react-router-dom"
+import { Form } from "react-router-dom"
 
 export async function action ({ request }) {
     const formData = await request.formData()
     const credentials = Object.fromEntries(formData)
     const result = await login(credentials)
     if (result?.status === 200) {
-        return redirect("/")
+        window.location.href = "/"
     }
     if (result?.status === 401) {
         document.querySelector(".serverResponse").innerText = result.data

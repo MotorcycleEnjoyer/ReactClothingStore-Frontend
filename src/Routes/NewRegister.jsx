@@ -9,7 +9,7 @@ export async function action ({ request }) {
     if (credentials.password === credentials.confirmPassword) {
         const response = await register(credentials)
         if (response.status === 200) {
-            return redirect("/")
+            window.location.href = "/"
         } else {
             alert(response.data)
             return redirect("/register")
