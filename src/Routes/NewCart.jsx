@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 import { ShoppingCartContext, ShoppingCartDispatchContext } from "../Contexts/ShoppingContext"
 import { Link } from "react-router-dom"
-import { checkoutWithStripe } from "../API/apiCalls"
+// import { checkoutWithStripe } from "../API/apiCalls"
 
 export default function NewCart () {
     const shoppingCart = useContext(ShoppingCartContext)
@@ -66,12 +66,12 @@ export default function NewCart () {
         setActiveCartItem(itemToAppend)
     }
 
-    /* function handleFormSubmit () {
+    function handleFormSubmit () {
         dispatch({
             type: "submitOrder",
             properties: shoppingCart
         })
-    } */
+    }
 
     const cartAsHTML = shoppingCart?.map((item, index) => <ShoppingProduct key={index} index={index} removeFromCart={() => deleteCartItem(index)} {...item} toggleCartModal={activateCartModal} view={"cart"} />)
 
@@ -88,8 +88,8 @@ export default function NewCart () {
                 </div>
                 <div>
                     <h1 style={{ color: "black" }}>TOTAL: {totalCost.toFixed(2) }<span></span></h1>
-                    {/* <button style={{ padding: "1rem" }} onClick={handleFormSubmit}>Checkout</button> */}
-                    <button style={{ padding: "1rem" }} onClick={() => { checkoutWithStripe(shoppingCart) }}>Checkout</button>
+                    <button style={{ padding: "1rem" }} onClick={handleFormSubmit}>Checkout</button>
+                    {/* <button style={{ padding: "1rem" }} onClick={() => { checkoutWithStripe(shoppingCart) }}>Checkout</button> */}
                 </div>
                 <div className="cartItems" >
                     {cartAsHTML}
@@ -99,7 +99,7 @@ export default function NewCart () {
             }
             { shoppingCart?.length === 0 &&
             <>
-                <h1 style={{ color: "white" }}>Your shopping cart is empty</h1>
+                <h1 >Your shopping cart is empty</h1>
                 <Link to="/"><button style={{ padding: "1rem" }}>Back to home</button></Link>
             </>
             }
