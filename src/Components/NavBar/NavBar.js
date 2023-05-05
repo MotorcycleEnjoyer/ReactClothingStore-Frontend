@@ -72,7 +72,7 @@ export default function NavBar ({ ...props }) {
                 </div>
             </div>
 
-            <Link reloadDocument to="/" className="homeLogo" style={{ backgroundImage: `url('${houseLogo}')` }} ></Link>
+            <Link to="/" className="homeLogo" style={{ backgroundImage: `url('${houseLogo}')` }} ></Link>
             <Search navigateWithoutRefresh={navigateWithoutRefresh}/>
             <Link to="/cart" onClick={props.hideModal} className="shoppingCartIcon" style={{ backgroundImage: `url('${shoppingCartLogo}')` }}><span className="cartIconSpan">{amountInCart}</span></Link>
 
