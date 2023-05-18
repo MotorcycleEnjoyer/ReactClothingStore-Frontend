@@ -19,6 +19,8 @@ import NewHomePage from "./Routes/NewHomePage"
 
 import UserPage from "./Routes/UserPage"
 import OrderHistory from "./Components/UserPage/OrderHistory/OrderHistory"
+import LandingPage from "./Components/UserPage/UserLandingPage"
+import ChangePassword, { action as PwChangeAction } from "./Components/UserPage/ChangePassword/ChangePassword"
 
 export default function App () {
     const [shoppingCartAndAuth, dispatch] = useAsyncReducer(shoppingCartReducer, null)
@@ -153,7 +155,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/userpage",
-                element: <h1>Welcome!</h1>,
+                element: <LandingPage />,
                 errorElement: <h1>REEE</h1>
             },
             {
@@ -163,8 +165,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "/userpage/resetPassword",
-                element: <h1>Reset User Password Element</h1>,
-                errorElement: <h1>Not logged in!</h1>
+                element: <ChangePassword />,
+                errorElement: <h1>Password Change Failed!</h1>,
+                action: PwChangeAction
             },
             {
                 path: "/userpage/ratingAndReviewHistory",
