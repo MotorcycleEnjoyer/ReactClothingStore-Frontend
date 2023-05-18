@@ -8,10 +8,10 @@ export async function action ({ request }) {
     const credentials = Object.fromEntries(data)
     if (credentials.password === credentials.confirmPassword) {
         const response = await register(credentials)
-        if (response.status === 200) {
+        if (response === 201) {
             window.location.href = "/"
         } else {
-            alert(response.data)
+            alert("Failed to register account.")
             return redirect("/register")
         }
     }

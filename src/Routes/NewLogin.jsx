@@ -7,11 +7,10 @@ export async function action ({ request }) {
     const formData = await request.formData()
     const credentials = Object.fromEntries(formData)
     const result = await login(credentials)
-    if (result?.status === 200) {
+    if (result === 200) {
         window.location.href = "/"
-    }
-    if (result?.status === 401) {
-        document.querySelector(".serverResponse").innerText = result.data
+    } else {
+        document.querySelector(".serverResponse").innerText = "Failed to login."
     }
 }
 
