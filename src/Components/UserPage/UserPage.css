@@ -1,18 +1,15 @@
 .loginModal {
-    background-color: "orange"; 
-    padding: "2rem";
-    border: "1px solid black";
-    height: "100rem";
+    background-color: orange; 
+    padding: 2rem;
+    border: 1px solid black;
+    height: 100rem;
 }
 
 .userPageNav{
-    flex: 1;
     display: flex;
     flex-direction: column;
     background-color: black;
-    max-width: 15rem;
     border: 0.25rem solid orange;
-    min-height: 100vh;
     color: white;
 }
 
@@ -37,5 +34,26 @@
 
 .userPageContainer{
     display: flex;
+    height: 100vh;
 }
 
+.userPageContent{
+    background-color: #373333;
+    color: white;
+}
+
+#root{
+    container-type: inline-size;
+}
+
+@container (max-width: 600px){
+    .userPageContainer{
+        flex-direction: column-reverse;
+        
+    }
+    .userPageNav{
+    }
+    .userPageContent{
+        background-color: red;
+    }
+}
