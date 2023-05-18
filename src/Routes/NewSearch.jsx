@@ -3,13 +3,15 @@ import React from "react"
 import { getSearchResults } from "../API/apiCalls"
 import ShoppingProduct from "../Components/ShoppingProduct/ShoppingProduct"
 
-export async function loader ({ params }) {
+export async function loader ({ params, request }) {
     document.title = `React Clothing Store Search: ${params.productName}`
     const searchResults = await getSearchResults(params.productName)
+    console.log(request)
     return { searchResults }
 }
 
 export default function NewSearch () {
+    // pick the sorting function based on url params.
     const { searchResults } = useLoaderData()
     const [resultsState, setResultsState] = React.useState(searchResults)
     const products = resultsState.map((item, index) => <ShoppingProduct key={index} {...item} view="searchResult"/>)
