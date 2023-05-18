@@ -16,6 +16,9 @@ const POST_REVIEW_URL = BASE_URL + "/reviews"
 const GET_USER_DATA_URL = BASE_URL + "/myDetails"
 const SUBMIT_ORDER_URL = BASE_URL + "/submitOrder"
 const STRIPE_CHECKOUT_URL = BASE_URL + "/stripeCheckout"
+const CHANGE_PASSWORD_URL = BASE_URL + "/changePassword"
+
+let csrfToken
 
 export async function getShoppingCart () {
     return axios.get(GET_CART_URL, { withCredentials: true })
@@ -23,7 +26,9 @@ export async function getShoppingCart () {
             if (response.data.shoppingCart === undefined) {
                 console.error("undefined")
             } else {
-                return response.data
+                csrfToken = response.data.csrfToken
+                const { shoppingCart, type } = response.data
+                return { shoppingCart, type }
             }
         }).catch(error => console.error(error))
 }
@@ -59,7 +64,7 @@ export async function getProduct (id) {
 }
 
 export async function addToCart (dataObjectHeaders) {
-    return axios.post(ADD_TO_CART_URL, dataObjectHeaders, { withCredentials: true })
+    return axios.post(ADD_TO_CART_URL, dataObjectHeaders, { withCredentials: true }, csrfToken)
         .then(response => {
             // const fadeModalContent = document.querySelector(".fadeModal--content")
             // fadeModalContent.innerText = "Added to cart"
@@ -70,7 +75,7 @@ export async function addToCart (dataObjectHeaders) {
 }
 
 export async function editCartItem (dataObjectHeaders) {
-    return axios.post(EDIT_CART_URL, dataObjectHeaders, { withCredentials: true })
+    return axios.post(EDIT_CART_URL, { ...dataObjectHeaders, csrfToken }, { withCredentials: true })
         .then(response => {
             alert("Edit Completed")
             // const fadeModalContent = document.querySelector(".fadeModal--content")
@@ -80,7 +85,7 @@ export async function editCartItem (dataObjectHeaders) {
 }
 
 export async function removeFromCart (index) {
-    return axios.post(DELETION_URL, { indexOfCartItem: index }, { withCredentials: true })
+    return axios.post(DELETION_URL, { indexOfCartItem: index, csrfToken }, { withCredentials: true })
         .then(response => {
             return response.data
         })
@@ -88,7 +93,7 @@ export async function removeFromCart (index) {
 }
 
 export async function clearCart () {
-    return axios.post(CLEAR_CART_URL, { }, { withCredentials: true })
+    return axios.post(CLEAR_CART_URL, { csrfToken }, { withCredentials: true })
         .then(response => {
             console.log(response.data)
             return response.data
@@ -98,7 +103,8 @@ export async function clearCart () {
 export async function register (credentials) {
     return axios.post(REGISTER_URL, credentials, { withCredentials: true })
         .then(response => {
-            return response
+            csrfToken = response.data.csrfToken
+            return response.status
         })
         .catch(error => {
             return error.response
@@ -106,9 +112,12 @@ export async function register (credentials) {
 }
 
 export async function login (credentials) {
+    console.log(credentials)
     return axios.post(LOGIN_URL, credentials, { withCredentials: true })
         .then(response => {
-            return response
+            console.log(response)
+            csrfToken = response.data.csrfToken
+            return response.status
         }).catch(err => {
             return err.response
         })
@@ -153,7 +162,8 @@ export async function addProductReview (productId, payload) {
 }
 
 export async function getUserDetails () {
-    return axios.get(GET_USER_DATA_URL, { withCredentials: true })
+    console.log(csrfToken)
+    return axios.post(GET_USER_DATA_URL, { csrfToken }, { withCredentials: true })
         .then(response => {
             return response.data
         })
@@ -173,6 +183,15 @@ export async function checkoutWithStripe (payload) {
         .then(response => {
             const { url } = response.data
             window.location = url
+        })
+        .catch(error => console.error(error))
+}
+
+export async function changePassword (payload) {
+    return axios.post(CHANGE_PASSWORD_URL, { ...payload, csrfToken }, { withCredentials: true })
+        .then(response => {
+            csrfToken = response.data.csrfToken
+            return response.status
         })
         .catch(error => console.error(error))
 }
