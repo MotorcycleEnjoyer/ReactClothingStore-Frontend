@@ -81,8 +81,7 @@ export default function ShoppingProduct ({ ...props }) {
                 props.view === "searchResult" &&
                     <SearchResult
                         redirectToProductView = {redirectToProductView}
-                        details = {props.details}
-                        name = {props.name}
+                        {...props}
                     />
             }
 
