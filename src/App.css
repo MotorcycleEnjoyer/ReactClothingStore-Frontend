@@ -109,7 +109,7 @@ body{
 }
 
 .cartItem--modal--content{
-  background-color: orange;
+  background-color: black;
   display: block;
   border-radius: 5px;
   padding: 10px;
@@ -364,6 +364,44 @@ body{
 .auth > form > button {
   font-size: 2rem;
   padding: 1rem;
+}
+
+
+
+
+.checkoutContainer{
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.checkoutItemDetails{
+  display: flex;
+  flex-direction: column;
+  border: 5px dashed blue;
+}
+
+.checkoutItemName{
+  font-size: 2rem;
+  border: 5px dashed orange;
+}
+
+.checkoutItemParams{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 5px dashed red;
+}
+.checkoutItemParams > * {
+  flex: 1;
+}
+
+
+
+
+.changePassword{
+  padding: 1rem;
+  width: 50%;
+  margin: 0 auto;
 }
 
 @container (max-width: 900px){
