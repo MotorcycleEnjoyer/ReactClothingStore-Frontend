@@ -4,6 +4,8 @@ import { Link, Outlet } from "react-router-dom"
 import { getUserDetails } from "../API/apiCalls"
 import "../Components/UserPage/UserPage.css"
 
+export const UserDetailContext = React.createContext(null)
+
 export default function UserPage () {
     const [data, setData] = React.useState(null)
     const loggedIn = React.useContext(LoginContext)
@@ -50,7 +52,9 @@ export default function UserPage () {
                         <Link to="/userpage/ratingAndReviewHistory" className="userPageNavButton">Review/Rating History</Link>
                     </div>
                     <div className="userPageContent">
-                        <Outlet />
+                        <UserDetailContext.Provider value={data}>
+                            <Outlet />
+                        </UserDetailContext.Provider>
                     </div>
                 </div>
             }
