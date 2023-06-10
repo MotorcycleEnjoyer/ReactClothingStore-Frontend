@@ -95,7 +95,6 @@ export async function removeFromCart (index) {
 export async function clearCart () {
     return axios.post(CLEAR_CART_URL, { csrfToken }, { withCredentials: true })
         .then(response => {
-            console.log(response.data)
             return response.data
         }).catch(error => console.error(error))
 }
@@ -112,10 +111,8 @@ export async function register (credentials) {
 }
 
 export async function login (credentials) {
-    console.log(credentials)
     return axios.post(LOGIN_URL, credentials, { withCredentials: true })
         .then(response => {
-            console.log(response)
             csrfToken = response.data.csrfToken
             return response.status
         }).catch(err => {
@@ -162,7 +159,6 @@ export async function addProductReview (productId, payload) {
 }
 
 export async function getUserDetails () {
-    console.log(csrfToken)
     return axios.post(GET_USER_DATA_URL, { csrfToken }, { withCredentials: true })
         .then(response => {
             return response.data
