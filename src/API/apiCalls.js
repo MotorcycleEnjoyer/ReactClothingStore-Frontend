@@ -23,8 +23,8 @@ export async function getShoppingCart() {
                 console.error("undefined");
             } else {
                 csrfToken = response.data.csrfToken;
-                const { shoppingCart, type } = response.data;
-                return { shoppingCart, type };
+                const { shoppingCart, loginStatus } = response.data;
+                return { shoppingCart, loginStatus };
             }
         })
         .catch((error) => console.error(error));
